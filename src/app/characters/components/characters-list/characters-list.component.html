@@ -1,0 +1,5 @@
+<section class="container">
+  @for (character of $characters(); track character.id) {
+  <character-card [$character]="character" />
+  }
+</section>
