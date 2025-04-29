@@ -14,4 +14,9 @@
   class="mt-5"
   [$characters]="$characterResource.value().characters"
 />
+<character-pagination
+  [$infoPagination]="$characterResource.value().info"
+  [$currentPage]="$page()"
+  ($pageChanged)="setPage($event)"
+/>
 }

@@ -1,0 +1,31 @@
+<nav aria-label="Paginación de personajes" class="mt-3">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <button
+        class="page-link"
+        (click)="goToPrevPage()"
+        [class.disabled]="1 === $currentPage()"
+      >
+        Previous
+      </button>
+    </li>
+
+    @for (page of visiblePages(); track page) {
+    <li class="page-item" [class.active]="page === $currentPage()">
+      <button class="page-link" (click)="goToPage(page)">
+        {{ page }}
+      </button>
+    </li>
+    }
+
+    <li class="page-item">
+      <button
+        class="page-link"
+        (click)="goToNextPage()"
+        [class.disabled]="$currentPage() === $infoPagination().pages"
+      >
+        Next
+      </button>
+    </li>
+  </ul>
+</nav>
