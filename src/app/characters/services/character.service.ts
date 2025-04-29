@@ -12,8 +12,8 @@ const API_URL = 'https://rickandmortyapi.com/api';
 export class CharacterService {
   private http = inject(HttpClient);
 
-  getAllCharacters() {
-    const url = `${API_URL}/character`;
+  getAllCharacters(page: number) {
+    const url = `${API_URL}/character/?page=${page}`;
 
     return this.http.get<RestPaginatedCharacters>(url).pipe(
       map((resp) => ({
