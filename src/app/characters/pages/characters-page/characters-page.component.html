@@ -1,0 +1,17 @@
+<!--  -->
+@if( $characterResource.error() ) {
+<p class="text-danger">Error: {{ $characterResource.error() }}</p>
+}
+
+<!--  -->
+@if ($characterResource.isLoading()) {
+<h1 class="text-3xl">Cargando...</h1>
+}
+
+<!--  -->
+@if( $characterResource.hasValue()) {
+<characters-list
+  class="mt-5"
+  [$characters]="$characterResource.value().characters"
+/>
+}
