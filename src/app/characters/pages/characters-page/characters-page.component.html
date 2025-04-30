@@ -10,11 +10,8 @@
 
 <!--  -->
 @if( $characterResource.hasValue()) {
-<section class="bg-dark bg-opacity-50">
-  <characters-list
-    class="pt-5"
-    [$characters]="$characterResource.value().characters"
-  />
+<section class="bg-dark bg-opacity-50 py-5">
+  <characters-list [$characters]="$characterResource.value().characters" />
   <character-pagination
     [$infoPagination]="$characterResource.value().info"
     [$currentPage]="$page()"
