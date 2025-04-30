@@ -4,10 +4,12 @@ import { LocationService } from '../../../locations/services/location.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
 import { Location } from '../../../locations/interfaces/location.interface';
+import { StatusTranslatePipe } from '../../../shared/pipes/status-translate.pipe';
+import { GenderTranslatePipe } from '../../../shared/pipes/gender-translate.pipe';
 
 @Component({
   selector: 'character-info',
-  imports: [],
+  imports: [StatusTranslatePipe, GenderTranslatePipe],
   templateUrl: './character-info.component.html',
   styleUrl: './character-info.component.css',
 })
