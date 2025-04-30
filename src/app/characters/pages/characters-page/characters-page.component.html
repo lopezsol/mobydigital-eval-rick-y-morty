@@ -10,13 +10,15 @@
 
 <!--  -->
 @if( $characterResource.hasValue()) {
-<characters-list
-  class="mt-5"
-  [$characters]="$characterResource.value().characters"
-/>
-<character-pagination
-  [$infoPagination]="$characterResource.value().info"
-  [$currentPage]="$page()"
-  ($pageChanged)="setPage($event)"
-/>
+<section class="bg-dark bg-opacity-50">
+  <characters-list
+    class="pt-5"
+    [$characters]="$characterResource.value().characters"
+  />
+  <character-pagination
+    [$infoPagination]="$characterResource.value().info"
+    [$currentPage]="$page()"
+    ($pageChanged)="setPage($event)"
+  />
+</section>
 }
