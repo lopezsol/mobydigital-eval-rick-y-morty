@@ -4,10 +4,12 @@ import { CharacterService } from '../../services/character.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CharacterPaginationComponent } from '../../components/character-pagination/character-pagination.component';
 import { of } from 'rxjs';
+import { LoaderComponent } from "../../../shared/components/loader/loader.component";
+import { ErrorComponent } from "../../../shared/components/error/error.component";
 
 @Component({
   selector: 'characters-page',
-  imports: [CharactersListComponent, CharacterPaginationComponent],
+  imports: [CharactersListComponent, CharacterPaginationComponent, LoaderComponent, ErrorComponent],
   templateUrl: './characters-page.component.html',
   styleUrl: './characters-page.component.css',
 })

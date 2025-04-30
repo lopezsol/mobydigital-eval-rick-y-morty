@@ -1,17 +1,19 @@
 <!--  -->
 @if( $characterResource.error() ) {
-<p class="text-danger">{{ $characterResource.error() }}</p>
+<app-error [$message]="$characterResource.error()" />
 }
 
 <!--  -->
 @if ($characterResource.isLoading()) {
-<h1>Loading character...</h1>
+<app-loader />
 }
 
 <!--  -->
 @if( $characterResource.hasValue()) {
-<section class="container mt-3">
-  <character-info [$character]="$characterResource.value()" />
-  <character-episodes-list [$episodes]="$characterResource.value().episode"/>
+<section class="bg-dark bg-opacity-50 d-flex justify-content-center">
+  <div class="container pt-3">
+    <character-info [$character]="$characterResource.value()" />
+    <character-episodes-list [$episodes]="$characterResource.value().episode" />
+  </div>
 </section>
 }

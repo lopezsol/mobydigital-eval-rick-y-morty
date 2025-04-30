@@ -6,10 +6,12 @@ import { ActivatedRoute } from '@angular/router';
 import { map, of } from 'rxjs';
 import { CharacterService } from '../../services/character.service';
 import { Character } from '../../interfaces/character.interface';
+import { LoaderComponent } from "../../../shared/components/loader/loader.component";
+import { ErrorComponent } from "../../../shared/components/error/error.component";
 
 @Component({
   selector: 'app-character-detail-page',
-  imports: [CharacterInfoComponent, CharacterEpisodesListComponent],
+  imports: [CharacterInfoComponent, CharacterEpisodesListComponent, LoaderComponent, ErrorComponent],
   templateUrl: './character-detail-page.component.html',
   styleUrl: './character-detail-page.component.css',
 })
