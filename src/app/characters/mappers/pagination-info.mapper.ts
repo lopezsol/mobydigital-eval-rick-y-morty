@@ -1,4 +1,4 @@
-import { RestPaginationInfo } from '../interfaces/paginated-characters.interface';
+import { RestPaginationInfo } from '../interfaces/rest-paginated-characters.interface';
 import { PaginationInfo } from '../interfaces/pagination-info.interface';
 
 export class PaginationInfoMapper {

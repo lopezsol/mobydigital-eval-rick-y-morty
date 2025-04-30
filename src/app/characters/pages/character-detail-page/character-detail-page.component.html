@@ -1,0 +1,17 @@
+<!--  -->
+@if( $characterResource.error() ) {
+<p class="text-danger">{{ $characterResource.error() }}</p>
+}
+
+<!--  -->
+@if ($characterResource.isLoading()) {
+<h1>Loading character...</h1>
+}
+
+<!--  -->
+@if( $characterResource.hasValue()) {
+<section class="container mt-3">
+  <character-info [$character]="$characterResource.value()" />
+  <character-episodes-list [$episodes]="$characterResource.value().episode"/>
+</section>
+}
