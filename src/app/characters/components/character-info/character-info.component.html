@@ -7,7 +7,15 @@
   <div class="card-body">
     <h5 class="card-title">Character Info</h5>
     <p class="card-text">Name: {{ $character().name }}</p>
-    <p class="card-text">Status: {{ $character().status | statusTranslate }}</p>
+    <p class="card-text">
+      Status:
+      <span
+        [class.text-success]="$character().status === 'Alive'"
+        [class.text-danger]="$character().status === 'Dead'"
+        [class.text-warning]="$character().status === 'unknown'"
+        >{{ $character().status | statusTranslate }}</span
+      >
+    </p>
     <p class="card-text">Species: {{ $character().species }}</p>
     <p class="card-text">Gender: {{ $character().gender | genderTranslate }}</p>
     <p class="card-text">
