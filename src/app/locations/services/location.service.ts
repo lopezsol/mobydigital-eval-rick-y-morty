@@ -3,16 +3,17 @@ import { inject, Injectable } from '@angular/core';
 import { RestLocation } from '../interfaces/rest-location.interface';
 import { LocationMapper } from '../mappers/location.mapper';
 import { catchError, map, throwError } from 'rxjs';
-const API_URL = 'https://rickandmortyapi.com/api';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocationService {
   private http = inject(HttpClient);
+  private apiUrl = environment.API_URL;
 
   getLocationById(id: number) {
-    const url = `${API_URL}/location/${id}`;
+    const url = `${this.apiUrl}/location/${id}`;
     return this.http.get<RestLocation>(url).pipe(
       map((resp) => LocationMapper.mapRestLocationToLocation(resp)),
       catchError((error) => {

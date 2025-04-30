@@ -7,16 +7,17 @@ import {
 import { CharacterMapper } from '../mappers/character.mapper';
 import { PaginationInfoMapper } from '../mappers/pagination-info.mapper';
 import { catchError, delay, map, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
-const API_URL = 'https://rickandmortyapi.com/api';
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
   private http = inject(HttpClient);
+  private apiUrl = environment.API_URL;
 
   getAllCharacters(page: number) {
-    const url = `${API_URL}/character/?page=${page}`;
+    const url = `${this.apiUrl}/character/?page=${page}`;
 
     return this.http.get<RestPaginatedCharacters>(url).pipe(
       map((resp) => ({
@@ -35,7 +36,7 @@ export class CharacterService {
   }
 
   getCharacterById(id: number) {
-    const url = `${API_URL}/character/${id}`;
+    const url = `${this.apiUrl}/character/${id}`;
     return this.http.get<RestCharacter>(url).pipe(
       map((resp) => CharacterMapper.mapRestCharacterToCharacter(resp)),
       catchError((error) => {

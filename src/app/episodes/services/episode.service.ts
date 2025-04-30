@@ -3,16 +3,17 @@ import { inject, Injectable } from '@angular/core';
 import { catchError, map, throwError } from 'rxjs';
 import { RestEpisode } from '../interfaces/rest-episode.interface';
 import { EpisodeMapper } from '../mappers/episode.mapper';
-const API_URL = 'https://rickandmortyapi.com/api';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EpisodeService {
   private http = inject(HttpClient);
+  private apiUrl = environment.API_URL;
 
   getEpisodeById(id: number) {
-    const url = `${API_URL}/episode/${id}`;
+    const url = `${this.apiUrl}/episode/${id}`;
     return this.http.get<RestEpisode>(url).pipe(
       map((resp) => EpisodeMapper.mapRestEpisodeToEpisode(resp)),
       catchError((error) => {
