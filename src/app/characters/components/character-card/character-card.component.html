@@ -1,10 +1,12 @@
-<div class="card bg-dark bg-opacity-75">
-  <img
-    [src]="$character().image"
-    class="card-img-top"
-    [alt]="'Imagen de ' + $character().name"
-  />
-  <div class="card-body">
-    <h6 class="card-title text-white">{{ $character().name }}</h6>
+<a [routerLink]="['/characters', $character().id]" class="text-decoration-none">
+  <div class="card bg-dark bg-opacity-75 h-100">
+    <img
+      [src]="$character().image"
+      class="card-img-top"
+      [alt]="'Imagen de ' + $character().name"
+    />
+    <div class="card-body">
+      <h6 class="card-title text-white">{{ $character().name }}</h6>
+    </div>
   </div>
-</div>
+</a>

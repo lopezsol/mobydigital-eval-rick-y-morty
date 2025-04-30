@@ -1,5 +1,5 @@
 import { Character } from '../interfaces/character.interface';
-import { RestCharacter } from '../interfaces/paginated-characters.interface';
+import { RestCharacter } from '../interfaces/rest-paginated-characters.interface';
 
 export class CharacterMapper {
   static mapRestCharacterToCharacter(restCharacter: RestCharacter): Character {
