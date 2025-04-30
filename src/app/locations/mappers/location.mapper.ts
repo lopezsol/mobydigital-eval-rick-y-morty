@@ -6,6 +6,7 @@ export class LocationMapper {
     return {
       id: restLocation.id,
       name: restLocation.name,
+      url: restLocation.url,
     };
   }
 }

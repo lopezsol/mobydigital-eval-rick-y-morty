@@ -7,15 +7,18 @@
   <div class="card-body">
     <h5 class="card-title">Character Info</h5>
     <p class="card-text">Name: {{ $character().name }}</p>
-    <p class="card-text">Status: {{ $character().status }}</p>
+    <p class="card-text">Status: {{ $character().status | statusTranslate }}</p>
     <p class="card-text">Species: {{ $character().species }}</p>
-    <p class="card-text">Gender: {{ $character().gender }}</p>
+    <p class="card-text">Gender: {{ $character().gender | genderTranslate }}</p>
     <p class="card-text">
       Origin:
       <!--  -->
       @if ($originResource.value()?.name) {
-      <a href="#" class="text-primary text-decoration-none"
-        >{{ $originResource.value()?.name}</a
+      <a
+        [href]="$originResource.value()?.url"
+        class="text-primary text-decoration-none"
+        target="_blank"
+        >{{ $originResource.value()?.name }}</a
       >
       } @else {
       <span class="card-text">{{ $character().origin.name }}</span>
@@ -24,9 +27,12 @@
     <p class="card-text">
       Location:
       <!--  -->
-      @if ($originResource.value()?.name) {
-      <a href="#" class="text-primary text-decoration-none"
-        >{{ $locationResource.value()?.name}</a
+      @if ($locationResource.value()?.name) {
+      <a
+        [href]="$locationResource.value()?.url"
+        class="text-primary text-decoration-none"
+        target="_blank"
+        >{{ $locationResource.value()?.name }}</a
       >
       } @else {
       <span class="card-text">{{ $character().location.name }}</span>
