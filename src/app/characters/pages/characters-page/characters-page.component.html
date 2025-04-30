@@ -1,11 +1,10 @@
-<!--  -->
 @if( $characterResource.error() ) {
-<p class="text-danger">{{ $characterResource.error() }}</p>
+<app-error [$message]="$characterResource.error()" />
 }
 
 <!--  -->
 @if ($characterResource.isLoading()) {
-<h1>Loading characters...</h1>
+<app-loader />
 }
 
 <!--  -->
