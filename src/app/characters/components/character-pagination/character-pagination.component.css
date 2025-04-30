@@ -1,3 +1,21 @@
-:host {
-  display: block;
+.pagination .page-link {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #007bff; 
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination .page-link:hover {
+  background-color: #333;
+  color: white;
+}
+
+.page-item .page-link.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
