@@ -1,38 +1,40 @@
-<div class="card bg-dark">
-  <div class="card-body text-white">
-    <h5 class="card-title">List of Episodes appearances</h5>
+<div class="container">
+  <div class="card border border-0">
+    <div class="card-body text-white">
+      <h5 class="card-title">List of Episodes appearances</h5>
+      <hr />
+      @if ($episodeResource.hasValue()) {
+      <!--  -->
+      @for (episode of $episodeResource.value().slice(0, $initialLimit()); track
+      episode; let idx = $index) {
+      <a
+        [href]="episode.url"
+        target="_blank"
+        class="card-text text-primary text-decoration-none d-block"
+      >
+        Episode {{ idx + 1 }} - {{ episode.name }}
+      </a>
+      }
+      <!--TODO: crear metodo para mostrar boton  -->
 
-    @if ($episodeResource.hasValue()) {
-    <!--  -->
-    @for (episode of $episodeResource.value().slice(0, $initialLimit()); track
-    episode; let idx = $index) {
-    <a
-      [href]="episode.url"
-      target="_blank"
-      class="card-text text-primary text-decoration-none d-block"
-    >
-      Episode {{ idx + 1 }} - {{ episode.name }}
-    </a>
-    }
-    <!--TODO: crear metodo para mostrar boton  -->
+      @if ($episodeResource.value().length > $initialLimit()) {
+      <button
+        class="btn btn-link text-decoration-none p-0 mt-2"
+        (click)="updateInitialLimit()"
+      >
+        (more)
+      </button>
+      } }
+      <!--  -->
 
-    @if ($episodeResource.value().length > $initialLimit()) {
-    <button
-      class="btn btn-link text-decoration-none p-0 mt-2"
-      (click)="updateInitialLimit()"
-    >
-      (more)
-    </button>
-    } }
-    <!--  -->
+      @if ($episodeResource.isLoading()) {
+      <app-loader />
+      }
+      <!--  -->
 
-    @if ($episodeResource.isLoading()) {
-    <app-loader />
-    }
-    <!--  -->
-
-    @if ($episodeResource.error()) {
-    <app-error [$message]="$episodeResource.error()" />
-    }
+      @if ($episodeResource.error()) {
+      <app-error [$message]="$episodeResource.error()" />
+      }
+    </div>
   </div>
 </div>

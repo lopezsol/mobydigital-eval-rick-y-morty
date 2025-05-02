@@ -3,7 +3,6 @@ import { CharactersListComponent } from '../../components/characters-list/charac
 import { CharacterService } from '../../services/character.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CharacterPaginationComponent } from '../../components/character-pagination/character-pagination.component';
-import { of } from 'rxjs';
 import { LoaderComponent } from "../../../shared/components/loader/loader.component";
 import { ErrorComponent } from "../../../shared/components/error/error.component";
 

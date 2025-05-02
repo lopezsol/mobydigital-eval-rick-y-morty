@@ -6,3 +6,27 @@ p {
   padding: 0;
   margin: 0;
 }
+
+.container {
+  padding: 24px;
+  border-radius: 8px;
+  background-color: var(--color-detail-card);
+}
+.card {
+  background-color: var(--color-detail-card);
+}
+
+.card img {
+  border-radius: 8px;
+}
+
+.card-body {
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+}
+
+@media (width > 768px) {
+  .container {
+    width: 100%;
+  }
+}

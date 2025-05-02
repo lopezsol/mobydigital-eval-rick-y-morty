@@ -1,3 +1,14 @@
+:root {
+  --color-navbar: #1e1e1e;
+  --color-navbar-active: #000000;
+  --color-background: #323232;
+  --color-card: #32373c;
+  --color-detail-card: #1e1e1e;
+
+  --color-hover: #272b2e;
+  --color-border-light: #373c41;
+}
+
 * {
   box-sizing: border-box;
 }

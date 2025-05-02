@@ -2,8 +2,21 @@
   display: block;
 }
 
-img {
-  height: 175px;
-  object-fit: cover;  
+.card {
+  background-color: var(--color-card); 
 }
 
+.card:hover {
+  background-color: var(--color-hover);
+}
+
+h6 {
+  font-weight: 700;
+
+}
+
+.card img {
+  height: 175px;
+  object-fit: cover;
+  border-radius: 8px;
+}
