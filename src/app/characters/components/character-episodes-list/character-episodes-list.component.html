@@ -5,7 +5,7 @@
       <hr />
       @if ($episodeResource.hasValue()) {
       <!--  -->
-      @for (episode of $episodeResource.value().slice(0, $initialLimit()); track
+      @for (episode of visibleEpisodes(); track
       episode; let idx = $index) {
       <a
         [href]="episode.url"
@@ -15,9 +15,8 @@
         Episode {{ idx + 1 }} - {{ episode.name }}
       </a>
       }
-      <!--TODO: crear metodo para mostrar boton  -->
 
-      @if ($episodeResource.value().length > $initialLimit()) {
+      @if (shouldShowMoreButton()) {
       <button
         class="btn btn-link text-decoration-none p-0 mt-2"
         (click)="updateInitialLimit()"

@@ -1,9 +1,9 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { EpisodeService } from '../../../episodes/services/episode.service';
-import { firstValueFrom, forkJoin, from, of } from 'rxjs';
-import { LoaderComponent } from "../../../shared/components/loader/loader.component";
-import { ErrorComponent } from "../../../shared/components/error/error.component";
+import { forkJoin, of } from 'rxjs';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
+import { ErrorComponent } from '../../../shared/components/error/error.component';
 
 @Component({
   selector: 'character-episodes-list',
@@ -30,4 +30,15 @@ export class CharacterEpisodesListComponent {
       );
     },
   });
+
+  shouldShowMoreButton(): boolean {
+    const episodes = this.$episodeResource.value();
+    return (episodes?.length || 0) > this.$initialLimit();
+  }
+
+  visibleEpisodes() {
+    const episodes = this.$episodeResource.value();
+    if (!episodes) return [];
+    return episodes.slice(0, this.$initialLimit());
+  }
 }
