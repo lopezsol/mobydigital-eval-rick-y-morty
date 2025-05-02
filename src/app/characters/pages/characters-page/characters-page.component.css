@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+section {
+  background-color: var(--color-background);
+}

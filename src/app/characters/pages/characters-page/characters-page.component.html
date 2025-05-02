@@ -9,7 +9,7 @@
 
 <!--  -->
 @if( $characterResource.hasValue()) {
-<section class="bg-dark bg-opacity-50 py-5">
+<section class="py-5">
   <characters-list [$characters]="$characterResource.value().characters" />
   <character-pagination
     [$infoPagination]="$characterResource.value().info"

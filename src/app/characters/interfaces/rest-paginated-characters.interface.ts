@@ -1,3 +1,7 @@
+import { Gender } from './gender.interface';
+import { LocationSummary } from './location-summary.interface';
+import { Status } from './status.interface';
+
 export interface RestPaginatedCharacters {
   info: RestPaginationInfo;
   results: RestCharacter[];
@@ -17,33 +21,15 @@ export interface RestCharacter {
   species: Species;
   type: string;
   gender: Gender;
-  origin: Location;
-  location: Location;
+  origin: LocationSummary;
+  location: LocationSummary;
   image: string;
   episode: string[];
   url: string;
   created: string;
 }
 
-
-export enum Gender {
-  Female = 'Female',
-  Male = 'Male',
-  Unknown = 'unknown',
-}
-
-export interface Location {
-  name: string;
-  url: string;
-}
-
 export enum Species {
   Alien = 'Alien',
   Human = 'Human',
-}
-
-export enum Status {
-  Alive = 'Alive',
-  Dead = 'Dead',
-  Unknown = 'unknown',
 }

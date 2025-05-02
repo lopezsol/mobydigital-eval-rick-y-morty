@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Status } from '../../characters/interfaces/character.interface';
+import { Status } from '../../characters/interfaces/status.interface';
 
 @Pipe({
   name: 'statusTranslate',
