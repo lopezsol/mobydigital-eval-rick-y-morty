@@ -1,5 +1,5 @@
-import type { Location } from "../../locations/interfaces/location.interface";
-import type { Gender } from "./rest-paginated-characters.interface";
+import { Gender } from "./gender.interface";
+import { LocationSummary } from "./location-summary.interface";
 import { Status } from "./status.interface";
 
 export interface Character {
@@ -8,9 +8,9 @@ export interface Character {
   episode: string[];
   gender: Gender | string;
   image: string;
-  location: Location;
+  location: LocationSummary;
   name: string;
-  origin: Location;
+  origin: LocationSummary;
   species: string;
   status: Status | string;
   type: string;

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Gender } from '../../characters/interfaces/character.interface';
+import { Gender } from '../../characters/interfaces/gender.interface';
 
 @Pipe({
   name: 'genderTranslate',
