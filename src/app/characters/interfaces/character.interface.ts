@@ -1,3 +1,7 @@
+import type { Location } from "../../locations/interfaces/location.interface";
+import type { Gender } from "./rest-paginated-characters.interface";
+import { Status } from "./status.interface";
+
 export interface Character {
   id: number;
   created: string;
@@ -13,20 +17,7 @@ export interface Character {
   url: string;
 }
 
-export enum Gender {
-  Female = 'Female',
-  Genderless = 'Genderless',
-  Male = 'Male',
-  Unknown = 'unknown',
-}
 
-export interface Location {
-  name: string;
-  url: string;
-}
 
-export enum Status {
-  Alive = 'Alive',
-  Dead = 'Dead',
-  Unknown = 'unknown',
-}
+
+
