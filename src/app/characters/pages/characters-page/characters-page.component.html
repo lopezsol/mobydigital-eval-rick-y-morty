@@ -1,20 +1,20 @@
-@if( $characterResource.error() ) {
-<app-error [$message]="$characterResource.error()" />
-}
-
-<!--  -->
-@if ($characterResource.isLoading()) {
-<app-loader />
-}
-
-<!--  -->
-@if( $characterResource.hasValue()) {
 <section class="py-5">
+  @if( $characterResource.error() ) {
+  <app-error [$message]="$characterResource.error()" />
+  }
+
+  <!--  -->
+  @if ($characterResource.isLoading()) {
+  <app-loader />
+  }
+
+  <!--  -->
+  @if( $characterResource.hasValue()) {
   <characters-list [$characters]="$characterResource.value().characters" />
   <character-pagination
     [$infoPagination]="$characterResource.value().info"
     [$currentPage]="$page()"
     ($pageChanged)="setPage($event)"
   />
+  }
 </section>
-}

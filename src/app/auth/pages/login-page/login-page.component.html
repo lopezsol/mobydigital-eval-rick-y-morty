@@ -1,0 +1,62 @@
+<section
+  class="login-container container-fluid d-flex align-items-center justify-content-center"
+>
+  <div class="row w-100">
+    <div
+      class="col-md-6 d-flex justify-content-center align-items-center mb-4 mb-md-0"
+    >
+      <img
+        src="images/rickandmorty.webp"
+        class="img-fluid login-image"
+        alt="Rick and Morty"
+      />
+    </div>
+
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <form
+        class="login-form d-flex flex-column gap-2 p-4 rounded"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div>
+          <label for="email" class="form-label text-primary">Email</label>
+          <input
+            type="email"
+            class="form-control text-white"
+            placeholder="email@example.com"
+            formControlName="email"
+          />
+        </div>
+
+        <div>
+          <label for="password" class="form-label text-primary">Password</label>
+          <input
+            type="password"
+            class="form-control text-white"
+            formControlName="password"
+          />
+        </div>
+
+        <div class="form-check text-white">
+          <input class="form-check-input" type="checkbox" id="remember" />
+          <label class="form-check-label" for="remember"> Remember me </label>
+        </div>
+
+        <button class="btn btn-primary mt-2">Sign In</button>
+        <hr class="text-white" />
+        <div class="text-center form-text text-white">
+          New around here?
+          <a routerLink="/auth/register" class="text-decoration-none"
+            >Sign Up</a
+          >
+        </div>
+
+        @if($hasError()) {
+        <error-alert
+          [$errorMessage]="'Por favor revise la información ingresada.'"
+        />
+        }
+      </form>
+    </div>
+  </div>
+</section>

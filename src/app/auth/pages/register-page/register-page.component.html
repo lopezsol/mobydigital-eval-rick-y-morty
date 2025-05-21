@@ -1,0 +1,146 @@
+<div class="container d-flex align-items-center justify-content-center py-5">
+  <section class="card p-4 shadow-lg w-100 text-white" style="max-width: 900px">
+    <h3 class="text-center mb-4">Register</h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="fullName" class="form-label text-primary"
+            >Full Name</label
+          >
+          <input
+            type="text"
+            class="form-control text-white"
+            placeholder="Cosme Fulanito"
+            formControlName="name"
+          />
+          @if ( formUtils.isInvalidField(loginForm, 'name')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'name')!"
+          />
+          }
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="email" class="form-label text-primary">Email</label>
+          <input
+            type="email"
+            class="form-control text-white"
+            placeholder="email@example.com"
+            formControlName="email"
+          />
+          @if ( formUtils.isInvalidField(loginForm, 'email')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'email')!"
+          />
+          }
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="password" class="form-label text-primary">Password</label>
+          <input
+            type="password"
+            class="form-control text-white"
+            formControlName="password"
+          />
+          @if ( formUtils.isInvalidField(loginForm, 'password')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'password')!"
+          />
+          }
+          <!--  -->
+          @else if( loginForm.errors && loginForm.touched ) {
+          <error-message [$message]="'Las contraseñas no son iguales'" />
+          }
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="repeatPassword" class="form-label text-primary"
+            >Repeat Password</label
+          >
+          <input
+            type="password"
+            class="form-control text-white"
+            formControlName="password2"
+          />
+          @if ( formUtils.isInvalidField(loginForm, 'password2')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'password2')!"
+          />
+          }
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label text-primary">Address</label>
+        <input
+          type="text"
+          class="form-control text-white"
+          formControlName="address"
+          placeholder="Apartment, studio or floor"
+        />
+        @if ( formUtils.isInvalidField(loginForm, 'address')) {
+        <error-message
+          [$message]="formUtils.getFieldError(loginForm, 'address')!"
+        />
+        }
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="city" class="form-label text-primary">City</label>
+          <input
+            type="text"
+            class="form-control text-white"
+            formControlName="city"
+            placeholder="Córdoba"
+          />
+          @if ( formUtils.isInvalidField(loginForm, 'city')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'city')!"
+          />
+          }
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="state" class="form-label text-primary">State</label>
+          <select class="form-select text-white" formControlName="state">
+            <option value="">--Choose an option--</option>
+            @for (country of countries; track country; let index = $index) {
+            <option>{{ country }}</option>
+            }
+          </select>
+          @if ( formUtils.isInvalidField(loginForm, 'state')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'state')!"
+          />
+          }
+        </div>
+        <div class="col-md-2 mb-3">
+          <label for="zip" class="form-label text-primary">Zip</label>
+          <input
+            type="text"
+            class="form-control text-white"
+            formControlName="zip"
+            placeholder="5000"
+          />
+          @if ( formUtils.isInvalidField(loginForm, 'zip')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'zip')!"
+          />
+          }
+        </div>
+      </div>
+
+      <div class="d-grid mt-3">
+        <button class="btn btn-primary">Sign Up</button>
+      </div>
+      <hr />
+      <div class="text-center mt-3 form-text text-white">
+        Already Signed Up?
+        <a routerLink="/auth/login " class="text-decoration-none">Sign In</a>
+      </div>
+    </form>
+  </section>
+
+  @if($hasError()) {
+  <error-alert [$errorMessage]="$errorMessage()" />
+  }
+</div>

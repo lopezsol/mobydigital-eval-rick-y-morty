@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class EpisodeService {
   private http = inject(HttpClient);
-  private apiUrl = environment.API_URL;
+  private apiUrl = environment.CHARACTER_API_URL;
 
   getEpisodeById(id: number) {
     const url = `${this.apiUrl}/episode/${id}`;

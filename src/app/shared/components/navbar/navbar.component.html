@@ -1,13 +1,14 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg bg-dark">
   <div class="container-fluid">
     <a
       routerLink="/"
       routerLinkActive="navbar-active text-opacity-100"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="navbar-brand text-white text-opacity-75"
+      class="navbar-brand text-white"
     >
       Rick & Morty
     </a>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -19,16 +20,36 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav me-auto">
         <a
-          routerLink="characters"
-          routerLinkActive="navbar-active text-opacity-100 "
+          routerLink="/characters"
+          routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="nav-link text-white text-opacity-75"
+          class="nav-link text-white"
         >
           Characters
         </a>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        @if (authService.authStatus() === 'authenticated') {
+        <button class="btn btn-outline-light btn-sm" type="button">
+          {{ authService.user()?.name }}
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          type="button"
+          (click)="authService.logout()"
+        >
+          Log Out
+        </button>
+        }
+        <!--  -->
+        @if (authService.authStatus() === 'not-authenticated') {
+        <a routerLink="/auth/login" class="btn btn-secondary btn-sm">Log In</a>
+        }
       </div>
     </div>
   </div>
