@@ -1,41 +1,75 @@
 <div class="container d-flex align-items-center justify-content-center">
   <div class="card p-4 shadow-lg" style="max-width: 500px; width: 100%">
     <h3 class="text-center mb-4">Register</h3>
-    <form>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="fullName" class="form-label">Full Name</label>
         <input
           type="text"
           class="form-control"
-          id="fullName"
           placeholder="Cosme Fulanito"
+          formControlName="name"
         />
+        @if ( formUtils.isInvalidField(loginForm, 'name')) {
+        <error-message
+          [$message]="formUtils.getFieldError(loginForm, 'name')!"
+        />
+        }
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input
           type="email"
           class="form-control"
-          id="email"
           placeholder="example@example.com"
+          formControlName="email"
         />
+        @if ( formUtils.isInvalidField(loginForm, 'email')) {
+        <error-message
+          [$message]="formUtils.getFieldError(loginForm, 'email')!"
+        />
+        }
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" />
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        @if ( formUtils.isInvalidField(loginForm, 'password')) {
+        <error-message
+          [$message]="formUtils.getFieldError(loginForm, 'password')!"
+        />
+        }
       </div>
       <div class="mb-3">
         <label for="repeatPassword" class="form-label">Repeat Password</label>
-        <input type="password" class="form-control" id="repeatPassword" />
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password2"
+        />
+        @if ( formUtils.isInvalidField(loginForm, 'password2')) {
+        <error-message
+          [$message]="formUtils.getFieldError(loginForm, 'password2')!"
+        />
+        }
       </div>
       <div class="mb-3">
         <label for="address" class="form-label">Address</label>
         <input
           type="text"
           class="form-control"
-          id="address"
+          formControlName="address"
           placeholder="Apartment, studio or floor"
         />
+        @if ( formUtils.isInvalidField(loginForm, 'address')) {
+        <error-message
+          [$message]="formUtils.getFieldError(loginForm, 'address')!"
+        />
+        }
       </div>
       <div class="row">
         <div class="col-md-6 mb-3">
@@ -43,28 +77,57 @@
           <input
             type="text"
             class="form-control"
-            id="city"
+            formControlName="city"
             placeholder="Córdoba"
           />
+          @if ( formUtils.isInvalidField(loginForm, 'city')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'city')!"
+          />
+          }
         </div>
         <div class="col-md-4 mb-3">
           <label for="state" class="form-label">State</label>
-          <select class="form-select" id="state">
+          <select class="form-select" formControlName="state">
             <option selected>Argentina</option>
             <option>Other</option>
           </select>
+          @if ( formUtils.isInvalidField(loginForm, 'state')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'state')!"
+          />
+          }
         </div>
         <div class="col-md-2 mb-3">
           <label for="zip" class="form-label">Zip</label>
-          <input type="text" class="form-control" id="zip" placeholder="5000" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="zip"
+            placeholder="5000"
+          />
+          @if ( formUtils.isInvalidField(loginForm, 'zip')) {
+          <error-message
+            [$message]="formUtils.getFieldError(loginForm, 'zip')!"
+          />
+          }
         </div>
       </div>
+      <div class="mb-3">
+        @if( loginForm.errors && loginForm.touched ) {
+        <error-message [$message]="'Las contraseñas no son iguales'" />
+        }
+      </div>
       <div class="d-grid">
-        <button type="submit" class="btn btn-primary">Sing Up</button>
+        <button class="btn btn-primary">Sing Up</button>
       </div>
       <div class="text-center mt-3 form-text">
         Already Signed Up? <a routerLink="/auth/login">Sing In</a>
       </div>
     </form>
   </div>
+
+  @if($hasError()) {
+  <error-alert [$errorMessage]="$errorMessage()" />
+  }
 </div>

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { catchError, map, Observable, of, tap } from 'rxjs';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { User } from '@auth/interfaces/user.interface';
 import { AuthResponse } from '@auth/interfaces/auth-response.interface';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 const baseUrl = environment.AUTH_API_URL;
@@ -17,9 +17,9 @@ export class AuthService {
 
   private http = inject(HttpClient);
 
-  constructor() {
-    this.checkStatus();
-  }
+  checkStatusResource = rxResource({
+    loader: () => this.checkStatus(),
+  });
 
   authStatus = computed<AuthStatus>(() => {
     console.log(this._authStatus());
@@ -45,15 +45,35 @@ export class AuthService {
       );
   }
 
-  checkStatus(): boolean {
+  register(user: User): Observable<boolean> {
+    return this.http
+      .post<AuthResponse>(`${baseUrl}/user/register`, {
+        name: user.name,
+        mail: user.mail,
+        password: user.password,
+        address: user.address,
+      })
+      .pipe(
+        map((resp) => true),
+        catchError((error: any) => {
+          const message =
+            error?.error?.header?.error ?? 'Error desconocido al registrarse';
+          return throwError(() => new Error(message));
+        })
+      );
+  }
+
+  checkStatus(): Observable<boolean> {
     const token = sessionStorage.getItem('token');
     const storedUser = sessionStorage.getItem('user');
+
     if (!token || !storedUser) {
       this.logout();
-      return false;
+      return of(false);
     }
+
     this.handleAuthSuccess(JSON.parse(storedUser), token);
-    return true;
+    return of(true);
   }
 
   logout() {

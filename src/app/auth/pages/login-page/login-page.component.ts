@@ -3,10 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '@auth/services/auth.service';
+import { FormUtils } from 'src/app/utils/form-utils';
+import { ErrorAlertComponent } from "../../../shared/components/error-alert/error-alert.component";
 
 @Component({
   selector: 'app-login-page',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, ErrorAlertComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })
@@ -23,7 +25,7 @@ export class LoginPageComponent {
       '',
       [
         Validators.required,
-        Validators.email,
+        Validators.pattern(FormUtils.emailPattern),
         Validators.minLength(10),
         Validators.maxLength(50),
       ],
@@ -58,6 +60,4 @@ export class LoginPageComponent {
       }, 2000);
     });
   }
-
-
 }
