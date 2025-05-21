@@ -1,6 +1,5 @@
 import {
   AbstractControl,
-  FormArray,
   FormGroup,
   ValidationErrors,
 } from '@angular/forms';
@@ -25,8 +24,6 @@ export class FormUtils {
           return `Valor mínimo de ${errors['min'].min}`;
         case 'emailTaken':
           return `El correo electrónico ya está siendo usado por otro usuario`;
-        case 'fullName':
-          return 'Debe ingresar al menos nombre y apellido';
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
             return 'El valor ingresado no luce como un correo electrónico';
@@ -59,23 +56,6 @@ export class FormUtils {
     return FormUtils.getTextError(errors);
   }
 
-  static isValidFieldInArray(formArray: FormArray, index: number) {
-    return (
-      formArray.controls[index].errors && formArray.controls[index].touched
-    );
-  }
-
-  static getFieldErrorInArray(
-    formArray: FormArray,
-    index: number
-  ): string | null {
-    if (formArray.controls.length === 0) return null;
-
-    const errors = formArray.controls[index].errors ?? {};
-
-    return FormUtils.getTextError(errors);
-  }
-
   static isFieldOneEqualFieldTwo(field1: string, field2: string) {
     return (formGroup: AbstractControl) => {
       const field1Value = formGroup.get(field1)?.value;
@@ -85,32 +65,4 @@ export class FormUtils {
     };
   }
 
-  //TODO: mejorar validador de nombre
-  // static fullNameValidator(control: AbstractControl): ValidationErrors | null {
-  //   const value = control.value?.trim();
-
-  //   if (!value) return { fullName: true }; // está vacío o son solo espacios
-
-  //   const words = value.split(/\s+/).filter((word: string) => word.length > 0);
-
-  //   return words.length >= 2 ? null : { fullName: true };
-  // }
-
-  //   static async checkingServerResponse(
-  //     control: AbstractControl
-  //   ): Promise<ValidationErrors | null> {
-  //     console.log('Validando contra servidor');
-
-  //     await sleep();
-
-  //     const formValue = control.value;
-
-  //     if (formValue === 'hola@mundo.com') {
-  //       return {
-  //         emailTaken: true,
-  //       };
-  //     }
-
-  //     return null;
-  //   }
 }

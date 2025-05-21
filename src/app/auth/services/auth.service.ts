@@ -22,9 +22,6 @@ export class AuthService {
   });
 
   authStatus = computed<AuthStatus>(() => {
-    console.log(this._authStatus());
-    console.log('token: ', this._token());
-
     if (this._authStatus() === 'checking') return 'checking';
     if (this._user()) return 'authenticated';
     return 'not-authenticated';

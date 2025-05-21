@@ -14,8 +14,7 @@ import { ErrorAlertComponent } from "../../../shared/components/error-alert/erro
 })
 export class LoginPageComponent {
   fb = inject(FormBuilder);
-  hasError = signal(false);
-  isPosting = signal(false);
+  $hasError = signal(false);
   router = inject(Router);
 
   authService = inject(AuthService);
@@ -38,15 +37,14 @@ export class LoginPageComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      this.hasError.set(true);
+      this.$hasError.set(true);
       setTimeout(() => {
-        this.hasError.set(false);
+        this.$hasError.set(false);
       }, 2000);
       return;
     }
 
     const { email = '', password = '' } = this.loginForm.value;
-    console.log(email, password);
 
     this.authService.login(email!, password!).subscribe((isAuthenticated) => {
       if (isAuthenticated) {
@@ -54,9 +52,9 @@ export class LoginPageComponent {
         return;
       }
 
-      this.hasError.set(true);
+      this.$hasError.set(true);
       setTimeout(() => {
-        this.hasError.set(false);
+        this.$hasError.set(false);
       }, 2000);
     });
   }
