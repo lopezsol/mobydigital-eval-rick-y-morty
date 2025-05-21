@@ -1,4 +1,5 @@
-<section class="py-5">
+<section class="py-5 container">
+  <character-search ($queryChanged)="setQuery($event)" [$query]="$query()" />
   @if( $characterResource.error() ) {
   <app-error [$message]="$characterResource.error()" />
   }

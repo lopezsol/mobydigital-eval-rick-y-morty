@@ -3,5 +3,5 @@
 }
 
 section {
-  background-color: var(--color-background);
+  min-height: calc(100vh - 60px);
 }
