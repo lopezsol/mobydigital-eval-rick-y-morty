@@ -122,6 +122,7 @@ export class RegisterPageComponent {
       zip = '',
     } = this.loginForm.value;
 
+    // address.street
     return {
       name: name!,
       mail: email!,

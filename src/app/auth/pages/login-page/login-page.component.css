@@ -20,14 +20,21 @@ background-color: var(--color-detail-card);
 }
 
 .login-image {
-  max-width: 350px;
-  width: 100%;
+  max-width: 200px;
+  height: auto;
 }
 
 .form-text a {
   text-decoration: none;
 }
 
-::placeholder, .form-check-label {
+::placeholder,
+.form-check-label {
   color: var(--color-placeholder);
+}
+
+@media (width > 768px) {
+  .login-image {
+    max-width: 450px;
+  }
 }
