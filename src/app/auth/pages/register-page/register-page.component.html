@@ -25,7 +25,7 @@
           <input
             type="email"
             class="form-control text-white"
-            placeholder="example@example.com"
+            placeholder="email@example.com"
             formControlName="email"
           />
           @if ( formUtils.isInvalidField(loginForm, 'email')) {
@@ -133,7 +133,8 @@
       </div>
       <hr />
       <div class="text-center mt-3 form-text text-white">
-        Already Signed Up? <a routerLink="/auth/login">Sign In</a>
+        Already Signed Up?
+        <a routerLink="/auth/login " class="text-decoration-none">Sign In</a>
       </div>
     </form>
   </section>

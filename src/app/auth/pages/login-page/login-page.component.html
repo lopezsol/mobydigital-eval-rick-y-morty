@@ -1,71 +1,62 @@
-<section>
-  <form
-    class="d-flex flex-column gap-2"
-    [formGroup]="loginForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <div class="input-group">
-      <span class="input-group-text">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-envelope"
-          viewBox="0 0 16 16"
-        >
-          <path d="M0 4a2 2 0 012-2h12a2 2 0 012 2v.217l-8 4.8-8-4.8V4z" />
-          <path
-            d="M0 4.697v7.104l5.803-3.482L0 4.697zm6.761 3.396L0 12.803V14a2 2 0 002 2h12a2 2 0 002-2v-1.197l-6.761-4.71L8 9.383l-1.239-.79zM16 4.697l-5.803 3.622L16 11.801V4.697z"
-          />
-        </svg>
-      </span>
-      <input
-        type="email"
-        class="form-control"
-        placeholder="Correo electrónico"
-        formControlName="email"
+<section
+  class="login-container container-fluid d-flex align-items-center justify-content-center"
+>
+  <div class="row w-100">
+    <div
+      class="col-md-6 d-flex justify-content-center align-items-center mb-4 mb-md-0"
+    >
+      <img
+        src="assets/images/rickandmorty.webp"
+        class="img-fluid login-image"
+        alt="Rick and Morty"
       />
     </div>
 
-    <div class="input-group">
-      <span class="input-group-text">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-lock"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M8 1a3 3 0 00-3 3v3h-.5A1.5 1.5 0 003 8.5v5A1.5 1.5 0 004.5 15h7a1.5 1.5 0 001.5-1.5v-5A1.5 1.5 0 0011.5 7H11V4a3 3 0 00-3-3zM6 4a2 2 0 114 0v3H6V4z"
-          />
-        </svg>
-      </span>
-      <input
-        type="password"
-        class="form-control"
-        placeholder="Contraseña"
-        formControlName="password"
-      />
-    </div>
-
-    <button class="btn btn-primary mt-2">Login</button>
-
-    <p class="text-muted mt-2">
-      ¿No tienes cuenta?
-      <a
-        routerLink="/auth/register"
-        class="text-decoration-none text-secondary"
-        routerLink="/auth/register"
-        >Crea una aquí</a
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <form
+        class="login-form d-flex flex-column gap-2 p-4 rounded"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
       >
-    </p>
-  </form>
+        <div>
+          <label for="email" class="form-label text-primary">Email</label>
+          <input
+            type="email"
+            class="form-control text-white"
+            placeholder="email@example.com"
+            formControlName="email"
+          />
+        </div>
 
-  <!-- -->
-  @if(hasError()) {
-  <error-alert [$errorMessage]="'Por favor revise la información ingresada.'" />
-  }
+        <div>
+          <label for="password" class="form-label text-primary">Password</label>
+          <input
+            type="password"
+            class="form-control text-white"
+            formControlName="password"
+          />
+        </div>
+
+        <div class="form-check text-white">
+          <input class="form-check-input" type="checkbox" id="remember" />
+          <label class="form-check-label" for="remember"> Remember me </label>
+        </div>
+
+        <button class="btn btn-primary mt-2">Sign In</button>
+        <hr class="text-white" />
+        <div class="text-center form-text text-white">
+          New around here?
+          <a routerLink="/auth/register" class="text-decoration-none"
+            >Sign Up</a
+          >
+        </div>
+
+        @if(hasError()) {
+        <error-alert
+          [$errorMessage]="'Por favor revise la información ingresada.'"
+        />
+        }
+      </form>
+    </div>
+  </div>
 </section>

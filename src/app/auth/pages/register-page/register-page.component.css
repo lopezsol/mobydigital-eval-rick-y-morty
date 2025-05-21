@@ -26,9 +26,6 @@ select.form-select {
   box-shadow: none;
 }
 
-.form-text a {
-  text-decoration: none;
-}
 
 ::placeholder {
   color: var(--color-placeholder);
