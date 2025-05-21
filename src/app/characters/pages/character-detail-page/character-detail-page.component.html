@@ -1,19 +1,19 @@
-<!--  -->
-@if( $characterResource.error() ) {
-<app-error [$message]="$characterResource.error()" />
-}
-
-<!--  -->
-@if ($characterResource.isLoading()) {
-<app-loader />
-}
-
-<!--  -->
-@if( $characterResource.hasValue()) {
 <section class="d-flex justify-content-center">
+  <!--  -->
+  @if( $characterResource.error() ) {
+  <app-error [$message]="$characterResource.error()" />
+  }
+
+  <!--  -->
+  @if ($characterResource.isLoading()) {
+  <app-loader />
+  }
+
+  <!--  -->
+  @if( $characterResource.hasValue()) {
   <div class="container py-5">
     <character-info [$character]="$characterResource.value()" />
     <character-episodes-list [$episodes]="$characterResource.value().episode" />
   </div>
+  }
 </section>
-}
