@@ -6,11 +6,16 @@ import { User } from '@auth/interfaces/user.interface';
 import { AuthService } from '@auth/services/auth.service';
 import { FormUtils } from 'src/app/utils/form-utils';
 import { ErrorMessageComponent } from '../../../shared/components/error-message/error-message.component';
-import { ErrorAlertComponent } from "../../../shared/components/error-alert/error-alert.component";
+import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, RouterLink, JsonPipe, ErrorMessageComponent, ErrorAlertComponent],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    ErrorMessageComponent,
+    ErrorAlertComponent,
+  ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css',
 })
@@ -22,6 +27,29 @@ export class RegisterPageComponent {
 
   authService = inject(AuthService);
   formUtils = FormUtils;
+
+  countries: string[] = [
+    'Argentina',
+    'Brasil',
+    'Chile',
+    'Uruguay',
+    'Paraguay',
+    'Bolivia',
+    'Perú',
+    'Colombia',
+    'Ecuador',
+    'México',
+    'España',
+    'Estados Unidos',
+    'Canadá',
+    'Alemania',
+    'Francia',
+    'Italia',
+    'Reino Unido',
+    'Japón',
+    'China',
+    'Australia',
+  ];
 
   loginForm = this.fb.group(
     {
@@ -54,7 +82,7 @@ export class RegisterPageComponent {
       password2: ['', Validators.required],
       address: ['', [Validators.maxLength(50)]],
       city: ['', [Validators.maxLength(50)]],
-      state: ['', [Validators.maxLength(50)]],
+      state: [this.countries[0], [Validators.maxLength(50)]],
       zip: ['', [Validators.minLength(4), Validators.maxLength(4)]],
     },
     {
@@ -64,6 +92,8 @@ export class RegisterPageComponent {
 
   onSubmit() {
     this.loginForm.markAllAsTouched();
+    if(!this.loginForm.valid) return
+
     const newUser = this.createUser();
 
     this.authService.register(newUser).subscribe({
