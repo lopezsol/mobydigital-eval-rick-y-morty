@@ -21,7 +21,6 @@ select.form-select {
 }
 
 .form-control:focus {
-  color: white;
   border-color: #007bff;
   box-shadow: none;
 }
