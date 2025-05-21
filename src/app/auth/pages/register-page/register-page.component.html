@@ -1,0 +1,70 @@
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="card p-4 shadow-lg" style="max-width: 500px; width: 100%">
+    <h3 class="text-center mb-4">Register</h3>
+    <form>
+      <div class="mb-3">
+        <label for="fullName" class="form-label">Full Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fullName"
+          placeholder="Cosme Fulanito"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="example@example.com"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" />
+      </div>
+      <div class="mb-3">
+        <label for="repeatPassword" class="form-label">Repeat Password</label>
+        <input type="password" class="form-control" id="repeatPassword" />
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          placeholder="Apartment, studio or floor"
+        />
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="city" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            placeholder="Córdoba"
+          />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="state" class="form-label">State</label>
+          <select class="form-select" id="state">
+            <option selected>Argentina</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="col-md-2 mb-3">
+          <label for="zip" class="form-label">Zip</label>
+          <input type="text" class="form-control" id="zip" placeholder="5000" />
+        </div>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Sing Up</button>
+      </div>
+      <div class="text-center mt-3 form-text">
+        Already Signed Up? <a routerLink="/auth/login">Sing In</a>
+      </div>
+    </form>
+  </div>
+</div>

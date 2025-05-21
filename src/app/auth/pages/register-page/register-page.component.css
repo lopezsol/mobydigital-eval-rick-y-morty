@@ -1,0 +1,43 @@
+body {
+  background-color: var(--color-background);
+  color: #fff;
+}
+
+.card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border-light);
+  color: #fff;
+
+}
+
+.form-control {
+  background-color: var(--color-detail-card);
+  color: white;
+  border: 1px solid var(--color-border-light);
+}
+
+.form-control:focus {
+  background-color: var(--color-detail-card);
+  color: white;
+  border-color: #007bff;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.form-text a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.form-text a:hover {
+  text-decoration: underline;
+}

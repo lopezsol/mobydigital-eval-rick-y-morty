@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
 })
 export class CharacterService {
   private http = inject(HttpClient);
-  private apiUrl = environment.API_URL;
+  private apiUrl = environment.CHARACTER_API_URL;
 
   getAllCharacters(page: number) {
     const url = `${this.apiUrl}/character/?page=${page}`;

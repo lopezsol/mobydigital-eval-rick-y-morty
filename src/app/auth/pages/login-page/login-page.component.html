@@ -1,0 +1,168 @@
+<!-- <form
+  class="flex flex-col gap-2"
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+>
+  <label class="input input-bordered flex items-center gap-2">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      class="h-4 w-4 opacity-70"
+    >
+      <path
+        d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"
+      />
+      <path
+        d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
+      />
+    </svg>
+    <input
+      type="text"
+      class="grow"
+      placeholder="Correo electrónico"
+      formControlName="email"
+    />
+  </label>
+
+  <label class="input input-bordered flex items-center gap-2">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      class="h-4 w-4 opacity-70"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+    <input
+      type="password"
+      class="grow"
+      placeholder="Contraseña"
+      formControlName="password"
+    />
+  </label>
+
+  <button type="submit" class="btn btn-secondary">Login</button>
+
+  <p class="text-slate-700">
+    ¿No tienes cuenta?
+    <a routerLink="/auth/register" class="text-secondary">Crea una aquí</a>
+  </p>
+</form>
+
+@if(hasError()) {
+<div
+  role="alert"
+  class="alert alert-error animate-fadeIn fixed bottom-5 right-5 w-52"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6 shrink-0 stroke-current"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span>Por favor revise la información ingresada.</span>
+</div>
+} -->
+<section>
+  <form
+    class="d-flex flex-column gap-2"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="input-group">
+      <span class="input-group-text">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-envelope"
+          viewBox="0 0 16 16"
+        >
+          <path d="M0 4a2 2 0 012-2h12a2 2 0 012 2v.217l-8 4.8-8-4.8V4z" />
+          <path
+            d="M0 4.697v7.104l5.803-3.482L0 4.697zm6.761 3.396L0 12.803V14a2 2 0 002 2h12a2 2 0 002-2v-1.197l-6.761-4.71L8 9.383l-1.239-.79zM16 4.697l-5.803 3.622L16 11.801V4.697z"
+          />
+        </svg>
+      </span>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Correo electrónico"
+        formControlName="email"
+      />
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-lock"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 1a3 3 0 00-3 3v3h-.5A1.5 1.5 0 003 8.5v5A1.5 1.5 0 004.5 15h7a1.5 1.5 0 001.5-1.5v-5A1.5 1.5 0 0011.5 7H11V4a3 3 0 00-3-3zM6 4a2 2 0 114 0v3H6V4z"
+          />
+        </svg>
+      </span>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+    </div>
+
+    <button class="btn btn-primary mt-2">Login</button>
+
+    <p class="text-muted mt-2">
+      ¿No tienes cuenta?
+      <a
+        routerLink="/auth/register"
+        class="text-decoration-none text-secondary"
+        routerLink="/auth/register"
+        >Crea una aquí</a
+      >
+    </p>
+  </form>
+
+  <!-- -->
+  @if(hasError()) {
+  <div
+    role="alert"
+    class="alert alert-danger position-fixed bottom-0 end-0 m-4 animate__animated animate__fadeIn"
+    style="width: 18rem"
+  >
+    <div class="d-flex align-items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="currentColor"
+        class="bi bi-exclamation-triangle-fill me-2"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8.982 1.566a1.13 1.13 0 00-1.964 0L.165 13.233c-.457.778.091 1.767.982 1.767h13.707c.89 0 1.438-.99.982-1.767L8.982 1.566zm-.982 4.434a.5.5 0 011 0v3a.5.5 0 01-1 0v-3zm.002 6a.75.75 0 110 1.5.75.75 0 010-1.5z"
+        />
+      </svg>
+      <span>Por favor revise la información ingresada.</span>
+    </div>
+  </div>
+  }
+</section>
