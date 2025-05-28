@@ -1,9 +1,17 @@
 <section
   class="login-container container-fluid d-flex align-items-center justify-content-center"
 >
+  @if($hasError() || $authResource.error()) {
+  <error-alert
+    [$errorMessage]="'Por favor revise la información ingresada.'"
+    ($hideAlert)="$hasError.set(false)"
+  />
+  }
+  <!--  -->
   @if($authResource.isLoading()){
   <app-loader />
   } @else {
+
   <div class="row w-100">
     <div
       class="col-md-6 d-flex justify-content-center align-items-center mb-4 mb-md-0"
@@ -56,10 +64,5 @@
       </form>
     </div>
   </div>
-  }
-
-  <!-- Mostrar el error solo si $hasError es true, no usando $authResource.error() -->
-  @if($hasError()) {
-  <error-alert [$errorMessage]="'Por favor revise la información ingresada.'" />
   }
 </section>

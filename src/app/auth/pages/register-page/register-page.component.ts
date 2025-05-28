@@ -22,12 +22,12 @@ import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.
 })
 export class RegisterPageComponent {
   fb = inject(FormBuilder);
-  $hasError = signal(false);
-  $errorMessage = signal('');
   router = inject(Router);
-
   authService = inject(AuthService);
   formUtils = FormUtils;
+  $hasError = signal(false);
+  $errorMessage = signal('');
+  $newUser = signal<User | null>(null);
 
   countries: string[] = [
     'Argentina',
@@ -172,7 +172,7 @@ export class RegisterPageComponent {
       this.isFilled(zip!)
     );
   }
-//TODO:verificar sin esto funciona
+  //TODO:verificar sin esto funciona
   private buildAddress(): Address | null {
     if (!this.hasFullAddress()) return null;
 
