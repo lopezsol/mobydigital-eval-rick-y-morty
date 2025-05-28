@@ -16,7 +16,6 @@ h6 {
 }
 
 .card img {
-  height: 175px;
-  object-fit: cover;
+  max-height: 225px;
   border-radius: 8px;
 }
