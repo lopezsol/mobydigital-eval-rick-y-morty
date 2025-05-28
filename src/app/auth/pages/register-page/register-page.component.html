@@ -1,8 +1,12 @@
 <div class="container d-flex align-items-center justify-content-center py-5">
+  <!--  -->
+  @if($authResource.isLoading()){
+  <app-loader />
+  } @else {
   <section class="card p-4 shadow-lg w-100 text-white" style="max-width: 900px">
     <h3 class="text-center mb-4">Register</h3>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="fullName" class="form-label text-primary"
@@ -14,9 +18,9 @@
             placeholder="Cosme Fulanito"
             formControlName="name"
           />
-          @if ( formUtils.isInvalidField(loginForm, 'name')) {
+          @if ( formUtils.isInvalidField(registerForm, 'name')) {
           <error-message
-            [$message]="formUtils.getFieldError(loginForm, 'name')!"
+            [$message]="formUtils.getFieldError(registerForm, 'name')!"
           />
           }
         </div>
@@ -28,9 +32,9 @@
             placeholder="email@example.com"
             formControlName="email"
           />
-          @if ( formUtils.isInvalidField(loginForm, 'email')) {
+          @if ( formUtils.isInvalidField(registerForm, 'email')) {
           <error-message
-            [$message]="formUtils.getFieldError(loginForm, 'email')!"
+            [$message]="formUtils.getFieldError(registerForm, 'email')!"
           />
           }
         </div>
@@ -43,13 +47,13 @@
             class="form-control text-white"
             formControlName="password"
           />
-          @if ( formUtils.isInvalidField(loginForm, 'password')) {
+          @if ( formUtils.isInvalidField(registerForm, 'password')) {
           <error-message
-            [$message]="formUtils.getFieldError(loginForm, 'password')!"
+            [$message]="formUtils.getFieldError(registerForm, 'password')!"
           />
           }
           <!--  -->
-          @else if( loginForm.errors && loginForm.touched ) {
+          @else if( registerForm.errors && registerForm.touched ) {
           <error-message [$message]="'Las contraseñas no son iguales'" />
           }
         </div>
@@ -62,9 +66,9 @@
             class="form-control text-white"
             formControlName="password2"
           />
-          @if ( formUtils.isInvalidField(loginForm, 'password2')) {
+          @if ( formUtils.isInvalidField(registerForm, 'password2')) {
           <error-message
-            [$message]="formUtils.getFieldError(loginForm, 'password2')!"
+            [$message]="formUtils.getFieldError(registerForm, 'password2')!"
           />
           }
         </div>
@@ -78,9 +82,9 @@
           formControlName="address"
           placeholder="Apartment, studio or floor"
         />
-        @if ( formUtils.isInvalidField(loginForm, 'address')) {
+        @if ( formUtils.isInvalidField(registerForm, 'address')) {
         <error-message
-          [$message]="formUtils.getFieldError(loginForm, 'address')!"
+          [$message]="formUtils.getFieldError(registerForm, 'address')!"
         />
         }
       </div>
@@ -93,9 +97,9 @@
             formControlName="city"
             placeholder="Córdoba"
           />
-          @if ( formUtils.isInvalidField(loginForm, 'city')) {
+          @if ( formUtils.isInvalidField(registerForm, 'city')) {
           <error-message
-            [$message]="formUtils.getFieldError(loginForm, 'city')!"
+            [$message]="formUtils.getFieldError(registerForm, 'city')!"
           />
           }
         </div>
@@ -107,9 +111,9 @@
             <option>{{ country }}</option>
             }
           </select>
-          @if ( formUtils.isInvalidField(loginForm, 'state')) {
+          @if ( formUtils.isInvalidField(registerForm, 'state')) {
           <error-message
-            [$message]="formUtils.getFieldError(loginForm, 'state')!"
+            [$message]="formUtils.getFieldError(registerForm, 'state')!"
           />
           }
         </div>
@@ -121,9 +125,9 @@
             formControlName="zip"
             placeholder="5000"
           />
-          @if ( formUtils.isInvalidField(loginForm, 'zip')) {
+          @if ( formUtils.isInvalidField(registerForm, 'zip')) {
           <error-message
-            [$message]="formUtils.getFieldError(loginForm, 'zip')!"
+            [$message]="formUtils.getFieldError(registerForm, 'zip')!"
           />
           }
         </div>
@@ -140,7 +144,12 @@
     </form>
   </section>
 
-  @if($hasError()) {
-  <error-alert [$errorMessage]="$errorMessage()" />
+  }
+  <!--  -->
+  @if($hasError() || $authResource.error()) {
+  <error-alert
+    [$errorMessage]="$errorMessage()"
+    ($hideAlert)="$hasError.set(false)"
+  />
   }
 </div>

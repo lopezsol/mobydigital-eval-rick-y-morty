@@ -5,6 +5,7 @@ import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { User } from '@auth/interfaces/user.interface';
 import { AuthResponse } from '@auth/interfaces/auth-response.interface';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { AuthErrorResponse } from '@auth/interfaces/auth-error-response.interface';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 const baseUrl = environment.AUTH_API_URL;
@@ -43,7 +44,7 @@ export class AuthService {
       );
   }
 
-  register(user: User): Observable<boolean> {
+  register(user: User): Observable<AuthResponse | AuthErrorResponse> {
     return this.http
       .post<AuthResponse>(`${baseUrl}/user/register`, {
         name: user.name,
@@ -52,10 +53,10 @@ export class AuthService {
         address: user.address,
       })
       .pipe(
-        map((resp) => true),
         catchError((error: any) => {
           const message =
             error?.error?.header?.error ?? 'Error desconocido al registrarse';
+            console.log("message en service; ", message)
           return throwError(() => new Error(message));
         })
       );

@@ -1,23 +1,52 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '@auth/services/auth.service';
 import { FormUtils } from 'src/app/utils/form-utils';
-import { ErrorAlertComponent } from "../../../shared/components/error-alert/error-alert.component";
+import { rxResource } from '@angular/core/rxjs-interop';
+import { UserLogin } from '@auth/interfaces/user-login.interface';
+import { of, tap } from 'rxjs';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.component';
 
 @Component({
   selector: 'app-login-page',
-  imports: [RouterLink, ReactiveFormsModule, ErrorAlertComponent],
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    ErrorAlertComponent,
+    LoaderComponent,
+  ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })
 export class LoginPageComponent {
   fb = inject(FormBuilder);
-  $hasError = signal(false);
   router = inject(Router);
-
   authService = inject(AuthService);
+  $hasError = signal(false);
+  $user = signal<UserLogin | null>(null);
+
+  $authResource = rxResource({
+    request: () => {
+      return { user: this.$user() };
+    },
+    loader: ({ request }) => {
+      if (!request.user) return of(null);
+      return this.authService
+        .login(request.user.mail, request.user.password)
+        .pipe(
+          tap((isAuthenticated) => {
+            if (isAuthenticated) {
+              this.navigateToCharacters();
+            } else {
+              throw new Error('Invalid credentials');
+            }
+          })
+        );
+    },
+  });
 
   loginForm = this.fb.group({
     email: [
@@ -38,24 +67,14 @@ export class LoginPageComponent {
   onSubmit() {
     if (this.loginForm.invalid) {
       this.$hasError.set(true);
-      setTimeout(() => {
-        this.$hasError.set(false);
-      }, 2000);
       return;
     }
 
     const { email = '', password = '' } = this.loginForm.value;
+    this.$user.set({ mail: email!, password: password! });
+  }
 
-    this.authService.login(email!, password!).subscribe((isAuthenticated) => {
-      if (isAuthenticated) {
-        this.router.navigateByUrl('/characters');
-        return;
-      }
-
-      this.$hasError.set(true);
-      setTimeout(() => {
-        this.$hasError.set(false);
-      }, 2000);
-    });
+  navigateToCharacters() {
+    this.router.navigateByUrl('/characters');
   }
 }
