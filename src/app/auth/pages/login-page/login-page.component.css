@@ -1,5 +1,5 @@
 .login-container {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 56px);
   padding: 2rem 1rem;
 }
 .form-control:focus {
@@ -33,7 +33,13 @@
   color: var(--color-placeholder);
 }
 
-@media (width > 768px) {
+@media (width > 770px) {
+  .login-image {
+    max-width: 350px;
+  }
+}
+
+@media (width > 914px) {
   .login-image {
     max-width: 450px;
   }
