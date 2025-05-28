@@ -96,7 +96,10 @@ export class RegisterPageComponent {
   );
 
   ngOnInit() {
-    //TODO:separar
+    this.setupAddressValidation();
+  }
+
+  private setupAddressValidation(): void {
     const addressFields = ['address', 'city', 'state', 'zip'];
 
     addressFields.forEach((field) => {
@@ -107,12 +110,27 @@ export class RegisterPageComponent {
 
         addressFields.forEach((key) => {
           const control = this.registerForm.get(key);
+          if (!control) return;
+
+          const currentValidators = control.validator
+            ? [control.validator]
+            : [];
+
+          const requiredValidator = Validators.required;
+
           if (hasAnyValue) {
-            control?.setValidators(Validators.required);
+            // Añade el required solo si no está
+            const newValidators = [...currentValidators, requiredValidator];
+            control.setValidators(newValidators);
           } else {
-            control?.clearValidators();
+            // Quita sólo el required pero deja los demás
+            const newValidators = currentValidators.filter(
+              (v) => v !== requiredValidator
+            );
+            control.setValidators(newValidators);
           }
-          control?.updateValueAndValidity({ emitEvent: false });
+
+          control.updateValueAndValidity({ emitEvent: false });
         });
       });
     });
@@ -128,13 +146,13 @@ export class RegisterPageComponent {
       return this.authService.register(request.newUser).pipe(
         tap((response) => {
           if (response.header.resultCode === 0) {
-            this.navigateToLogin()
+            this.navigateToLogin();
           }
         }),
         catchError((err: Error) => {
           this.$hasError.set(true);
           this.$errorMessage.set(err.message || 'Error inesperado');
-          return of(false); 
+          return of(false);
         })
       );
     },

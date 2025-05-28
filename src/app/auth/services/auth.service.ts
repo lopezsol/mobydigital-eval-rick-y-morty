@@ -6,16 +6,18 @@ import { User } from '@auth/interfaces/user.interface';
 import { AuthResponse } from '@auth/interfaces/auth-response.interface';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { AuthErrorResponse } from '@auth/interfaces/auth-error-response.interface';
+import { SessionStorageKey } from '@auth/enums/session-storage-key.enum';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 const baseUrl = environment.AUTH_API_URL;
 
-//TODO: agregar enum para session storage
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _authStatus = signal<AuthStatus>('checking');
   private _user = signal<User | null>(null);
-  private _token = signal<string | null>(sessionStorage.getItem('token'));
+  private _token = signal<string | null>(
+    sessionStorage.getItem(SessionStorageKey.Token)
+  );
 
   private http = inject(HttpClient);
 
@@ -56,15 +58,14 @@ export class AuthService {
         catchError((error: any) => {
           const message =
             error?.error?.header?.error ?? 'Error desconocido al registrarse';
-            console.log("message en service; ", message)
           return throwError(() => new Error(message));
         })
       );
   }
 
   checkStatus(): Observable<boolean> {
-    const token = sessionStorage.getItem('token');
-    const storedUser = sessionStorage.getItem('user');
+    const token = sessionStorage.getItem(SessionStorageKey.Token);
+    const storedUser = sessionStorage.getItem(SessionStorageKey.User);
 
     if (!token || !storedUser) {
       this.logout();
@@ -80,8 +81,8 @@ export class AuthService {
     this._token.set(null);
     this._authStatus.set('not-authenticated');
 
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem(SessionStorageKey.User);
+    sessionStorage.removeItem(SessionStorageKey.Token);
   }
 
   private handleAuthSuccess(user: User, token: string) {
@@ -89,9 +90,8 @@ export class AuthService {
     this._authStatus.set('authenticated');
     this._token.set(token);
 
-    sessionStorage.setItem('user', JSON.stringify(user));
-    sessionStorage.setItem('token', token);
-
+    sessionStorage.setItem(SessionStorageKey.User, JSON.stringify(user));
+    sessionStorage.setItem(SessionStorageKey.Token, token);
     return true;
   }
 
