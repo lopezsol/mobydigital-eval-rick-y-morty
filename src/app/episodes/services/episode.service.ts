@@ -5,15 +5,15 @@ import { RestEpisode } from '../interfaces/rest-episode.interface';
 import { EpisodeMapper } from '../mappers/episode.mapper';
 import { environment } from '../../../environments/environment';
 
+const apiUrl = environment.CHARACTER_API_URL;
 @Injectable({
   providedIn: 'root',
 })
 export class EpisodeService {
   private http = inject(HttpClient);
-  private apiUrl = environment.CHARACTER_API_URL;
 
   getEpisodeById(id: number) {
-    const url = `${this.apiUrl}/episode/${id}`;
+    const url = `${apiUrl}/episode/${id}`;
     return this.http.get<RestEpisode>(url).pipe(
       map((resp) => EpisodeMapper.mapRestEpisodeToEpisode(resp)),
       catchError((error) => {

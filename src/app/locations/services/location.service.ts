@@ -5,15 +5,15 @@ import { LocationMapper } from '../mappers/location.mapper';
 import { catchError, map, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
+const apiUrl = environment.CHARACTER_API_URL;
 @Injectable({
   providedIn: 'root',
 })
 export class LocationService {
   private http = inject(HttpClient);
-  private apiUrl = environment.CHARACTER_API_URL;
 
   getLocationById(id: number) {
-    const url = `${this.apiUrl}/location/${id}`;
+    const url = `${apiUrl}/location/${id}`;
     return this.http.get<RestLocation>(url).pipe(
       map((resp) => LocationMapper.mapRestLocationToLocation(resp)),
       catchError((error) => {

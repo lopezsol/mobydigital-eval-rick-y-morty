@@ -9,8 +9,7 @@ import { AuthErrorResponse } from '@auth/interfaces/auth-error-response.interfac
 import { SessionStorageKey } from '@auth/enums/session-storage-key.enum';
 import { AuthStatus } from '@auth/enums/auth-status.enum';
 
-// type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';s
-const baseUrl = environment.AUTH_API_URL;
+const apiUrl = environment.AUTH_API_URL;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -36,7 +35,7 @@ export class AuthService {
   });
   login(email: string, password: string): Observable<boolean> {
     return this.http
-      .post<AuthResponse>(`${baseUrl}/user/login`, {
+      .post<AuthResponse>(`${apiUrl}/user/login`, {
         mail: email,
         password: password,
       })
@@ -48,7 +47,7 @@ export class AuthService {
 
   register(user: User): Observable<AuthResponse | AuthErrorResponse> {
     return this.http
-      .post<AuthResponse>(`${baseUrl}/user/register`, {
+      .post<AuthResponse>(`${apiUrl}/user/register`, {
         name: user.name,
         mail: user.mail,
         password: user.password,
@@ -79,9 +78,7 @@ export class AuthService {
   logout() {
     this._user.set(null);
     this._token.set(null);
-    // this._authStatus.set('not-authenticated');
     this._authStatus.set(AuthStatus.NotAuthenticated);
-
 
     sessionStorage.removeItem(SessionStorageKey.User);
     sessionStorage.removeItem(SessionStorageKey.Token);
@@ -89,7 +86,6 @@ export class AuthService {
 
   private handleAuthSuccess(user: User, token: string) {
     this._user.set(user);
-    // this._authStatus.set('authenticated');
     this._authStatus.set(AuthStatus.Authenticated);
 
     this._token.set(token);
