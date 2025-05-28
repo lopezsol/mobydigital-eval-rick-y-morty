@@ -58,7 +58,6 @@ export class AuthService {
         catchError((error: any) => {
           const message =
             error?.error?.header?.error ?? 'Error desconocido al registrarse';
-          console.log('message en service; ', message);
           return throwError(() => new Error(message));
         })
       );
