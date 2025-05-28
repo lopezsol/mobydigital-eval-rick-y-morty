@@ -1,15 +1,9 @@
-import {
-  AbstractControl,
-  FormGroup,
-  ValidationErrors,
-} from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 export class FormUtils {
-  // static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)';
   static namePattern = '^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+)(\\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)+$';
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
-//regex.test
   static getTextError(errors: ValidationErrors) {
     for (const key of Object.keys(errors)) {
       switch (key) {
@@ -64,5 +58,4 @@ export class FormUtils {
       return field1Value === field2Value ? null : { passwordsNotEqual: true };
     };
   }
-
 }

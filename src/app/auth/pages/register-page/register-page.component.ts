@@ -110,12 +110,27 @@ export class RegisterPageComponent {
 
         addressFields.forEach((key) => {
           const control = this.registerForm.get(key);
+          if (!control) return;
+
+          const currentValidators = control.validator
+            ? [control.validator]
+            : [];
+
+          const requiredValidator = Validators.required;
+
           if (hasAnyValue) {
-            control?.setValidators(Validators.required);
+            // Añade el required solo si no está
+            const newValidators = [...currentValidators, requiredValidator];
+            control.setValidators(newValidators);
           } else {
-            control?.clearValidators();
+            // Quita sólo el required pero deja los demás
+            const newValidators = currentValidators.filter(
+              (v) => v !== requiredValidator
+            );
+            control.setValidators(newValidators);
           }
-          control?.updateValueAndValidity({ emitEvent: false });
+
+          control.updateValueAndValidity({ emitEvent: false });
         });
       });
     });
