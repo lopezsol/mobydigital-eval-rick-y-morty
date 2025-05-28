@@ -21,11 +21,7 @@ export class AuthService {
 
   private http = inject(HttpClient);
 
-  checkStatusResource = rxResource({
-    loader: () => this.checkStatus(),
-  });
-
-  authStatus = computed<AuthStatus>(() => {
+  $authStatus = computed<AuthStatus>(() => {
     if (this._authStatus() === 'checking') return 'checking';
     if (this._user()) return 'authenticated';
     return 'not-authenticated';
@@ -34,6 +30,9 @@ export class AuthService {
   user = computed(() => this._user());
   token = computed(this._token);
 
+  checkStatusResource = rxResource({
+    loader: () => this.checkStatus(),
+  });
   login(email: string, password: string): Observable<boolean> {
     return this.http
       .post<AuthResponse>(`${baseUrl}/user/login`, {

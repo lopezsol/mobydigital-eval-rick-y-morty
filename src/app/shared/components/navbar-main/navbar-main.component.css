@@ -1,0 +1,36 @@
+nav {
+  background-color: var(--color-navbar);
+}
+
+.nav-link,
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-active {
+  background-color: var(--color-navbar);
+  width: fit-content;
+}
+
+@media (width >= 992px) {
+  .navbar {
+    height: 56px;
+  }
+
+  .navbar .container-fluid,
+  .navbar-nav,
+  .nav-link,
+  .navbar-brand {
+    height: 56px;
+  }
+
+  .navbar-active {
+    background-color: var(--color-navbar-active);
+  }
+
+  .navbar-brand {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

@@ -1,10 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
+import { NavbarAuthComponent } from '../../../auth/components/navbar-auth/navbar-auth.component';
+import { NavbarMainComponent } from '../navbar-main/navbar-main.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [NavbarAuthComponent, NavbarMainComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -12,8 +14,7 @@ export class NavbarComponent {
   authService = inject(AuthService);
   router = inject(Router);
 
-  onLogout() {
-    this.authService.logout();
-    this.router.navigateByUrl('/auth/login');
-  }
+  $isAuthenticated = computed(
+    () => this.authService.$authStatus() === 'authenticated'
+  );
 }
