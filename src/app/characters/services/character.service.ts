@@ -17,7 +17,7 @@ export class CharacterService {
   private apiUrl = environment.CHARACTER_API_URL;
 
   getAllCharacters(page: number) {
-    const url = `${this.apiUrl}/character/?page=${page}`;
+    const url = `${this.apiUrl}/character?page=${page}`;
 
     return this.http.get<RestPaginatedCharacters>(url).pipe(
       map((resp) => ({
@@ -49,7 +49,7 @@ export class CharacterService {
   }
 
   getAllCharactersByName(name: string, page: number) {
-    const url = `${this.apiUrl}/character/?page=${page}&name=${name}`;
+    const url = `${this.apiUrl}/character?page=${page}&name=${name}`;
 
     return this.http.get<RestPaginatedCharacters>(url).pipe(
       map((resp) => ({
