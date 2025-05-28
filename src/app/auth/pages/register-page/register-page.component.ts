@@ -96,7 +96,10 @@ export class RegisterPageComponent {
   );
 
   ngOnInit() {
-    //TODO:separar
+    this.setupAddressValidation();
+  }
+
+  private setupAddressValidation(): void {
     const addressFields = ['address', 'city', 'state', 'zip'];
 
     addressFields.forEach((field) => {
@@ -128,13 +131,13 @@ export class RegisterPageComponent {
       return this.authService.register(request.newUser).pipe(
         tap((response) => {
           if (response.header.resultCode === 0) {
-            this.navigateToLogin()
+            this.navigateToLogin();
           }
         }),
         catchError((err: Error) => {
           this.$hasError.set(true);
           this.$errorMessage.set(err.message || 'Error inesperado');
-          return of(false); 
+          return of(false);
         })
       );
     },
