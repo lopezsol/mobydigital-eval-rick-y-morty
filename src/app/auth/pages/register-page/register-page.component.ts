@@ -1,13 +1,15 @@
-import { JsonPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '@auth/interfaces/user.interface';
 import { AuthService } from '@auth/services/auth.service';
 import { FormUtils } from 'src/app/utils/form-utils';
-import { Address } from '@auth/interfaces/adress.interface';
+import type { Address } from '@auth/interfaces/adress.interface';
 import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
 import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.component';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { catchError, of, tap } from 'rxjs';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-register-page',
@@ -16,6 +18,7 @@ import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.
     RouterLink,
     ErrorMessageComponent,
     ErrorAlertComponent,
+    LoaderComponent,
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css',
@@ -52,7 +55,7 @@ export class RegisterPageComponent {
     'Australia',
   ];
 
-  loginForm = this.fb.group(
+  registerForm = this.fb.group(
     {
       name: [
         '',
@@ -97,13 +100,13 @@ export class RegisterPageComponent {
     const addressFields = ['address', 'city', 'state', 'zip'];
 
     addressFields.forEach((field) => {
-      this.loginForm.get(field)?.valueChanges.subscribe(() => {
+      this.registerForm.get(field)?.valueChanges.subscribe(() => {
         const hasAnyValue = addressFields.some(
-          (key) => !!this.loginForm.get(key)?.value
+          (key) => !!this.registerForm.get(key)?.value
         );
 
         addressFields.forEach((key) => {
-          const control = this.loginForm.get(key);
+          const control = this.registerForm.get(key);
           if (hasAnyValue) {
             control?.setValidators(Validators.required);
           } else {
@@ -115,29 +118,38 @@ export class RegisterPageComponent {
     });
   }
 
+  $authResource = rxResource({
+    request: () => {
+      return { newUser: this.$newUser() };
+    },
+    loader: ({ request }) => {
+      if (!request.newUser) return of(null);
+
+      return this.authService.register(request.newUser).pipe(
+        tap((response) => {
+          if (response.header.resultCode === 0) {
+            this.navigateToLogin()
+          }
+        }),
+        catchError((err: Error) => {
+          this.$hasError.set(true);
+          this.$errorMessage.set(err.message || 'Error inesperado');
+          return of(false); 
+        })
+      );
+    },
+  });
+
   onSubmit() {
-    this.loginForm.markAllAsTouched();
-    if (!this.loginForm.valid) return;
+    this.registerForm.markAllAsTouched();
+    if (!this.registerForm.valid) return;
 
     const newUser = this.createUser();
-
-    this.authService.register(newUser).subscribe({
-      next: () => {
-        this.router.navigateByUrl('/auth/login');
-      },
-      error: (err: Error) => {
-        this.$errorMessage.set(err.message);
-        this.$hasError.set(true);
-        setTimeout(() => {
-          this.$hasError.set(false);
-          this.$errorMessage.set('');
-        }, 3000);
-      },
-    });
+    this.$newUser.set(newUser);
   }
 
   createUser(): User {
-    const { name = '', email = '', password = '' } = this.loginForm.value;
+    const { name = '', email = '', password = '' } = this.registerForm.value;
 
     const user: User = {
       name: name!,
@@ -163,7 +175,7 @@ export class RegisterPageComponent {
       city = '',
       state = '',
       zip = '',
-    } = this.loginForm.value;
+    } = this.registerForm.value;
 
     return (
       this.isFilled(address!) &&
@@ -181,7 +193,7 @@ export class RegisterPageComponent {
       city = '',
       state = '',
       zip = '',
-    } = this.loginForm.value;
+    } = this.registerForm.value;
 
     return {
       street: address!,
@@ -190,5 +202,9 @@ export class RegisterPageComponent {
       cp: zip!,
       location: '-',
     };
+  }
+
+  navigateToLogin() {
+    this.router.navigateByUrl('/auth/login');
   }
 }

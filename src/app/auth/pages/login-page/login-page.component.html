@@ -1,13 +1,6 @@
 <section
   class="login-container container-fluid d-flex align-items-center justify-content-center"
 >
-  @if($hasError() || $authResource.error()) {
-  <error-alert
-    [$errorMessage]="'Por favor revise la información ingresada.'"
-    ($hideAlert)="$hasError.set(false)"
-  />
-  }
-  <!--  -->
   @if($authResource.isLoading()){
   <app-loader />
   } @else {
@@ -64,5 +57,12 @@
       </form>
     </div>
   </div>
+  }
+  <!--  -->
+  @if($hasError() || $authResource.error()) {
+  <error-alert
+    [$errorMessage]="'Por favor revise la información ingresada.'"
+    ($hideAlert)="$hasError.set(false)"
+  />
   }
 </section>

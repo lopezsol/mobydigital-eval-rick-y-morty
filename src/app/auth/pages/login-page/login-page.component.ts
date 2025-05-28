@@ -34,14 +34,12 @@ export class LoginPageComponent {
     },
     loader: ({ request }) => {
       if (!request.user) return of(null);
-      console.log('user: ', this.$user());
-
       return this.authService
         .login(request.user.mail, request.user.password)
         .pipe(
           tap((isAuthenticated) => {
             if (isAuthenticated) {
-              this.router.navigateByUrl('/characters');
+              this.navigateToCharacters();
             } else {
               throw new Error('Invalid credentials');
             }
@@ -74,5 +72,9 @@ export class LoginPageComponent {
 
     const { email = '', password = '' } = this.loginForm.value;
     this.$user.set({ mail: email!, password: password! });
+  }
+
+  navigateToCharacters() {
+    this.router.navigateByUrl('/characters');
   }
 }
