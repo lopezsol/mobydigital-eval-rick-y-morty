@@ -1,3 +1,7 @@
+.container {
+  min-height: calc(100vh - 56px);
+  padding: 2rem 1rem;
+}
 .card {
   background-color: var(--color-detail-card);
   border: 1px solid var(--color-border-light);
@@ -17,14 +21,13 @@ select.form-select {
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1rem;
-  padding-right: 2rem; 
+  padding-right: 2rem;
 }
 
 .form-control:focus {
   border-color: #007bff;
   box-shadow: none;
 }
-
 
 ::placeholder {
   color: var(--color-placeholder);
