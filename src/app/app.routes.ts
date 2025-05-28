@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './shared/pages/home-page/home-page.component';
-import { NotFoundPageComponent } from './shared/pages/not-found-page/not-found-page.component';
 import { NotAuthenticatedGuard } from '@auth/guards/not-authenticated.guard';
 import { AuthenticatedGuard } from '@auth/guards/authenticated.guard';
+import { NotFoundPageComponent } from '@shared/pages/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +14,6 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.routes'),
     canMatch: [NotAuthenticatedGuard],
   },
-  { path: '', component: HomePageComponent },
+  { path: '', redirectTo: 'characters', pathMatch: 'full' },
   { path: '**', component: NotFoundPageComponent },
 ];
