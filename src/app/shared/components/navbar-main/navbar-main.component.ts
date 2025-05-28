@@ -1,5 +1,6 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthStatus } from '@auth/enums/auth-status.enum';
 import { AuthService } from '@auth/services/auth.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class NavbarMainComponent {
   router = inject(Router);
 
   $isAuthenticated = computed(
-    () => this.authService.$authStatus() === 'authenticated'
+    () => this.authService.$authStatus() === AuthStatus.Authenticated
   );
 
   onLogout() {
