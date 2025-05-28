@@ -9,6 +9,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 const baseUrl = environment.AUTH_API_URL;
 
+//TODO: agregar enum para session storage
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _authStatus = signal<AuthStatus>('checking');

@@ -2,11 +2,13 @@ import { Routes } from '@angular/router';
 import { HomePageComponent } from './shared/pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './shared/pages/not-found-page/not-found-page.component';
 import { NotAuthenticatedGuard } from '@auth/guards/not-authenticated.guard';
+import { AuthenticatedGuard } from '@auth/guards/authenticated.guard';
 
 export const routes: Routes = [
   {
     path: 'characters',
     loadChildren: () => import('./characters/character.routes'),
+    canMatch: [AuthenticatedGuard],
   },
   {
     path: 'auth',

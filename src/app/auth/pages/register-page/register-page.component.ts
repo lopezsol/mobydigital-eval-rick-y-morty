@@ -93,6 +93,7 @@ export class RegisterPageComponent {
   );
 
   ngOnInit() {
+    //TODO:separar
     const addressFields = ['address', 'city', 'state', 'zip'];
 
     addressFields.forEach((field) => {
@@ -171,7 +172,7 @@ export class RegisterPageComponent {
       this.isFilled(zip!)
     );
   }
-
+//TODO:verificar sin esto funciona
   private buildAddress(): Address | null {
     if (!this.hasFullAddress()) return null;
 
