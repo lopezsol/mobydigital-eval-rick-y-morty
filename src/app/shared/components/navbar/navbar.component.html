@@ -22,7 +22,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav me-auto ">
+      <div class="navbar-nav me-auto">
         <a
           routerLink="/characters"
           routerLinkActive="navbar-active"
@@ -33,7 +33,7 @@
         </a>
       </div>
       <div
-        class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 column-gap-5 "
+        class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 column-gap-5"
       >
         @if (authService.authStatus() === 'authenticated') {
         <a class="nav-link text-white">
@@ -43,7 +43,7 @@
         <button
           class="btn btn-link text-white text-decoration-none p-0"
           type="button"
-          (click)="authService.logout()"
+          (click)="onLogout()"
         >
           Log Out
         </button>
