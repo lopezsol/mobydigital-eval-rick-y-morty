@@ -63,7 +63,7 @@ export class CharacterService {
       catchError((error) => {
         console.error('Error fetching characters:', error);
         return throwError(
-          () => new Error(`No se pudo obtener personajes con nombre: ${name}`)
+          () => new Error(`No se pudo obtener personajes con nombre ${name}`)
         );
       })
     );

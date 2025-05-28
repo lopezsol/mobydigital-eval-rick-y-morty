@@ -2,7 +2,7 @@
   <!--  -->
   @if($authResource.isLoading()){
   <app-loader />
-  } @else {
+  }
   <section class="card p-4 shadow-lg w-100 text-white" style="max-width: 900px">
     <h3 class="text-center mb-4">Register</h3>
 
@@ -144,7 +144,6 @@
     </form>
   </section>
 
-  }
   <!--  -->
   @if($hasError() || $authResource.error()) {
   <error-alert
