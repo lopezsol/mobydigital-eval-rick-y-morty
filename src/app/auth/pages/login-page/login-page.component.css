@@ -33,7 +33,13 @@
   color: var(--color-placeholder);
 }
 
-@media (width > 768px) {
+@media (width > 770px) {
+  .login-image {
+    max-width: 350px;
+  }
+}
+
+@media (width > 914px) {
   .login-image {
     max-width: 450px;
   }
