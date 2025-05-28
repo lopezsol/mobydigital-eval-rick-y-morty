@@ -9,11 +9,10 @@ nav {
 }
 
 .navbar-active {
-  background-color: var(--color-navbar);
-  width: fit-content;
+  background-color: var(--color-navbar-active);
 }
 
-@media (width >= 992px) {
+@media (width >=992px) {
   .navbar {
     height: 56px;
   }
@@ -24,13 +23,7 @@ nav {
   .navbar-brand {
     height: 56px;
   }
-
   .navbar-active {
-    background-color: var(--color-navbar-active);
-  }
-
-  .navbar-brand {
-    padding-left: 8px;
-    padding-right: 8px;
+    background-color: var(--color-navbar);
   }
 }
