@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
-import { User } from '@auth/interfaces/user.interface';
-import { AuthResponse } from '@auth/interfaces/auth-response.interface';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { AuthErrorResponse } from '@auth/interfaces/auth-error-response.interface';
 import { SessionStorageKey } from '@auth/enums/session-storage-key.enum';
 import { AuthStatus } from '@auth/enums/auth-status.enum';
+import type { AuthErrorResponse } from '@auth/interfaces/auth-error-response.interface';
+import type { RegisterUserDto } from '@auth/interfaces/register-user-dto.interface';
+import type { AuthResponse } from '@auth/interfaces/auth-response.interface';
+import type { User } from '@auth/interfaces/user.interface';
+import { RegisterResponse } from '@auth/interfaces/register-user-response.interface';
 
 const apiUrl = environment.AUTH_API_URL;
 
@@ -45,9 +47,9 @@ export class AuthService {
       );
   }
 
-  register(user: User): Observable<AuthResponse | AuthErrorResponse> {
+  register(user: RegisterUserDto): Observable<RegisterResponse | AuthErrorResponse> {
     return this.http
-      .post<AuthResponse>(`${apiUrl}/user/register`, {
+      .post<RegisterResponse>(`${apiUrl}/user/register`, {
         name: user.name,
         mail: user.mail,
         password: user.password,

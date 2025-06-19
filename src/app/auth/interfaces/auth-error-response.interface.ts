@@ -1,5 +1,4 @@
-import { HeaderError } from './header-error.interface';
 
 export interface AuthErrorResponse {
-  header: HeaderError;
+  header: { resultCode: number; error: string };
 }

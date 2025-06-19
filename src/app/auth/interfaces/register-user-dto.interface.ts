@@ -1,11 +1,10 @@
 import type { Address } from './adress.interface';
 
-export interface User {
-  id: string;
-  role: string;
+export interface RegisterUserDto {
   name: string;
   mail: string;
+  password: string;
   address?: Address;
-  birthday?: Date;
   phone?: string;
+  birthday?: Date;
 }
