@@ -13,10 +13,6 @@ export class NavbarMainComponent {
   authService = inject(AuthService);
   router = inject(Router);
 
-  $isAuthenticated = computed(
-    () => this.authService.$authStatus() === AuthStatus.Authenticated
-  );
-
   onLogout() {
     this.authService.logout();
     this.router.navigateByUrl('/auth/login');

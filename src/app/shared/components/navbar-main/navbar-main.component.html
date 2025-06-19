@@ -29,7 +29,6 @@
       <div
         class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 column-gap-5"
       >
-        @if ($isAuthenticated()) {
         <a class="nav-link text-white">
           {{ authService.user()?.name }}
         </a>
@@ -41,13 +40,6 @@
         >
           Log Out
         </button>
-        }
-
-        <!-- --- -->
-
-        @if (!$isAuthenticated()) {
-        <a routerLink="/auth/login" class="nav-link text-white">Log In</a>
-        }
       </div>
     </div>
   </div>
