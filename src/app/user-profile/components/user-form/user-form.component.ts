@@ -18,7 +18,7 @@ import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
     ReactiveFormsModule,
     ErrorMessageComponent,
     LoaderComponent,
-    SnackbarErrorComponent
+    SnackbarErrorComponent,
 ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
