@@ -33,7 +33,10 @@ p {
 h5 {
   width: fit-content;
 }
-button {
+
+button{
+  border: none;
+  color: white;
   width: fit-content;
 }
 
