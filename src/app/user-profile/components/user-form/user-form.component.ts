@@ -11,6 +11,7 @@ import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackb
 import type { UpdateUserResponse } from '@user/interfaces/update-user-response.interface';
 import type { User } from '@auth/interfaces/user.interface';
 import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
+import { Address } from '@auth/interfaces/adress.interface';
 
 @Component({
   selector: 'user-form',
@@ -19,7 +20,7 @@ import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
     ErrorMessageComponent,
     LoaderComponent,
     SnackbarErrorComponent,
-],
+  ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
 })
@@ -95,7 +96,7 @@ export class UserFormComponent {
   }
 
   private setupAddressValidation(): void {
-    const addressFields = ['street', 'city', 'location', 'state', 'zip'];
+    const addressFields = ['street', 'city', 'location', 'country', 'zip'];
 
     addressFields.forEach((field) => {
       const control = this.profileForm.get(field);
@@ -123,7 +124,7 @@ export class UserFormComponent {
 
   private getBaseValidators(field: string) {
     switch (field) {
-      case 'street':
+      case 'country':
       case 'city':
       case 'location':
       case 'state':
@@ -138,12 +139,8 @@ export class UserFormComponent {
   onSubmit() {
     this.profileForm.markAllAsTouched();
     if (!this.profileForm.valid) return;
-
     const updatedUser: UpdateUserDto = this.getUpdatedUser();
     this.$updatedUser.set(updatedUser);
-
-    // const newUser = this.createUser();
-    // this.$newUser.set(newUser);
   }
 
   getUpdatedUser(): UpdateUserDto {
@@ -158,9 +155,7 @@ export class UserFormComponent {
       zip = this.$user().address?.cp,
     } = this.profileForm.value;
 
-    const parsedBirthday = birthday
-      ? new Date(birthday)
-      : this.$user().birthday;
+    const parsedBirthday = birthday ? new Date(birthday) : undefined;
 
     const address = street
       ? {
@@ -170,7 +165,7 @@ export class UserFormComponent {
           country: country!,
           cp: zip?.toString()!,
         }
-      : undefined;
+      : {} as Address;
 
     const updatedUser: UpdateUserDto = {
       id: this.$user().id,
@@ -188,13 +183,10 @@ export class UserFormComponent {
     loader: ({ request }) => {
       if (!request.user) return of({} as UpdateUserResponse);
 
-      console.log(request.user);
-      return this.userService
-        .update(request.user)
-        .pipe(
-          tap((userResponse) => this.authService.updateUser(userResponse.user)),
-          tap(() => this.$isEditMode.emit(false))
-        );
+      return this.userService.update(request.user).pipe(
+        tap((userResponse) => this.authService.updateUser(userResponse.user)),
+        tap(() => this.$isEditMode.emit(false))
+      );
     },
   });
 }
