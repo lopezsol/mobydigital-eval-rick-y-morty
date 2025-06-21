@@ -7,9 +7,9 @@
   @else {
   <div class="card gap-4 border border-0">
     <img
-      src="/images/rickandmorty.webp"
+      [src]="$user().profilePictureUrl | imageFallback"
       class="card-img-top"
-      [alt]="'Imagen de ' + $user().name"
+      [alt]="'Profile picture ' + $user().name"
     />
     <div class="card-body text-white">
       <div class="row">

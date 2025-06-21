@@ -2,10 +2,11 @@ import { Component, computed, input, signal } from '@angular/core';
 import { User } from '@auth/interfaces/user.interface';
 import type { Address } from '@auth/interfaces/adress.interface';
 import { UserFormComponent } from '../user-form/user-form.component';
+import { ImageFallbackPipe } from '@user/pipes/image-fallback.pipe';
 
 @Component({
   selector: 'user-info',
-  imports: [UserFormComponent],
+  imports: [UserFormComponent, ImageFallbackPipe],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css',
 })
