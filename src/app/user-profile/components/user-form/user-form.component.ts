@@ -48,7 +48,7 @@ export class UserFormComponent {
         Validators.pattern(FormUtils.nicknamePattern),
       ],
     ],
-    birthday: ['', [Validators.pattern(FormUtils.birthdayPattern)]],
+    birthday: ['', [Validators.pattern(FormUtils.birthdayPattern), FormUtils.noFutureDate]],
     street: ['', [Validators.maxLength(50)]],
     city: ['', [Validators.maxLength(50)]],
     location: ['', [Validators.maxLength(50)]],
