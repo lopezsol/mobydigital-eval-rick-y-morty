@@ -1,0 +1,127 @@
+@if($updateUserResource.isLoading()) {
+<app-loader />
+}
+<!--  -->
+@if($updateUserResource.error()) {
+<snackbar-error
+  snackbarMessage="Ocurrió un error editando los datos. Por favor, intente de nuevo más tarde."
+/>
+}
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-6 mb-3">
+    <label for="nickname" class="form-label text-primary">Nickname</label>
+    <input
+      type="text"
+      class="form-control text-white"
+      placeholder="PickleRick"
+      formControlName="nickname"
+    />
+    @if ( formUtils.isInvalidField(profileForm, 'nickname')) {
+    <error-message
+      [$message]="formUtils.getFieldError(profileForm, 'nickname')!"
+    />
+    }
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="birthday" class="form-label text-primary">Birthday</label>
+    <input
+      type="date"
+      class="form-control text-white"
+      placeholder="1943-01-15"
+      formControlName="birthday"
+    />
+    @if ( formUtils.isInvalidField(profileForm, 'birthday')) {
+    <error-message
+      [$message]="formUtils.getFieldError(profileForm, 'birthday')!"
+    />
+    }
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="street" class="form-label text-primary">Street</label>
+    <input
+      type="text"
+      class="form-control text-white"
+      placeholder="Birdperson Ave 42"
+      formControlName="street"
+    />
+    @if ( formUtils.isInvalidField(profileForm, 'street')) {
+    <error-message
+      [$message]="formUtils.getFieldError(profileForm, 'street')!"
+    />
+    }
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="city" class="form-label text-primary">City</label>
+    <input
+      type="text"
+      class="form-control text-white"
+      placeholder="Citadel of Ricks"
+      formControlName="city"
+    />
+    @if ( formUtils.isInvalidField(profileForm, 'city')) {
+    <error-message [$message]="formUtils.getFieldError(profileForm, 'city')!" />
+    }
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="location" class="form-label text-primary">Location</label>
+    <input
+      type="text"
+      class="form-control text-white"
+      placeholder="Gromflom Prime"
+      formControlName="location"
+    />
+    @if ( formUtils.isInvalidField(profileForm, 'location')) {
+    <error-message
+      [$message]="formUtils.getFieldError(profileForm, 'location')!"
+    />
+    }
+  </div>
+
+  <div class="col-md-4 mb-3">
+    <label for="country" class="form-label text-primary">Country</label>
+    <select class="form-select text-white" formControlName="country">
+      <option value="">--Choose an option--</option>
+      @for (country of countries; track country; let index = $index) {
+      <option [value]="country">{{ country }}</option>
+      }
+    </select>
+    @if ( formUtils.isInvalidField(profileForm, 'country')) {
+    <error-message
+      [$message]="formUtils.getFieldError(profileForm, 'country')!"
+    />
+    }
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="zip" class="form-label text-primary">Zip</label>
+    <input
+      type="number"
+      class="form-control text-white"
+      placeholder="1987"
+      formControlName="zip"
+    />
+    @if ( formUtils.isInvalidField(profileForm, 'zip')) {
+    <error-message [$message]="formUtils.getFieldError(profileForm, 'zip')!" />
+    }
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <label for="profilePictureUrl" class="form-label text-primary"
+      >Profile picture Url</label
+    >
+    <input
+      type="text"
+      class="form-control text-white"
+      placeholder="https://myimage.com/"
+      formControlName="profilePictureUrl"
+    />
+    @if ( formUtils.isInvalidField(profileForm, 'profilePictureUrl')) {
+    <error-message
+      [$message]="formUtils.getFieldError(profileForm, 'profilePictureUrl')!"
+    />
+    }
+  </div>
+
+  <div class="d-grid mt-3">
+    <button class="btn btn-primary">Save</button>
+  </div>
+</form>

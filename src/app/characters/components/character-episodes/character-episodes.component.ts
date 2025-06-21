@@ -6,12 +6,12 @@ import { LoaderComponent } from '../../../shared/components/loader/loader.compon
 import { ErrorComponent } from '../../../shared/components/error/error.component';
 
 @Component({
-  selector: 'character-episodes-list',
+  selector: 'character-episodes',
   imports: [LoaderComponent, ErrorComponent],
-  templateUrl: './character-episodes-list.component.html',
-  styleUrl: './character-episodes-list.component.css',
+  templateUrl: './character-episodes.component.html',
+  styleUrl: './character-episodes.component.css',
 })
-export class CharacterEpisodesListComponent {
+export class CharacterEpisodesComponent {
   $episodes = input.required<string[]>();
   $initialLimit = signal(15);
   episodeService = inject(EpisodeService);

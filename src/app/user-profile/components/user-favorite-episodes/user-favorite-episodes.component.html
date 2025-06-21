@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="card border border-0">
+    <div class="card-body text-white">
+      <h5 class="card-title">Favorite Episodes</h5>
+      <hr />
+      @if ($favoriteEpisodes()) {
+      <!--  -->
+      @for (episode of visibleEpisodes(); track episode; let idx = $index) {
+      <a
+        [href]="episode.url"
+        target="_blank"
+        class="card-text text-primary text-decoration-none d-block"
+      >
+        Episode {{ idx + 1 }} - {{ episode.name }}
+      </a>
+      } @empty {
+        <p>You haven't selected any favorite episodes yet.</p>
+      } 
+      <!--  -->
+      @if (shouldShowMoreButton()) {
+      <button
+        class="btn btn-link text-decoration-none p-0 mt-2"
+        (click)="updateInitialLimit()"
+      >
+        (more)
+      </button>
+      } }
+      <!--  -->
+
+      <!-- @if ($episodeResource.isLoading()) {
+      <app-loader />
+      }
+
+      @if ($episodeResource.error()) {
+      <app-error [$message]="$episodeResource.error()" />
+      } -->
+    </div>
+  </div>
+</div>

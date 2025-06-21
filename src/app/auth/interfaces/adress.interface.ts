@@ -1,7 +1,7 @@
 export interface Address {
   street: string;
-  location: string;
   city: string;
+  location: string;
   country: string;
   cp: string;
 }

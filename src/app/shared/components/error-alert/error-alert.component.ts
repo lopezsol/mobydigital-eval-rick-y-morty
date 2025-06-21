@@ -12,6 +12,7 @@ export class ErrorAlertComponent {
   $hideAlert = output<boolean>();
 
   private _autoHideEffect = effect((): void => {
+    console.log('me emiti')
     this.$visible.set(true);
     setTimeout(() => {
       this.$visible.set(false);

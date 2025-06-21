@@ -9,7 +9,7 @@ import type { AuthErrorResponse } from '@auth/interfaces/auth-error-response.int
 import type { RegisterUserDto } from '@auth/interfaces/register-user-dto.interface';
 import type { AuthResponse } from '@auth/interfaces/auth-response.interface';
 import type { User } from '@auth/interfaces/user.interface';
-import { RegisterResponse } from '@auth/interfaces/register-user-response.interface';
+import type { RegisterResponse } from '@auth/interfaces/register-user-response.interface';
 
 const apiUrl = environment.AUTH_API_URL;
 
@@ -47,7 +47,9 @@ export class AuthService {
       );
   }
 
-  register(user: RegisterUserDto): Observable<RegisterResponse | AuthErrorResponse> {
+  register(
+    user: RegisterUserDto
+  ): Observable<RegisterResponse | AuthErrorResponse> {
     return this.http
       .post<RegisterResponse>(`${apiUrl}/user/register`, {
         name: user.name,
@@ -101,5 +103,10 @@ export class AuthService {
     this.logout();
     console.log(error);
     return of(false);
+  }
+
+  updateUser(user: User) {
+    this._user.set(user);
+    sessionStorage.setItem(SessionStorageKey.User, JSON.stringify(user));
   }
 }

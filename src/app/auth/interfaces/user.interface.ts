@@ -8,4 +8,7 @@ export interface User {
   address?: Address;
   birthday?: Date;
   phone?: string;
+  nickname?: string;
+  favoriteEpisodes?: string[],
+  profilePictureUrl?: string
 }

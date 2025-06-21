@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { CharacterInfoComponent } from '../../components/character-info/character-info.component';
-import { CharacterEpisodesListComponent } from '../../components/character-episodes-list/character-episodes-list.component';
 import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { map, of } from 'rxjs';
 import { CharacterService } from '../../services/character.service';
-import { Character } from '../../interfaces/character.interface';
-import { LoaderComponent } from "../../../shared/components/loader/loader.component";
-import { ErrorComponent } from "../../../shared/components/error/error.component";
+import { CharacterEpisodesComponent } from '@characters/components/character-episodes/character-episodes.component';
+import { CharacterInfoComponent } from '@characters/components/character-info/character-info.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { ErrorComponent } from '@shared/components/error/error.component';
+import type { Character } from '@characters/interfaces/character.interface';
 
 @Component({
   selector: 'app-character-detail-page',
-  imports: [CharacterInfoComponent, CharacterEpisodesListComponent, LoaderComponent, ErrorComponent],
+  imports: [CharacterInfoComponent, CharacterEpisodesComponent, LoaderComponent, ErrorComponent],
   templateUrl: './character-detail-page.component.html',
   styleUrl: './character-detail-page.component.css',
 })
