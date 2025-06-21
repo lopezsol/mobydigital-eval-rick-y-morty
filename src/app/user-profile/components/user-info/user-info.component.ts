@@ -1,12 +1,13 @@
 import { Component, computed, input, signal } from '@angular/core';
-import { User } from '@auth/interfaces/user.interface';
-import type { Address } from '@auth/interfaces/adress.interface';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { ImageFallbackPipe } from '@user/pipes/image-fallback.pipe';
-
+import { DatePipe } from '@angular/common';
+import { FallbackPipe } from '@shared/pipes/fallback.pipe';
+import type { User } from '@auth/interfaces/user.interface';
+import type { Address } from '@auth/interfaces/adress.interface';
 @Component({
   selector: 'user-info',
-  imports: [UserFormComponent, ImageFallbackPipe],
+  imports: [UserFormComponent, ImageFallbackPipe, DatePipe, FallbackPipe],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css',
 })
@@ -16,7 +17,7 @@ export class UserInfoComponent {
   $userAdress = computed(() => this.getFullAddress(this.$user().address));
 
   getFullAddress(address?: Address): string {
-    if (!address) return '';
+    if (!address?.street) return '';
 
     const { street, city, location, country, cp } = address;
     return `${street}, ${city}, ${location}, ${country}, ${cp}`;

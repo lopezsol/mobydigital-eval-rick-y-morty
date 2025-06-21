@@ -23,8 +23,10 @@
       <p class="card-text">Name: {{ $user().name }}</p>
       <p class="card-text">Nickname: {{ $user().nickname }}</p>
       <p class="card-text">E-mail: {{ $user().mail }}</p>
-      <p class="card-text">Birthday: {{ $user().birthday }}</p>
-      <p class="card-text">Address: {{ $userAdress() }}</p>
+      <p class="card-text">
+        Birthday: {{ $user().birthday | date : "MMM d, y" : "UTC" | fallback }}
+      </p>
+      <p class="card-text">Address: {{ $userAdress() | fallback }}</p>
     </div>
   </div>
   }
