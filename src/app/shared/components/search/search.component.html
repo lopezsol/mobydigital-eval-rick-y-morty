@@ -1,0 +1,11 @@
+<form (submit)="onSearch($event)" class="pb-3">
+  <div class="d-flex align-items-stretch gap-2">
+    <input
+      [formControl]="searchControl"
+      type="text"
+      class="form-control text-white"
+      placeholder="Search..."
+    />
+    <button class="btn btn-outline-primary">Search</button>
+  </div>
+</form>

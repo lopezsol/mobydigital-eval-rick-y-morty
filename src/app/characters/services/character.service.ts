@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import {
+import { CharacterMapper } from '../mappers/character.mapper';
+import { PaginationInfoMapper } from '../mappers/pagination-info.mapper';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import type { Character } from '@characters/interfaces/character.interface';
+import type {
   RestCharacter,
   RestPaginatedCharacters,
 } from '../interfaces/rest-paginated-characters.interface';
-import { CharacterMapper } from '../mappers/character.mapper';
-import { PaginationInfoMapper } from '../mappers/pagination-info.mapper';
-import { catchError, map, throwError } from 'rxjs';
-import { environment } from '../../../environments/environment';
 
 const apiUrl = environment.CHARACTER_API_URL;
 @Injectable({
@@ -43,6 +44,18 @@ export class CharacterService {
         console.error('Error fetching characters:', error);
         return throwError(
           () => new Error(`No se pudo obtener el personaje con id: ${id}`)
+        );
+      })
+    );
+  }
+
+  getCharacterByUrl(url: string): Observable<Character> {
+    return this.http.get<RestCharacter>(url).pipe(
+      map((resp) => CharacterMapper.mapRestCharacterToCharacter(resp)),
+      catchError((error) => {
+        console.error('Error fetching characters:', error);
+        return throwError(
+          () => new Error(`No se pudo obtener el personaje con url: ${url}`)
         );
       })
     );

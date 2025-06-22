@@ -22,6 +22,11 @@ export const routes: Routes = [
       ),
     canMatch: [AuthenticatedGuard],
   },
+  {
+    path: 'episodes',
+    loadChildren: () => import('./episodes/episodes.routes'),
+    canMatch: [AuthenticatedGuard],
+  },
   { path: '', redirectTo: 'characters', pathMatch: 'full' },
   { path: '**', component: NotFoundPageComponent },
 ];
