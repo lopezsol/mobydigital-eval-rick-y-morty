@@ -1,13 +1,14 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { EpisodeService } from '../../../episodes/services/episode.service';
+import { RouterLink } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
-import { LoaderComponent } from '../../../shared/components/loader/loader.component';
-import { ErrorComponent } from '../../../shared/components/error/error.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { ErrorComponent } from '@shared/components/error/error.component';
+import { EpisodeService } from '@episodes/services/episode.service';
 
 @Component({
   selector: 'character-episodes-list',
-  imports: [LoaderComponent, ErrorComponent],
+  imports: [LoaderComponent, ErrorComponent, RouterLink],
   templateUrl: './character-episodes-list.component.html',
   styleUrl: './character-episodes-list.component.css',
 })

@@ -1,0 +1,21 @@
+<section class="d-flex justify-content-center">
+  <!--  -->
+  @if( $episodeResource.error() ) {
+  <app-error [$message]="$episodeResource.error()" />
+  }
+
+  <!--  -->
+  @if ($episodeResource.isLoading()) {
+  <app-loader />
+  }
+
+  <!--  -->
+  @if( $episodeResource.hasValue()) {
+  <div class="container my-3 mx-3">
+    <episode-info [$episode]="$episodeResource.value()" />
+    <episode-characters-list
+      [$characters]="$episodeResource.value().characters"
+    />
+  </div>
+  }
+</section>

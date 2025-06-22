@@ -11,7 +11,7 @@
 
   <!--  -->
   @if( $characterResource.hasValue()) {
-  <div class="container py-5">
+  <div class="container py-3">
     <character-info [$character]="$characterResource.value()" />
     <character-episodes-list [$episodes]="$characterResource.value().episode" />
   </div>
