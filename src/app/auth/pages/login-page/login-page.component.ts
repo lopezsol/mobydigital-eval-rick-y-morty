@@ -1,14 +1,14 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { of, tap } from 'rxjs';
 
 import { AuthService } from '@auth/services/auth.service';
 import { FormUtils } from 'src/app/utils/form-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { UserLogin } from '@auth/interfaces/user-login.interface';
-import { of, tap } from 'rxjs';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.component';
+import type { LoginUserDto } from '@auth/interfaces/login-user-dto.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -26,7 +26,7 @@ export class LoginPageComponent {
   router = inject(Router);
   authService = inject(AuthService);
   $hasError = signal(false);
-  $user = signal<UserLogin | null>(null);
+  $user = signal<LoginUserDto | null>(null);
 
   $authResource = rxResource({
     request: () => {

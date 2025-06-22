@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+div {
+  background-color: var(--color-detail-card);
+}
+
+.container {
+  padding: 24px;
+  border-radius: 8px;
+  background-color: var(--color-detail-card);
+}
+
+.card-body {
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+}

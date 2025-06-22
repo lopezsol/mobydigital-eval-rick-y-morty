@@ -1,0 +1,17 @@
+section {
+  min-height: calc(100vh - 56px);
+  background-color: var(--color-background);
+}
+div {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (width > 768px) {
+  div {
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+  }
+}

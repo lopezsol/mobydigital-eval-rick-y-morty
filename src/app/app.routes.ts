@@ -15,6 +15,14 @@ export const routes: Routes = [
     canMatch: [NotAuthenticatedGuard],
   },
   {
+    path: 'profile',
+    loadComponent: () =>
+      import(
+        './user-profile/pages/user-profile-page/user-profile-page.component'
+      ),
+    canMatch: [AuthenticatedGuard],
+  },
+  {
     path: 'episodes',
     loadChildren: () => import('./episodes/episodes.routes'),
     canMatch: [AuthenticatedGuard],

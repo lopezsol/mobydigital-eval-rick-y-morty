@@ -1,0 +1,33 @@
+<div class="container">
+  <!--  -->
+  @if ($isEditMode()) {
+  <user-form [$user]="$user()" ($isEditMode)="$isEditMode.set($event)" />
+  }
+  <!--  -->
+  @else {
+  <div class="card gap-4 border border-0">
+    <img
+      [src]="$user().profilePictureUrl | imageFallback"
+      class="card-img-top"
+      [alt]="'Profile picture ' + $user().name"
+    />
+    <div class="card-body text-white">
+      <div class="row">
+        <h5 class="card-title">User Info</h5>
+        <button (click)="$isEditMode.set(true)" class="btn btn-outline-primary">
+          <i class="bi bi-pencil"></i>
+        </button>
+      </div>
+
+      <hr />
+      <p class="card-text">Name: {{ $user().name }}</p>
+      <p class="card-text">Nickname: {{ $user().nickname }}</p>
+      <p class="card-text">E-mail: {{ $user().mail }}</p>
+      <p class="card-text">
+        Birthday: {{ $user().birthday | date : "MMM d, y" : "UTC" | fallback }}
+      </p>
+      <p class="card-text">Address: {{ $userAdress() | fallback }}</p>
+    </div>
+  </div>
+  }
+</div>

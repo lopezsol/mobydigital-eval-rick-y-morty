@@ -1,13 +1,9 @@
-import type { AuthData } from './auth-data.interface';
-import type { Header } from './header.interface';
-
+import type { User } from './user.interface';
 
 export interface AuthResponse {
-  header: Header;
-  data:   AuthData;
+  header: {
+    message: string;
+    resultCode: number;
+  };
+  data: { user: User; token: string };
 }
-
-
-
-
-

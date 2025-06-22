@@ -1,10 +1,14 @@
 import type { Address } from './adress.interface';
 
 export interface User {
+  id: string;
+  role: string;
   name: string;
   mail: string;
-  password: string;
   address?: Address;
-  phone?: string;
   birthday?: Date;
+  phone?: string;
+  nickname?: string;
+  favoriteEpisodes?: string[],
+  profilePictureUrl?: string
 }

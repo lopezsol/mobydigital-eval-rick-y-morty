@@ -1,15 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { User } from '@auth/interfaces/user.interface';
-import { AuthService } from '@auth/services/auth.service';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { FormUtils } from 'src/app/utils/form-utils';
-import type { Address } from '@auth/interfaces/adress.interface';
+import { catchError, of, tap } from 'rxjs';
 import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
 import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.component';
-import { rxResource } from '@angular/core/rxjs-interop';
-import { catchError, of, tap } from 'rxjs';
-import { LoaderComponent } from '../../../shared/components/loader/loader.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { AuthService } from '@auth/services/auth.service';
+import type { Address } from '@auth/interfaces/adress.interface';
+import type { RegisterUserDto } from '@auth/interfaces/register-user-dto.interface';
 
 @Component({
   selector: 'app-register-page',
@@ -30,7 +30,7 @@ export class RegisterPageComponent {
   formUtils = FormUtils;
   $hasError = signal(false);
   $errorMessage = signal('');
-  $newUser = signal<User | null>(null);
+  $newUser = signal<RegisterUserDto | null>(null);
 
   countries: string[] = [
     'Argentina',
@@ -166,10 +166,10 @@ export class RegisterPageComponent {
     this.$newUser.set(newUser);
   }
 
-  createUser(): User {
+  createUser(): RegisterUserDto {
     const { name = '', email = '', password = '' } = this.registerForm.value;
 
-    const user: User = {
+    const user: RegisterUserDto = {
       name: name!,
       mail: email!,
       password: password!,
