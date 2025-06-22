@@ -1,10 +1,17 @@
-
-h5 {
-  font-weight: 700;
-  padding: 16px;
+.card-header {
+  display: flex;
+  flex-direction: row;
   border-radius: 8px 8px 0 0;
   border-bottom: 1px solid #25292c;
   background-color: #32383e;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h5 {
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
 }
 
 .card {
@@ -12,11 +19,12 @@ h5 {
   border: 1px solid #25292c;
 }
 
-.card:hover, .card:hover h5{
+.card:hover,
+.card:hover .card-header {
   background-color: var(--color-hover);
 }
 
-.card:hover h5 {
+.card:hover .card-header {
   border-bottom: 1px solid #757f88;
 }
 
@@ -27,4 +35,10 @@ p {
 
 div.card-body {
   padding-top: 0;
+}
+
+button{
+  border: none;
+  color: white;
+  width: fit-content;
 }

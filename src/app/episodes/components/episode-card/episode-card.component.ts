@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { Episode } from '@episodes/interfaces/episode.interface';
 
@@ -10,4 +10,13 @@ import type { Episode } from '@episodes/interfaces/episode.interface';
 })
 export class EpisodeCardComponent {
   $episode = input.required<Episode>();
+  //TODO: completar la forma en la que se agrega favorito, hay que leer los favoritos del usuario
+  $isFavorite = signal(false);
+
+  toggleFavorite(event: MouseEvent): void {
+    event.stopPropagation();
+    event.preventDefault()
+    console.log('toggleFavorite');
+    this.$isFavorite.update((current) => !current);
+  }
 }

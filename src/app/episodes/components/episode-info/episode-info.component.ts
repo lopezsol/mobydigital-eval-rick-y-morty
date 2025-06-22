@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import type { Episode } from '@episodes/interfaces/episode.interface';
 
 @Component({
@@ -9,4 +9,12 @@ import type { Episode } from '@episodes/interfaces/episode.interface';
 })
 export class EpisodeInfoComponent {
   $episode = input.required<Episode>();
+  $isFavorite = signal(false);
+
+  toggleFavorite(event: MouseEvent): void {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log('toggleFavorite');
+    this.$isFavorite.update((current) => !current);
+  }
 }

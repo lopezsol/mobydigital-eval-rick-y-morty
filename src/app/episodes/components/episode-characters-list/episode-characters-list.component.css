@@ -18,3 +18,8 @@ div {
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
 }
+
+div {
+  height: 36px;
+  width: 100%;
+}
