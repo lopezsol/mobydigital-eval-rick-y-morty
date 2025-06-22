@@ -48,13 +48,16 @@ export class UserFormComponent {
         Validators.pattern(FormUtils.nicknamePattern),
       ],
     ],
-    birthday: ['', [Validators.pattern(FormUtils.birthdayPattern), FormUtils.noFutureDate]],
+    birthday: [
+      '',
+      [Validators.pattern(FormUtils.birthdayPattern), FormUtils.noFutureDate],
+    ],
     street: ['', [Validators.maxLength(50)]],
     city: ['', [Validators.maxLength(50)]],
     location: ['', [Validators.maxLength(50)]],
     country: ['', [Validators.maxLength(50)]],
     zip: ['', [Validators.minLength(4), Validators.maxLength(4)]],
-    profilePictureUrl: ['', [Validators.maxLength(100)]],
+    avatarUrl: ['', [Validators.maxLength(100)]],
   });
 
   countries: string[] = [
@@ -86,7 +89,7 @@ export class UserFormComponent {
       birthday: user.birthday
         ? new Date(user.birthday).toISOString().split('T')[0]
         : '',
-      profilePictureUrl: user.profilePictureUrl || '',
+      avatarUrl: user.avatarUrl || '',
       street: user.address?.street || '',
       city: user.address?.city,
       location: user.address?.location || '',
@@ -149,7 +152,7 @@ export class UserFormComponent {
       city = this.$user().address?.city,
       location = this.$user().address?.location,
       nickname = this.$user().nickname,
-      profilePictureUrl = this.$user().profilePictureUrl,
+      avatarUrl = this.$user().avatarUrl,
       country = this.$user().address?.country,
       street = this.$user().address?.street,
       zip = this.$user().address?.cp,
@@ -165,14 +168,14 @@ export class UserFormComponent {
           country: country!,
           cp: zip?.toString()!,
         }
-      : {} as Address;
+      : ({} as Address);
 
     const updatedUser: UpdateUserDto = {
       id: this.$user().id,
       name: this.$user().name,
       birthday: parsedBirthday,
       // nickname: nickname!, TODO: agregarlos cuando haga mi be
-      // profilePictureUrl: profilePictureUrl!,
+      // avatarUrl: avatarUrl!,
       address: address,
     };
     return updatedUser;

@@ -10,7 +10,8 @@
       "@episodes/*": ["./src/app/episodes/*"],
       "@locations/*": ["./src/app/locations/*"],
       "@shared/*": ["./src/app/shared/*"],
-      "@user/*": ["./src/app/user-profile/*"]
+      "@user/*": ["./src/app/user-profile/*"],
+      "@comments/*": ["./src/app/comments/*"]
     },
 
     "outDir": "./dist/out-tsc",

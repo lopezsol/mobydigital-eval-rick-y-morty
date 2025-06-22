@@ -1,0 +1,9 @@
+<section class="container">
+  <h5 class="mb-4">{{ $totalComments() }} comments</h5>
+
+  <div>
+    @for (comment of $comments(); track comment.id) {
+    <comment-card [$comment]="comment" />
+    }
+  </div>
+</section>

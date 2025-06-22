@@ -7,6 +7,7 @@ import { ErrorComponent } from '@shared/components/error/error.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { EpisodeInfoComponent } from '@episodes/components/episode-info/episode-info.component';
 import { EpisodeCharactersListComponent } from '@episodes/components/episode-characters-list/episode-characters-list.component';
+import { CommentListComponent } from '@comments/components/comment-list/comment-list.component';
 import type { Episode } from '@episodes/interfaces/episode.interface';
 
 @Component({
@@ -16,7 +17,8 @@ import type { Episode } from '@episodes/interfaces/episode.interface';
     ErrorComponent,
     EpisodeInfoComponent,
     EpisodeCharactersListComponent,
-  ],
+    CommentListComponent
+],
   templateUrl: './episode-detail-page.component.html',
   styleUrl: './episode-detail-page.component.css',
 })

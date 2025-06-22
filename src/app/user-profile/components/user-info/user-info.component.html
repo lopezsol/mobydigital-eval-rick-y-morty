@@ -7,7 +7,7 @@
   @else {
   <div class="card gap-4 border border-0">
     <img
-      [src]="$user().profilePictureUrl | imageFallback"
+      [src]="$user().avatarUrl | avatarFallback"
       class="card-img-top"
       [alt]="'Profile picture ' + $user().name"
     />

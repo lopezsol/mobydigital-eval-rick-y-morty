@@ -10,5 +10,5 @@ export interface User {
   phone?: string;
   nickname?: string;
   favoriteEpisodes?: string[],
-  profilePictureUrl?: string
+  avatarUrl?: string
 }

@@ -7,5 +7,5 @@ export interface UpdateUserDto {
   birthday?: Date;
   nickname?: string;
   favoriteEpisodes?: string[];
-  profilePictureUrl?: string;
+  avatarUrl?: string;
 }

@@ -114,18 +114,18 @@
     </div>
 
     <div class="col-12 mb-3">
-      <label for="profilePictureUrl" class="form-label text-primary"
-        >Profile picture Url</label
+      <label for="avatarUrl" class="form-label text-primary"
+        >Avatar Url</label
       >
       <input
         type="text"
         class="form-control text-white"
         placeholder="https://myimage.com/"
-        formControlName="profilePictureUrl"
+        formControlName="avatarUrl"
       />
-      @if (formUtils.isInvalidField(profileForm, 'profilePictureUrl')) {
+      @if (formUtils.isInvalidField(profileForm, 'avatarUrl')) {
       <error-message
-        [$message]="formUtils.getFieldError(profileForm, 'profilePictureUrl')!"
+        [$message]="formUtils.getFieldError(profileForm, 'avatarUrl')!"
       />
       }
     </div>
