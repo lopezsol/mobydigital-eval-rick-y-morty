@@ -1,0 +1,21 @@
+<section class="py-5 container">
+  <app-search ($queryChanged)="setQuery($event)" [$query]="$query()" />
+  @if( $episodeResource.error() ) {
+  <app-error [$message]="$episodeResource.error()" />
+  }
+
+  <!--  -->
+  @if ($episodeResource.isLoading()) {
+  <app-loader />
+  }
+
+  <!--  -->
+  @if( $episodeResource.hasValue()) {
+  <episodes-list [$episodes]="$episodeResource.value().episodes"/>
+  <app-pagination
+    [$infoPagination]="$episodeResource.value()!.info"
+    [$currentPage]="$page()"
+    ($pageChanged)="setPage($event)"
+  />
+  }
+</section>

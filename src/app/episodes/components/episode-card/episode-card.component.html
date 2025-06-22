@@ -1,0 +1,17 @@
+<a [routerLink]="['/episodes', $episode().id]" class="text-decoration-none">
+  <div class="card h-100">
+    <div class="card-header">
+      <h5 class="text-white">Episode {{ $episode().id }}</h5>
+
+      <button class="btn btn-outline-primary" (click)="toggleFavorite($event)">
+        <i [class]="$isFavorite() ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+      </button>
+    </div>
+
+    <div class="card-body mt-2">
+      <h4 class="card-title">{{ $episode().name }}</h4>
+      <p>{{ $episode().episode }}</p>
+      <p>Air Date: {{ $episode().air_date }}</p>
+    </div>
+  </div>
+</a>

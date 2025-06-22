@@ -1,17 +1,18 @@
 <div class="container">
   <div class="card border border-0">
     <div class="card-header">
-      <h5 class="card-title">List of Episodes appearances</h5>
+      <h5 class="card-title">Characters in this episode</h5>
     </div>
     <div class="card-body">
-      @if ($episodeResource.hasValue()) {
+      @if ($characterResource.hasValue()) {
       <!--  -->
-      @for (episode of visibleEpisodes(); track episode; let idx = $index) {
+      @for (character of visibleCharacters(); track character; let idx = $index)
+      {
       <a
-        [routerLink]="['/episodes', episode.id]"
+        [routerLink]="['/characters', character.id]"
         class="card-text text-primary text-decoration-none d-block"
       >
-        Episode {{ episode.id }} - {{ episode.name }}
+        {{ character.name }}
       </a>
       } @if (shouldShowMoreButton()) {
       <button
@@ -23,13 +24,13 @@
       } }
       <!--  -->
 
-      @if ($episodeResource.isLoading()) {
+      @if ($characterResource.isLoading()) {
       <app-loader />
       }
       <!--  -->
 
-      @if ($episodeResource.error()) {
-      <app-error [$message]="$episodeResource.error()" />
+      @if ($characterResource.error()) {
+      <app-error [$message]="$characterResource.error()" />
       }
     </div>
   </div>

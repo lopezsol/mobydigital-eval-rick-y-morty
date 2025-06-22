@@ -1,16 +1,15 @@
-:host {
-  display: block;
-}
-
 div {
   background-color: var(--color-detail-card);
 }
 
 .container {
   padding: 24px;
+  height: 100%;
 }
 
 .card {
+  height: 100%;
+  padding: 0;
   color: var(--color-text-gray);
 }
 
