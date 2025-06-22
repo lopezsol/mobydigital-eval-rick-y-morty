@@ -1,10 +1,9 @@
 <div class="container">
   <div class="card border border-0">
+    <div class="card-header text-white">
+      <h5 class="card-title">Characters in this episode</h5>
+    </div>
     <div class="card-body text-white">
-      <div class="card-header">
-        <h5 class="card-title">Characters in this episode</h5>
-      </div>
-      <hr />
       @if ($characterResource.hasValue()) {
       <!--  -->
       @for (character of visibleCharacters(); track character; let idx = $index)

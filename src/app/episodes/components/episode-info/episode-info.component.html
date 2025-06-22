@@ -1,17 +1,15 @@
 <div class="container">
-  <div class="card gap-4 border border-0">
-    <div class="card-body text-white">
-      <div class="card-header">
+  <div class="card border border-0">
+    <div class="card-header text-white">
       <h5 class="card-title">Info of the episode</h5>
-       <button class="btn btn-outline-primary" (click)="toggleFavorite($event)">
+      <button class="btn btn-outline-primary" (click)="toggleFavorite($event)">
         <i [class]="$isFavorite() ? 'bi bi-star-fill' : 'bi bi-star'"></i>
       </button>
     </div>
-    <hr class="text-white" />
+    <div class="card-body text-white">
       <p class="card-text">Name: {{ $episode().name }}</p>
       <p class="card-text">Air date: {{ $episode().air_date }}</p>
       <p class="card-text">Episode code: {{ $episode().episode }}</p>
     </div>
   </div>
 </div>
-
