@@ -10,6 +10,9 @@ div {
   padding: 24px;
 }
 
+.card {
+  color: var(--color-text-gray);
+}
 
 .card-body {
   border: 1px solid var(--color-border-light);

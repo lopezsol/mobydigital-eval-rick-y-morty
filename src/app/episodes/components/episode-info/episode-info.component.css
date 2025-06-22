@@ -10,6 +10,7 @@ p {
 .card {
   background-color: var(--color-detail-card);
   height: 100%;
+  color: var(--color-text-gray);
 }
 
 .card-body {

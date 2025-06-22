@@ -10,6 +10,7 @@ div {
 .card {
   height: 100%;
   padding: 0;
+  color: var(--color-text-gray);
 }
 
 .card-body {
