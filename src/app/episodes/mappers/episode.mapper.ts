@@ -1,12 +1,23 @@
-import { Episode } from '../interfaces/episode.interface';
-import { RestEpisode } from '../interfaces/rest-episode.interface';
+import type { EpisodeResponse } from '@episodes/interfaces/episode-response.interface';
+import type { Episode } from '../interfaces/episode.interface';
 
 export class EpisodeMapper {
-  static mapRestEpisodeToEpisode(restEpisode: RestEpisode): Episode {
+  static mapEpisodeResponseToEpisode(
+    episodeResponse: EpisodeResponse
+  ): Episode {
     return {
-      id: restEpisode.id,
-      name: restEpisode.name,
-      url: restEpisode.url
+      id: episodeResponse.id,
+      name: episodeResponse.name,
+      url: episodeResponse.url,
+      air_date: episodeResponse.air_date,
+      characters: episodeResponse.characters,
+      episode: episodeResponse.episode,
     };
+  }
+
+  static mapEpisodesResponseToEpisodesArray(
+    episodesResponse: EpisodeResponse[]
+  ): Episode[] {
+    return episodesResponse.map(this.mapEpisodeResponseToEpisode);
   }
 }

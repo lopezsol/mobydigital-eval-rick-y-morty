@@ -1,0 +1,30 @@
+
+h5 {
+  font-weight: 700;
+  padding: 16px;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #25292c;
+  background-color: #32383e;
+}
+
+.card {
+  background-color: #343a40;
+  border: 1px solid #25292c;
+}
+
+.card:hover, .card:hover h5{
+  background-color: var(--color-hover);
+}
+
+.card:hover h5 {
+  border-bottom: 1px solid #757f88;
+}
+
+h4,
+p {
+  color: #757f88;
+}
+
+div.card-body {
+  padding-top: 0;
+}
