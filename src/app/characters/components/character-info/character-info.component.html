@@ -1,13 +1,14 @@
 <div class="container">
-  <div class="card gap-4 border border-0">
+  <div class="card border border-0 text-white">
     <img
       [src]="$character().image"
       class="card-img-top"
       [alt]="'Imagen de ' + $character().name"
     />
-    <div class="card-body text-white ">
+    <div class="card-header ">
       <h5 class="card-title">Character Info</h5>
-      <hr>
+    </div>
+    <div class="card-body ">
       <p class="card-text">Name: {{ $character().name }}</p>
       <p class="card-text">
         Status:

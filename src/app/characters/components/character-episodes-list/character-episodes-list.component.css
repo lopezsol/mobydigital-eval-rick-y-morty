@@ -8,12 +8,15 @@ div {
 
 .container {
   padding: 24px;
-  border-radius: 8px;
-  background-color: var(--color-detail-card);
 }
+
 
 .card-body {
   border: 1px solid var(--color-border-light);
-  border-radius: 8px;
+  border-radius: 0px 0px 8px 8px;
+}
 
+.card-header {
+  border: 1px solid var(--color-border-light);
+  padding: 16px 16px;
 }

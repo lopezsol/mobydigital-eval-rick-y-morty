@@ -1,21 +1,19 @@
 <div class="container">
-  <div class="card border border-0">
-    <div class="card-body text-white">
+  <div class="card border border-0 text-white">
+    <div class="card-header">
       <h5 class="card-title">List of Episodes appearances</h5>
-      <hr />
+    </div>
+    <div class="card-body text-white">
       @if ($episodeResource.hasValue()) {
       <!--  -->
-      @for (episode of visibleEpisodes(); track
-      episode; let idx = $index) {
+      @for (episode of visibleEpisodes(); track episode; let idx = $index) {
       <a
         [routerLink]="['/episodes', episode.id]"
         class="card-text text-primary text-decoration-none d-block"
       >
         Episode {{ episode.id }} - {{ episode.name }}
       </a>
-      }
-
-      @if (shouldShowMoreButton()) {
+      } @if (shouldShowMoreButton()) {
       <button
         class="btn btn-link text-decoration-none p-0 mt-2"
         (click)="updateInitialLimit()"
