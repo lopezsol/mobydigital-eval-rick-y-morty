@@ -4,7 +4,7 @@
 <!--  -->
 @if($updateUserResource.error()) {
 <snackbar-error
-  snackbarMessage="Ocurrió un error editando los datos. Por favor, intente de nuevo más tarde."
+  snackbarMessage="We couldn't update your profile. Please try again."
 />
 }
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
@@ -114,9 +114,7 @@
     </div>
 
     <div class="col-12 mb-3">
-      <label for="avatarUrl" class="form-label text-primary"
-        >Avatar Url</label
-      >
+      <label for="avatarUrl" class="form-label text-primary">Avatar Url</label>
       <input
         type="text"
         class="form-control text-white"

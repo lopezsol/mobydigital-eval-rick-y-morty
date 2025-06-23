@@ -1,3 +1,10 @@
+@if (createCommentResource.isLoading()) {
+<app-loader />
+} @if(createCommentResource.error()){
+<snackbar-error
+  snackbarMessage="We couldn't post your comment. Please try again"
+/>
+}
 <form (ngSubmit)="onSubmit()" [formGroup]="commentForm" class="comment-form">
   <img
     [src]=""

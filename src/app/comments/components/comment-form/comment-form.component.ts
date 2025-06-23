@@ -7,10 +7,12 @@ import { CommentService } from '@comments/services/comment.service';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
 import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
 import type { User } from '@auth/interfaces/user.interface';
+import { SnackbarErrorComponent } from "../../../shared/components/snackbar-error/snackbar-error.component";
+import { LoaderComponent } from "../../../shared/components/loader/loader.component";
 
 @Component({
   selector: 'comment-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SnackbarErrorComponent, LoaderComponent],
   templateUrl: './comment-form.component.html',
   styleUrl: './comment-form.component.css',
 })
