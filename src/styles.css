@@ -7,10 +7,12 @@
 
   --color-hover: #272b2e;
   --color-border-light: #373c41;
+  --color-border-focus: #007bff;
 
   --color-placeholder: #838282;
 
   --color-text-gray: #a0acb6;
+
 }
 
 * {

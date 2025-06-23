@@ -7,7 +7,7 @@
 }
 
 .form-control:focus {
-  border-color: #007bff;
+  border-color: var(--color-border-focus);
   box-shadow: none;
 }
 

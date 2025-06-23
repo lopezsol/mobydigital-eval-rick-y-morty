@@ -1,6 +1,7 @@
 import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Post } from '../interfaces/post.interface';
+import type { Post } from '../interfaces/post.interface';
+import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +49,16 @@ export class CommentService {
   }
 
   //TODO: implementar cuando este la BE hecha
+  createComment(postId: string, comment: CreateCommentDto) {
+    console.log('me cree: ', postId, comment);
+    return of();
+  }
+
+  //TODO: implementar cuando este la BE hecha
   updatePostEnabledStatus(postId: string, enabled: boolean) {
     this.mockPost.enabled = !this.mockPost.enabled;
   }
+
+  //TODO: implementar cuando este la BE hecha
+  deleteComment(postId: string, idComment: string) {}
 }

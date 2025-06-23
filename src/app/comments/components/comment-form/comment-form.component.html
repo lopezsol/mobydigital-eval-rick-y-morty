@@ -1,1 +1,33 @@
-<p>comment-form works!</p>,
+<form (ngSubmit)="onSubmit()" [formGroup]="commentForm" class="comment-form">
+  <img
+    [src]=""
+    alt="User avatar"
+    class="avatar rounded-circle me-2"
+    width="40"
+    height="40"
+  />
+
+  <div class="w-100">
+    <input
+      formControlName="content"
+      placeholder="Add a comment..."
+      #contentInput
+      (focus)="this.$focused.set(true)"
+    />
+
+    @if (this.$focused() ) {
+    <div class="action-buttons mt-3">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="commentForm.invalid"
+      >
+        Comment
+      </button>
+    </div>
+    }
+  </div>
+</form>

@@ -9,9 +9,10 @@
       "@characters/*": ["./src/app/characters/*"],
       "@episodes/*": ["./src/app/episodes/*"],
       "@locations/*": ["./src/app/locations/*"],
-      "@shared/*": ["./src/app/shared/*"],
       "@user/*": ["./src/app/user-profile/*"],
-      "@comments/*": ["./src/app/comments/*"]
+      "@comments/*": ["./src/app/comments/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@utils/*": ["./src/app/utils/*"]
     },
 
     "outDir": "./dist/out-tsc",

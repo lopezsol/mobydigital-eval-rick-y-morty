@@ -2,8 +2,16 @@
   <h5 class="mb-4">{{ $totalComments() }} comments</h5>
 
   <div>
+    <comment-form
+      ($commentCreated)="$postRefreshTrigger.set($event)"
+      [$user]="authService.user()!"
+      [$postId]="$post()?.id!"
+    />
     @for (comment of $comments(); track comment.id) {
-    <comment-card [$comment]="comment" />
+    <comment-card
+      [$comment]="comment"
+      ($deleteComment)="$commentIdToDelete.set($event)"
+    />
     }
   </div>
 </section>

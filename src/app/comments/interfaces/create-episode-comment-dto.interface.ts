@@ -1,8 +1,6 @@
-export interface Comment {
-  id: string;
+export interface CreateCommentDto {
   content: string;
   idUser: string;
   userName: string;
   avatarUrl?: string;
-  createdAt: string;
 }

@@ -1,3 +1,31 @@
-:host {
-  display: block;
+.comment-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  flex-shrink: 0;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+  color: var(--color-text-gray);
+}
+
+input:focus {
+  border-bottom: 1px solid var(--color-border-focus);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
 }
