@@ -44,14 +44,14 @@ export class CommentService {
     ],
   };
 
-   mockPostEmptyComments: Post = {
+  mockPostEmptyComments: Post = {
     id: 'post-001',
     idEpisode: 10,
     enabled: true,
-    comments: []
+    comments: [],
   };
 
-   mockPostDisabled: Post = {
+  mockPostDisabled: Post = {
     id: 'post-001',
     idEpisode: 10,
     enabled: false,
@@ -98,9 +98,11 @@ export class CommentService {
 
   //TODO: implementar cuando este la BE hecha
   updatePostEnabledStatus(postId: string, enabled: boolean) {
-    return of(true)
+    return of(true);
   }
 
   //TODO: implementar cuando este la BE hecha
-  deleteComment(postId: string, idComment: string) {}
+  deleteComment(postId: string, idComment: string) {
+    return of(true);
+  }
 }
