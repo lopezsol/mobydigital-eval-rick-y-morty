@@ -4,15 +4,16 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { of, tap } from 'rxjs';
 import { FormUtils } from '@utils/form-utils';
 import { CommentService } from '@comments/services/comment.service';
+import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackbar-error.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { AvatarFallbackPipe } from '@shared/pipes/avatar-fallback.pipe';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
 import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
 import type { User } from '@auth/interfaces/user.interface';
-import { SnackbarErrorComponent } from "../../../shared/components/snackbar-error/snackbar-error.component";
-import { LoaderComponent } from "../../../shared/components/loader/loader.component";
 
 @Component({
   selector: 'comment-form',
-  imports: [ReactiveFormsModule, SnackbarErrorComponent, LoaderComponent],
+  imports: [ReactiveFormsModule, SnackbarErrorComponent, LoaderComponent, AvatarFallbackPipe],
   templateUrl: './comment-form.component.html',
   styleUrl: './comment-form.component.css',
 })

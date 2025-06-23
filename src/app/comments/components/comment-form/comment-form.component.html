@@ -7,7 +7,7 @@
 }
 <form (ngSubmit)="onSubmit()" [formGroup]="commentForm" class="comment-form">
   <img
-    [src]=""
+    [src]="$user().avatarUrl | avatarFallback"
     alt="User avatar"
     class="avatar rounded-circle me-2"
     width="40"
