@@ -1,17 +1,37 @@
 <section class="container">
-  <h5 class="mb-4">{{ $totalComments() }} comments</h5>
+  <div class="comment-header">
+    <h5 class="mb-4">{{ $totalComments() }} comments</h5>
+
+    @if ($isAdmin()) {
+    <app-dropdown
+      [$type]="commentDropdown.AdminPost"
+      ($disableComments)="onDisableComments()"
+    />
+    }
+  </div>
 
   <div>
+    @if (!$post()?.enabled) {
+    <p>
+      New comments are not allowed on this episode. You can still read the
+      previous ones.
+    </p>
+    } @else {
     <comment-form
       ($commentCreated)="$postRefreshTrigger.set($event)"
       [$user]="authService.user()!"
       [$postId]="$post()?.id!"
-    />
+    />}
+    <!--  -->
     @for (comment of $comments(); track comment.id) {
     <comment-card
       [$comment]="comment"
+      [$isAdmin]="$isAdmin()!"
       ($deleteComment)="$commentIdToDelete.set($event)"
+      [$user]="authService.user()!"
     />
+    } @empty {
+    <p>No comments yet. Be the first to share your thoughts!</p>
     }
   </div>
 </section>

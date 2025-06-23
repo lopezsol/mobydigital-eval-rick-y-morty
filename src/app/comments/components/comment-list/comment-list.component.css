@@ -13,3 +13,9 @@ div {
   display: flex;
   flex-direction: column;
 }
+
+.comment-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

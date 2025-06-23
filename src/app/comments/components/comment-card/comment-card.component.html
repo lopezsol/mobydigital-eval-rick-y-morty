@@ -14,29 +14,20 @@
         <!-- <span class="text-muted small ms-1">hace 40 minutos</span> -->
       </div>
 
-      <!-- Dropdown -->
-      <div class="dropdown">
-        <button
-          class="btn btn-sm text-secondary"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="bi bi-three-dots-vertical"></i>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li>
-            <button class="dropdown-item"  (click)="onEdit()">Edit</button>
-          </li>
-          <li>
-            <button class="dropdown-item text-danger" (click)="onDelete()">Delete</button>
-          </li>
-        </ul>
-      </div>
+      @if ($isAdmin()) {
+      <app-dropdown
+        [$type]="commentDropdown.AdminComment"
+        ($delete)="onDelete()"
+      />
+      } @else if (isCommentAuthor()) {
+      <app-dropdown
+        [$type]="commentDropdown.UserOwn"
+        ($edit)="onEdit()"
+        ($delete)="onDelete()"
+      />
+      }
     </div>
 
     <p class="mb-1">{{ $comment().content }}</p>
   </div>
 </div>
-
-
