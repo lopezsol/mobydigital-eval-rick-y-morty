@@ -1,4 +1,4 @@
-export interface EpisodeComment {
+export interface UpdateCommentDto {
   id: string;
   content: string;
   idUser: string;

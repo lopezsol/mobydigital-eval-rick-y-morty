@@ -1,4 +1,14 @@
 <div class="d-flex align-items-start mb-3">
+  @if ($isEditMode()) {
+  <comment-form
+    [$postId]="$postId()!"
+    [$user]="$user()"
+    [$commentToUpdate]="$comment()"
+    ($commentUpdated)="(onCommentUpdated($event))"
+    ($editModeCanceled)="$isEditMode.set(false)"
+    editMode
+  />
+  } @else {
   <img
     [src]="$comment().avatarUrl | avatarFallback"
     alt="Avatar"
@@ -14,6 +24,7 @@
         <!-- <span class="text-muted small ms-1">hace 40 minutos</span> -->
       </div>
 
+      <!--  -->
       @if ($isAdmin()) {
       <app-dropdown
         [$type]="commentDropdown.AdminComment"
@@ -30,4 +41,5 @@
 
     <p class="mb-1">{{ $comment().content }}</p>
   </div>
+  }
 </div>

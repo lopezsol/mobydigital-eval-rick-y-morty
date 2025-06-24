@@ -11,6 +11,7 @@ import { DropdownComponent } from '@shared/components/dropdown/dropdown.componen
 import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
 import type { Post } from '@comments/interfaces/post.interface';
+import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface copy';
 @Component({
   selector: 'comment-list',
   imports: [CommentCardComponent, CommentFormComponent, DropdownComponent],
@@ -23,8 +24,9 @@ export class CommentListComponent {
   commentDropdown = CommentDropdown;
 
   $postRefreshTrigger = signal<EpisodeComment | null>(null);
-  $commentIdToDelete = signal<string | null>(null); 
+  $commentIdToDelete = signal<string | null>(null);
   $postEnabledStatusToUpdate = signal<boolean | null>(null);
+  $commentToEdit = signal<UpdateCommentDto | null>(null);
 
   $episodeId = toSignal(
     inject(ActivatedRoute).params.pipe(map((params) => params['id']))

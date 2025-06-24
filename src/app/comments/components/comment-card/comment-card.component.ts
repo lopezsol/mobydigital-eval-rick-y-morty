@@ -1,13 +1,15 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { AvatarFallbackPipe } from '@shared/pipes/avatar-fallback.pipe';
 import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 import { DropdownComponent } from '@shared/components/dropdown/dropdown.component';
 import type { User } from '@auth/interfaces/user.interface';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
+import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface copy';
+import { CommentFormComponent } from '../comment-form/comment-form.component';
 
 @Component({
   selector: 'comment-card',
-  imports: [AvatarFallbackPipe, DropdownComponent],
+  imports: [AvatarFallbackPipe, DropdownComponent, CommentFormComponent],
   templateUrl: './comment-card.component.html',
   styleUrl: './comment-card.component.css',
 })
@@ -15,8 +17,11 @@ export class CommentCardComponent {
   $comment = input.required<EpisodeComment>();
   $isAdmin = input.required<boolean>();
   $user = input.required<User>();
-  $editComment = output<string>();
-  $deleteComment = output<string>();
+  $commentToEdit = output<UpdateCommentDto>();
+  $commentToDelete = output<string>();
+  $isEditMode = signal<boolean>(false);
+  $postId = input.required<string>();
+  $commentUpdated = output<EpisodeComment>();
 
   commentDropdown = CommentDropdown;
 
@@ -27,10 +32,20 @@ export class CommentCardComponent {
 
   onDelete() {
     console.log('me borro');
-    this.$deleteComment.emit(this.$comment().id);
+    this.$commentToDelete.emit(this.$comment().id);
   }
   onEdit() {
     console.log('me edito');
-    this.$editComment.emit(this.$comment().id);
+    // this.$commentToEdit.emit(this.$comment());
+    this.$isEditMode.set(true);
+  }
+  onCommentUpdated(comment: EpisodeComment) {
+    console.log('ya me edite');
+    this.$commentUpdated.emit(comment);
+    this.$isEditMode.set(false);
+  }
+
+  onCancelEdition() {
+    
   }
 }

@@ -27,8 +27,12 @@
     <comment-card
       [$comment]="comment"
       [$isAdmin]="$isAdmin()!"
-      ($deleteComment)="$commentIdToDelete.set($event)"
       [$user]="authService.user()!"
+      ($commentToDelete)="$commentIdToDelete.set($event)"
+      ($commentToEdit)="$commentToEdit.set($event)"
+      [$postId]="$post()?.id!"
+      ($commentUpdated)="$postRefreshTrigger.set($event)"
+
     />
     } @empty {
     <p>No comments yet. Be the first to share your thoughts!</p>
