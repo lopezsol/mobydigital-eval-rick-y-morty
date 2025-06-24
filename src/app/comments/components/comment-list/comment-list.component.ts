@@ -26,7 +26,6 @@ export class CommentListComponent {
   $postRefreshTrigger = signal<EpisodeComment | null>(null);
   $commentIdToDelete = signal<string | null>(null);
   $postEnabledStatusToUpdate = signal<boolean | null>(null);
-  $commentToEdit = signal<UpdateCommentDto | null>(null);
 
   $episodeId = toSignal(
     inject(ActivatedRoute).params.pipe(map((params) => params['id']))

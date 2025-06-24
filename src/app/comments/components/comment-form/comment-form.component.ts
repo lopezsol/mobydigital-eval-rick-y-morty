@@ -1,10 +1,12 @@
 import {
   booleanAttribute,
   Component,
+  ElementRef,
   inject,
   input,
   output,
   signal,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -31,32 +33,35 @@ import type { User } from '@auth/interfaces/user.interface';
   styleUrl: './comment-form.component.css',
 })
 export class CommentFormComponent {
+  @ViewChild('contentInput') contentInput!: ElementRef<HTMLInputElement>;
+
   fb = inject(FormBuilder);
   commentService = inject(CommentService);
-
-  $createComment = signal<CreateCommentDto | null>(null);
-  $updateComment = signal<UpdateCommentDto | null>(null);
 
   $user = input.required<User>();
   $postId = input.required<string>();
   $commentToUpdate = input<UpdateCommentDto>();
-
-  $commentCreated = output<EpisodeComment>();
-  $commentUpdated = output<EpisodeComment>();
-
-  $focused = signal(false);
-
-  $editMode = input(false, {
+  $isEditMode = input(false, {
     transform: booleanAttribute,
     alias: 'editMode',
   });
-  $editModeCanceled = output();
+
+  $commentCreated = output<EpisodeComment>();
+  $commentUpdated = output<EpisodeComment>();
+  $editCanceled = output();
+
+  $createComment = signal<CreateCommentDto | null>(null);
+  $updateComment = signal<UpdateCommentDto | null>(null);
+  $focused = signal(false);
 
   formUtils = FormUtils;
 
   ngOnInit() {
-    console.log(this.$editMode());
     this.setFormValue();
+  }
+
+  ngAfterViewInit() {
+    this.setFocus();
   }
 
   setFormValue() {
@@ -65,6 +70,9 @@ export class CommentFormComponent {
     });
   }
 
+  setFocus() {
+    if (this.$isEditMode()) this.contentInput.nativeElement.focus();
+  }
   commentForm = this.fb.group({
     content: [
       '',
@@ -81,7 +89,7 @@ export class CommentFormComponent {
     const content = this.commentForm.value.content?.trim();
     if (!content) return;
 
-    if (this.$commentToUpdate()) {
+    if (this.$isEditMode()) {
       const updatedComment: UpdateCommentDto =
         this.buildEditCommentDto(content);
       this.$updateComment.set(updatedComment!);
@@ -91,17 +99,11 @@ export class CommentFormComponent {
     }
 
     this.commentForm.reset();
-  }
-
-  onBlur() {
-    const content = this.commentForm.get('content')?.value;
-    if (!content) {
-      this.$focused.set(false);
-    }
+    this.$focused.set(false);
   }
 
   onCancel() {
-    if (this.$editMode()) this.$editModeCanceled.emit();
+    if (this.$isEditMode()) this.$editCanceled.emit();
     this.commentForm.reset();
     this.$focused.set(false);
   }

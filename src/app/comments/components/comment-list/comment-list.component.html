@@ -28,9 +28,8 @@
       [$comment]="comment"
       [$isAdmin]="$isAdmin()!"
       [$user]="authService.user()!"
-      ($commentToDelete)="$commentIdToDelete.set($event)"
-      ($commentToEdit)="$commentToEdit.set($event)"
       [$postId]="$post()?.id!"
+      ($commentToDelete)="$commentIdToDelete.set($event)"
       ($commentUpdated)="$postRefreshTrigger.set($event)"
 
     />

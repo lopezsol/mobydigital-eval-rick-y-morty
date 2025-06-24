@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import type { Post } from '../interfaces/post.interface';
 import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
-import { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface copy';
+import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface copy';
 
 @Injectable({
   providedIn: 'root',

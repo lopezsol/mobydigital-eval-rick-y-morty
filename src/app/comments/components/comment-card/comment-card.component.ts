@@ -17,11 +17,12 @@ export class CommentCardComponent {
   $comment = input.required<EpisodeComment>();
   $isAdmin = input.required<boolean>();
   $user = input.required<User>();
-  $commentToEdit = output<UpdateCommentDto>();
-  $commentToDelete = output<string>();
-  $isEditMode = signal<boolean>(false);
   $postId = input.required<string>();
+
+  $commentToDelete = output<string>();
   $commentUpdated = output<EpisodeComment>();
+  
+  $isEditMode = signal<boolean>(false);
 
   commentDropdown = CommentDropdown;
 
@@ -36,7 +37,6 @@ export class CommentCardComponent {
   }
   onEdit() {
     console.log('me edito');
-    // this.$commentToEdit.emit(this.$comment());
     this.$isEditMode.set(true);
   }
   onCommentUpdated(comment: EpisodeComment) {
@@ -45,7 +45,4 @@ export class CommentCardComponent {
     this.$isEditMode.set(false);
   }
 
-  onCancelEdition() {
-    
-  }
 }
