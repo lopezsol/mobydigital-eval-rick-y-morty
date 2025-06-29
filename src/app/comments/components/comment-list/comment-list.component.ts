@@ -11,7 +11,7 @@ import { DropdownComponent } from '@shared/components/dropdown/dropdown.componen
 import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
 import type { Post } from '@comments/interfaces/post.interface';
-import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface copy';
+import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
 @Component({
   selector: 'comment-list',
   imports: [CommentCardComponent, CommentFormComponent, DropdownComponent],
@@ -31,11 +31,9 @@ export class CommentListComponent {
     inject(ActivatedRoute).params.pipe(map((params) => params['id']))
   );
   $post = signal<Post | null>(null);
-  $comments = computed(() => this.$post()?.comments);
-  $totalComments = computed(() => this.$post()?.comments.length);
+  $comments = signal<EpisodeComment[] | null>(null);
+  $totalComments = signal<number>(0);
   $isAdmin = computed(() => this.authService.user()?.role === Role.Admin);
-
-  role = Role.Admin;
 
   onDisableComments() {
     console.log('me deshabilito');
@@ -55,6 +53,24 @@ export class CommentListComponent {
       return this.commentService
         .getPostByEpisodeId(request.episodeId)
         .pipe(tap((post) => this.$post.set(post)));
+    },
+  });
+
+  commentResource = rxResource({
+    request: () => {
+      return {
+        postId: this.$post()?.id,
+      };
+    },
+    loader: ({ request }) => {
+      if (!request.postId) return of(null);
+
+      return this.commentService.getAllCommentsByPostId(request.postId).pipe(
+        tap((res) => {
+          this.$comments.set(res.comments);
+          this.$totalComments.set(res.totalComments);
+        })
+      );
     },
   });
 

@@ -1,8 +1,11 @@
 export interface EpisodeComment {
   id: string;
   content: string;
-  idUser: string;
-  userName: string;
-  avatarUrl?: string;
-  createdAt?: string;
+  postId: string;
+  createdAt: string;
+  author: {
+    name: string;
+    userId: string;
+    avatarUrl: string;
+  };
 }

@@ -4,13 +4,13 @@
     [$postId]="$postId()!"
     [$user]="$user()"
     [$commentToUpdate]="$comment()"
-    ($commentUpdated)="(onCommentUpdated($event))"
+    ($commentUpdated)="onCommentUpdated($event)"
     ($editCanceled)="$isEditMode.set(false)"
     editMode
   />
   } @else {
   <img
-    [src]="$comment().avatarUrl | avatarFallback"
+    [src]="$comment().author.avatarUrl | avatarFallback"
     alt="Avatar"
     class="rounded-circle me-2"
     width="40"
@@ -20,7 +20,7 @@
   <div class="flex-grow-1 position-relative">
     <div class="d-flex justify-content-between align-items-start">
       <div>
-        <span class="fw-semibold">{{ $comment().userName }}</span>
+        <span class="fw-semibold">{{ $comment().author.avatarUrl }}</span>
         <!-- <span class="text-muted small ms-1">hace 40 minutos</span> -->
       </div>
 

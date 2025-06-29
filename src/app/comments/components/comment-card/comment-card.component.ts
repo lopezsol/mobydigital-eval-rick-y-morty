@@ -4,7 +4,7 @@ import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 import { DropdownComponent } from '@shared/components/dropdown/dropdown.component';
 import type { User } from '@auth/interfaces/user.interface';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
-import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface copy';
+import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
 import { CommentFormComponent } from '../comment-form/comment-form.component';
 
 @Component({
@@ -27,7 +27,7 @@ export class CommentCardComponent {
   commentDropdown = CommentDropdown;
 
   isCommentAuthor(): boolean {
-    if (this.$user().id === this.$comment().idUser) return true;
+    if (this.$user().id === this.$comment().author.userId) return true;
     return false;
   }
 

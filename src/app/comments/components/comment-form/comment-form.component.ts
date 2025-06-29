@@ -18,7 +18,7 @@ import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { AvatarFallbackPipe } from '@shared/pipes/avatar-fallback.pipe';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
 import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
-import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface copy';
+import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
 import type { User } from '@auth/interfaces/user.interface';
 
 @Component({
@@ -111,9 +111,7 @@ export class CommentFormComponent {
   buildCreateCommentDto(content: string): CreateCommentDto {
     const newComment: CreateCommentDto = {
       content,
-      idUser: this.$user().id,
-      userName: this.$user().name,
-      avatarUrl: this.$user().avatarUrl,
+      postId: this.$postId(),
     };
     return newComment;
   }

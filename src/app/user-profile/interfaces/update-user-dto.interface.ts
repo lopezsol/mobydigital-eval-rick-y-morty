@@ -6,6 +6,6 @@ export interface UpdateUserDto {
   address?: Address;
   birthday?: Date;
   nickname?: string;
-  favoriteEpisodes?: string[];
+  favoriteEpisodes?: number[];
   avatarUrl?: string;
 }
