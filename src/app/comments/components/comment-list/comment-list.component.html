@@ -18,7 +18,7 @@
     </p>
     } @else {
     <comment-form
-      ($commentCreated)="$postRefreshTrigger.set($event)"
+      ($commentCreated)="$commentRefreshTrigger.set(true)"
       [$user]="authService.user()!"
       [$postId]="$post()?.id!"
     />}
@@ -30,11 +30,13 @@
       [$user]="authService.user()!"
       [$postId]="$post()?.id!"
       ($commentToDelete)="$commentIdToDelete.set($event)"
-      ($commentUpdated)="$postRefreshTrigger.set($event)"
-
+      ($commentUpdated)="$commentRefreshTrigger.set(true)"
     />
     } @empty {
+    <!--  -->
+    @if ($post()?.enabled) {
     <p>No comments yet. Be the first to share your thoughts!</p>
-    }
+
+    } }
   </div>
 </section>

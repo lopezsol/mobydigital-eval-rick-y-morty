@@ -11,7 +11,7 @@ import { DropdownComponent } from '@shared/components/dropdown/dropdown.componen
 import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
 import type { Post } from '@comments/interfaces/post.interface';
-import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
+
 @Component({
   selector: 'comment-list',
   imports: [CommentCardComponent, CommentFormComponent, DropdownComponent],
@@ -23,7 +23,7 @@ export class CommentListComponent {
   authService = inject(AuthService);
   commentDropdown = CommentDropdown;
 
-  $postRefreshTrigger = signal<EpisodeComment | null>(null);
+  $commentRefreshTrigger = signal<boolean | null>(null);
   $commentIdToDelete = signal<string | null>(null);
   $postEnabledStatusToUpdate = signal<boolean | null>(null);
 
@@ -37,14 +37,17 @@ export class CommentListComponent {
 
   onDisableComments() {
     console.log('me deshabilito');
-    this.$postEnabledStatusToUpdate.update((current) => !current);
+    this.$postEnabledStatusToUpdate.set(!this.$post()?.enabled);
+    console.log(
+      'postEnabledStatusToUpdate: ',
+      this.$postEnabledStatusToUpdate()
+    );
   }
 
   postResource = rxResource({
     request: () => {
       return {
         episodeId: this.$episodeId(),
-        refresh: this.$postRefreshTrigger(),
       };
     },
     loader: ({ request }) => {
@@ -60,16 +63,19 @@ export class CommentListComponent {
     request: () => {
       return {
         postId: this.$post()?.id,
+        refresh: this.$commentRefreshTrigger(),
       };
     },
     loader: ({ request }) => {
       if (!request.postId) return of(null);
+      if (request.refresh === false) return of(null);
 
       return this.commentService.getAllCommentsByPostId(request.postId).pipe(
         tap((res) => {
           this.$comments.set(res.comments);
           this.$totalComments.set(res.totalComments);
-        })
+        }),
+        tap(() => this.$commentRefreshTrigger.set(false))
       );
     },
   });
@@ -81,12 +87,24 @@ export class CommentListComponent {
       };
     },
     loader: ({ request }) => {
-      if (!request.enabled) return of(null);
+      console.log('entre?');
 
-      return this.commentService.updatePostEnabledStatus(
-        this.$post()?.id!,
-        request.enabled
-      );
+      if (request.enabled === null) return of(null);
+
+      console.log(request.enabled);
+      return this.commentService
+        .updatePostEnabledStatus(this.$post()?.id!, request.enabled)
+        .pipe(
+          tap(() =>
+            this.$post.update((current) => {
+              if (!current) return current;
+              return {
+                ...current,
+                enabled: request.enabled!,
+              };
+            })
+          )
+        );
     },
   });
 
@@ -99,10 +117,9 @@ export class CommentListComponent {
         return of(null);
       }
 
-      return this.commentService.deleteComment(
-        this.$post()?.id!,
-        this.$commentIdToDelete()!
-      );
+      return this.commentService
+        .deleteComment(request.commentIdToDelete)
+        .pipe(tap(() => this.$commentRefreshTrigger.set(true)));
     },
   });
 }

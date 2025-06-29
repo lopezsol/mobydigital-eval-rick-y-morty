@@ -20,7 +20,7 @@ export class CommentCardComponent {
   $postId = input.required<string>();
 
   $commentToDelete = output<string>();
-  $commentUpdated = output<EpisodeComment>();
+  $commentUpdated = output();
   
   $isEditMode = signal<boolean>(false);
 
@@ -39,9 +39,9 @@ export class CommentCardComponent {
     console.log('me edito');
     this.$isEditMode.set(true);
   }
-  onCommentUpdated(comment: EpisodeComment) {
+  onCommentUpdated() {
     console.log('ya me edite');
-    this.$commentUpdated.emit(comment);
+    this.$commentUpdated.emit();
     this.$isEditMode.set(false);
   }
 

@@ -46,8 +46,8 @@ export class CommentFormComponent {
     alias: 'editMode',
   });
 
-  $commentCreated = output<EpisodeComment>();
-  $commentUpdated = output<EpisodeComment>();
+  $commentCreated = output();
+  $commentUpdated = output();
   $editCanceled = output();
 
   $createComment = signal<CreateCommentDto | null>(null);
@@ -133,8 +133,8 @@ export class CommentFormComponent {
       if (!request.comment) return of(null);
 
       return this.commentService
-        .createComment(this.$postId(), request.comment)
-        .pipe(tap((comment) => this.$commentCreated.emit(comment)));
+        .createComment(this.$postId(), request.comment.content)
+        .pipe(tap(() => this.$commentCreated.emit()));
     },
   });
 
@@ -146,8 +146,8 @@ export class CommentFormComponent {
       if (!request.comment) return of(null);
 
       return this.commentService
-        .editComment(this.$postId(), request.comment)
-        .pipe(tap((comment) => this.$commentUpdated.emit(comment)));
+        .editComment(request.comment.id, request.comment.content)
+        .pipe(tap(() => this.$commentUpdated.emit()));
     },
   });
 }

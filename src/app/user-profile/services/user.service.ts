@@ -17,16 +17,25 @@ export class UserService {
   private authService = inject(AuthService);
   private _token = this.authService.token() || '';
 
-  update(
-    user: UpdateUserDto
-  ): Observable<UpdateUserResponse> {
+  update(user: UpdateUserDto): Observable<UpdateUserResponse> {
     console.log('token: ', this._token);
 
     const headers = new HttpHeaders({
       'auth-token': this._token,
     });
+
+    //TODO: revisar que version es mejor
+    // const token = this.authService.token();
+
+    // const headers = new HttpHeaders({
+    //   'auth-token': token ?? '',
+    // });
     return this.http
-      .put<UpdateUserResponse>(`${apiUrl}/user/update`, { ...user }, { headers })
+      .put<UpdateUserResponse>(
+        `${apiUrl}/user/update`,
+        { ...user },
+        { headers }
+      )
       .pipe(
         catchError((error: any) => {
           const message =
