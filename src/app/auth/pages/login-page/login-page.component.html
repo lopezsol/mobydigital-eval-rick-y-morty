@@ -3,7 +3,7 @@
 >
   @if($authResource.isLoading()){
   <app-loader />
-  } 
+  }
 
   <div class="row w-100">
     <div
@@ -57,12 +57,21 @@
       </form>
     </div>
   </div>
-  
+
   <!--  -->
-  @if($hasError() || $authResource.error()) {
+  <!-- @if($hasError() || $authResource.error()) { -->
+  @if($hasError()) {
+
   <error-alert
-    [$errorMessage]="'Por favor revise la información ingresada.'"
+    [$errorMessage]="'Please check your credentials and try again.'"
     ($hideAlert)="$hasError.set(false)"
+  />
+  } 
+  <!--  -->
+  @if(errorService.$errorMessage()) {
+  <error-alert
+    [$errorMessage]="errorService.$errorMessage()!"
+    ($hideAlert)="errorService.clearError()"
   />
   }
 </section>
