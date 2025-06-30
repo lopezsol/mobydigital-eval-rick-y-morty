@@ -5,6 +5,7 @@
     />
     <user-favorite-episodes
       [$favoriteEpisodes]="$favoriteEpisodesResource.value() || []"
+      ($favoriteEpisodeToDelete)="$favoriteEpisodeDeleted.set($event)"
     />
   </div>
 </section>
