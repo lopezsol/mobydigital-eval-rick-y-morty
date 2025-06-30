@@ -1,5 +1,9 @@
 <section>
   @for (episode of $episodes(); track episode.id) {
-  <episode-card [$episode]="episode" />
+  <episode-card
+    [$episode]="episode"
+    ($userToUpdate)="$userToUpdate.emit($event)"
+    [$user]="$user()"
+  />
   }
 </section>

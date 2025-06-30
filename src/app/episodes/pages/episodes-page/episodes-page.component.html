@@ -11,7 +11,11 @@
 
   <!--  -->
   @if( $episodeResource.hasValue()) {
-  <episodes-list [$episodes]="$episodeResource.value().episodes"/>
+  <episodes-list
+    [$episodes]="$episodeResource.value().episodes"
+    [$user]="authService.user()!"
+    ($userToUpdate)="$userUpdated.set($event)"
+  />
   <app-pagination
     [$infoPagination]="$episodeResource.value()!.info"
     [$currentPage]="$page()"

@@ -12,7 +12,11 @@
   <!--  -->
   @if( $episodeResource.hasValue()) {
   <div class="container my-3 mx-3 episode-details">
-    <episode-info [$episode]="$episodeResource.value()" />
+    <episode-info
+      [$episode]="$episodeResource.value()"
+      ($userToUpdate)="$userUpdated.set($event)"
+      [$user]="authService.user()!"
+    />
     <episode-characters-list
       [$characters]="$episodeResource.value().characters"
     />

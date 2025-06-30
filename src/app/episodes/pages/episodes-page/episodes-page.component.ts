@@ -1,11 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { of, tap } from 'rxjs';
+import { AuthService } from '@auth/services/auth.service';
 import { EpisodesListComponent } from '@episodes/components/episodes-list/episodes-list.component';
 import { EpisodeService } from '@episodes/services/episode.service';
 import { ErrorComponent } from '@shared/components/error/error.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { PaginationComponent } from '@shared/components/pagination/pagination.component';
 import { SearchComponent } from '@shared/components/search/search.component';
+import { UserService } from '@user/services/user.service';
+import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
 
 @Component({
   selector: 'episodes-page',
@@ -14,15 +18,20 @@ import { SearchComponent } from '@shared/components/search/search.component';
     ErrorComponent,
     PaginationComponent,
     SearchComponent,
-    EpisodesListComponent
-],
+    EpisodesListComponent,
+  ],
   templateUrl: './episodes-page.component.html',
   styleUrl: './episodes-page.component.css',
 })
 export class EpisodesPageComponent {
   episodeService = inject(EpisodeService);
+  userService = inject(UserService);
+  authService = inject(AuthService);
+
   $page = signal<number>(1);
   $query = signal<string>('');
+  $favoriteEpisode = signal<number | null>(null);
+  $userUpdated = signal<UpdateUserDto | null>(null);
 
   $episodeResource = rxResource({
     request: () => ({ page: this.$page(), query: this.$query() }),
@@ -45,4 +54,16 @@ export class EpisodesPageComponent {
     this.$query.set(query);
     this.$page.set(1);
   }
+
+  favoriteEpisodeResource = rxResource({
+    request: () => ({ user: this.$userUpdated() }),
+    loader: ({ request }) => {
+      console.log('entre en reouserce');
+      if (!request.user) return of(null);
+
+      return this.userService
+        .updateFavoriteEpisodes(request.user)
+        .pipe(tap((resp) => this.authService.updateUser(resp.data.user)));
+    },
+  });
 }

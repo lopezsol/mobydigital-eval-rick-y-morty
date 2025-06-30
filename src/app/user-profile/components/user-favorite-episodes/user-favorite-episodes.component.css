@@ -10,9 +10,24 @@ div {
   padding: 24px;
   border-radius: 8px;
   background-color: var(--color-detail-card);
+  height: 100%;
 }
-
+.card {
+  height: 100%;
+}
 .card-body {
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
+}
+
+.episode-line {
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+button {
+  border: none;
+  color: white;
+  width: fit-content;
 }
