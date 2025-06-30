@@ -24,7 +24,7 @@
       </li>
     </ng-container>
     }
-
+    <!--  -->
     @if ($type() === comentDropdown.AdminComment) {
     <ng-container>
       <li>
@@ -35,13 +35,16 @@
       </li>
     </ng-container>
     }
-
+    <!--  -->
     @if ($type() === comentDropdown.AdminPost) {
     <ng-container>
       <li>
         <button class="dropdown-item" (click)="$disableComments.emit()">
+          @if ($isPostEnabled()) {
           <i class="bi bi-slash-circle me-2"></i>
-          Disable comments
+          Disable comments } @else {
+          <i class="bi bi-check-circle me-2"></i>
+          Enable comments }
         </button>
       </li>
     </ng-container>

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { booleanAttribute, Component, input, output } from '@angular/core';
 import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 
 @Component({
@@ -9,6 +9,7 @@ import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 })
 export class DropdownComponent {
   $type = input.required<CommentDropdown>();
+  $isPostEnabled = input<boolean>();
   $edit = output<void>();
   $delete = output<void>();
   $disableComments = output<void>();

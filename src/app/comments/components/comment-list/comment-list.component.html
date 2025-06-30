@@ -5,6 +5,7 @@
     @if ($isAdmin()) {
     <app-dropdown
       [$type]="commentDropdown.AdminPost"
+      [$isPostEnabled]="$post()?.enabled"
       ($disableComments)="onDisableComments()"
     />
     }
