@@ -40,4 +40,29 @@ export class UserService {
         })
       );
   }
+
+  updateFavoriteEpisodes(user: UpdateUserDto) {
+    const token = this.authService.token();
+
+    const headers = new HttpHeaders({
+      'auth-token': token ?? '',
+    });
+
+    console.log(user);
+    return this.http
+      .put<UpdateUserResponse>(
+        `${apiUrl}/user/update`,
+        { ...user },
+        { headers }
+      )
+      .pipe(
+        catchError((error: any) => {
+          const message =
+            error?.error?.header?.error ??
+            'Error desconocido al actualizar los datos del usuario';
+          console.error(error);
+          return throwError(() => new Error(message));
+        })
+      );
+  }
 }

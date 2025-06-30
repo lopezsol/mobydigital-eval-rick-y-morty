@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { EpisodeCardComponent } from '../episode-card/episode-card.component';
 import type { Episode } from '@episodes/interfaces/episode.interface';
 
@@ -10,4 +10,6 @@ import type { Episode } from '@episodes/interfaces/episode.interface';
 })
 export class EpisodesListComponent {
   $episodes = input.required<Episode[]>();
+  $favoriteToggled = output<number>();
+  $favoriteEpisodes = input.required<number[]>()
 }

@@ -172,7 +172,6 @@ export class UserFormComponent {
 
     const updatedUser: UpdateUserDto = {
       id: this.$user().id,
-      name: this.$user().name,
       birthday: parsedBirthday,
       nickname: parsedNickname!,
       avatarUrl: avatarUrl!,

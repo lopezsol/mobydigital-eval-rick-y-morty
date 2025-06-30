@@ -1,5 +1,9 @@
 <section>
   @for (episode of $episodes(); track episode.id) {
-  <episode-card [$episode]="episode" />
+  <episode-card
+    [$episode]="episode"
+    ($favoriteToggled)="$favoriteToggled.emit($event)"
+    [$favoriteEpisodes]="$favoriteEpisodes()"
+  />
   }
 </section>
