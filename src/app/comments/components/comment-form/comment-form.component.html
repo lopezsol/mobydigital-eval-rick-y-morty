@@ -1,8 +1,17 @@
-@if (createCommentResource.isLoading()) {
+@if (createCommentResource.isLoading() || updateCommentResource.isLoading()) {
 <app-loader />
-} @if(createCommentResource.error()){
+}
+<!--  -->
+@if(createCommentResource.error()){
 <snackbar-error
   snackbarMessage="We couldn't post your comment. Please try again"
+/>
+}
+
+<!--  -->
+@if(updateCommentResource.error()){
+<snackbar-error
+  snackbarMessage="We couldn't update your comment. Please try again"
 />
 }
 <form (ngSubmit)="onSubmit()" [formGroup]="commentForm" class="comment-form">

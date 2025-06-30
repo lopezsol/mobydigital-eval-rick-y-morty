@@ -16,7 +16,6 @@ import { CommentService } from '@comments/services/comment.service';
 import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackbar-error.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { AvatarFallbackPipe } from '@shared/pipes/avatar-fallback.pipe';
-import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
 import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
 import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
 import type { User } from '@auth/interfaces/user.interface';
@@ -97,9 +96,6 @@ export class CommentFormComponent {
       const newComment: CreateCommentDto = this.buildCreateCommentDto(content);
       this.$createComment.set(newComment!);
     }
-
-    this.commentForm.reset();
-    this.$focused.set(false);
   }
 
   onCancel() {
@@ -134,7 +130,13 @@ export class CommentFormComponent {
 
       return this.commentService
         .createComment(this.$postId(), request.comment.content)
-        .pipe(tap(() => this.$commentCreated.emit()));
+        .pipe(
+          tap(() => {
+            this.$commentCreated.emit();
+            this.commentForm.reset();
+            this.$focused.set(false);
+          })
+        );
     },
   });
 
@@ -147,7 +149,13 @@ export class CommentFormComponent {
 
       return this.commentService
         .editComment(request.comment.id, request.comment.content)
-        .pipe(tap(() => this.$commentUpdated.emit()));
+        .pipe(
+          tap(() => {
+            this.$commentUpdated.emit();
+            this.commentForm.reset();
+            this.$focused.set(false);
+          })
+        );
     },
   });
 }

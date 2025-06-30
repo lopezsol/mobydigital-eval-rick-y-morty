@@ -36,12 +36,7 @@ export class CommentListComponent {
   $isAdmin = computed(() => this.authService.user()?.role === Role.Admin);
 
   onDisableComments() {
-    console.log('me deshabilito');
     this.$postEnabledStatusToUpdate.set(!this.$post()?.enabled);
-    console.log(
-      'postEnabledStatusToUpdate: ',
-      this.$postEnabledStatusToUpdate()
-    );
   }
 
   postResource = rxResource({
