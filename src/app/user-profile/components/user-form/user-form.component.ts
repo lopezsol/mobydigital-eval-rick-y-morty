@@ -2,7 +2,7 @@ import { Component, inject, input, output, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormUtils } from 'src/app/utils/form-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { of, tap } from 'rxjs';
+import { map, of, tap } from 'rxjs';
 import { UserService } from '@user/services/user.service';
 import { AuthService } from '@auth/services/auth.service';
 import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
@@ -11,7 +11,7 @@ import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackb
 import type { UpdateUserResponse } from '@user/interfaces/update-user-response.interface';
 import type { User } from '@auth/interfaces/user.interface';
 import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
-import { Address } from '@auth/interfaces/adress.interface';
+import type { Address } from '@auth/interfaces/adress.interface';
 
 @Component({
   selector: 'user-form',
@@ -57,7 +57,7 @@ export class UserFormComponent {
     location: ['', [Validators.maxLength(50)]],
     country: ['', [Validators.maxLength(50)]],
     zip: ['', [Validators.minLength(4), Validators.maxLength(4)]],
-    avatarUrl: ['', [Validators.maxLength(100)]],
+    avatarUrl: ['', [Validators.maxLength(2048)]],
   });
 
   countries: string[] = [
@@ -159,7 +159,7 @@ export class UserFormComponent {
     } = this.profileForm.value;
 
     const parsedBirthday = birthday ? new Date(birthday) : undefined;
-
+    const parsedNickname = nickname || undefined;
     const address = street
       ? {
           street: street!,
@@ -174,8 +174,8 @@ export class UserFormComponent {
       id: this.$user().id,
       name: this.$user().name,
       birthday: parsedBirthday,
-      // nickname: nickname!, TODO: agregarlos cuando haga mi be
-      // avatarUrl: avatarUrl!,
+      nickname: parsedNickname!,
+      avatarUrl: avatarUrl!,
       address: address,
     };
     return updatedUser;
@@ -187,7 +187,7 @@ export class UserFormComponent {
       if (!request.user) return of({} as UpdateUserResponse);
 
       return this.userService.update(request.user).pipe(
-        tap((userResponse) => this.authService.updateUser(userResponse.user)),
+        tap((res) => this.authService.updateUser(res.data.user)),
         tap(() => this.$isEditMode.emit(false))
       );
     },
