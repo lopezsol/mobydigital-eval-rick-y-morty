@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  color: var(--color-text-gray);
+  
+}
+
+.container {
+  padding: 24px;
+}
+
+div {
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -1,0 +1,53 @@
+<div class="dropdown">
+  <button
+    class="btn btn-sm text-secondary"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <i class="bi bi-three-dots-vertical"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    @if ($type() === comentDropdown.UserOwn) {
+    <ng-container>
+      <li>
+        <button class="dropdown-item" (click)="$edit.emit()">
+          <i class="bi bi-pencil me-2"></i>
+          Edit
+        </button>
+      </li>
+      <li>
+        <button class="dropdown-item" (click)="$delete.emit()">
+          <i class="bi bi-trash me-2"></i>
+          Delete
+        </button>
+      </li>
+    </ng-container>
+    }
+    <!--  -->
+    @if ($type() === comentDropdown.AdminComment) {
+    <ng-container>
+      <li>
+        <button class="dropdown-item" (click)="$delete.emit()">
+          <i class="bi bi-trash me-2"></i>
+          Delete
+        </button>
+      </li>
+    </ng-container>
+    }
+    <!--  -->
+    @if ($type() === comentDropdown.AdminPost) {
+    <ng-container>
+      <li>
+        <button class="dropdown-item" (click)="$disableComments.emit()">
+          @if ($isPostEnabled()) {
+          <i class="bi bi-slash-circle me-2"></i>
+          Disable comments } @else {
+          <i class="bi bi-check-circle me-2"></i>
+          Enable comments }
+        </button>
+      </li>
+    </ng-container>
+    }
+  </ul>
+</div>

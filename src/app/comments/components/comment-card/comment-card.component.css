@@ -1,0 +1,7 @@
+img.rounded-circle {
+  object-fit: cover;
+}
+
+.dropdown-menu {
+  min-width: 120px;
+}

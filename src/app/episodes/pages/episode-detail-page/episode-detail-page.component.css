@@ -1,8 +1,12 @@
 section {
   min-height: calc(100vh - 56px);
   background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-div {
+.episode-details {
   display: grid;
   grid-template-columns: 1fr;
   grid-row: 1fr 1fr;
@@ -15,7 +19,7 @@ div {
 }
 
 @media (width > 768px) {
-  div {
+  .episode-details {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
   }

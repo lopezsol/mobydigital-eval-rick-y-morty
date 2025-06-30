@@ -1,0 +1,51 @@
+@if ($isEditMode()) {
+
+  <comment-form
+    [$postId]="$postId()!"
+    [$user]="$user()"
+    [$commentToUpdate]="$comment()"
+    ($commentUpdated)="onCommentUpdated()"
+    ($editCanceled)="$isEditMode.set(false)"
+    editMode
+  />
+
+}
+<!--  -->
+@else {
+<div class="d-flex align-items-start mb-3">
+  <img
+    [src]="$comment().author.avatarUrl | avatarFallback"
+    alt="Avatar"
+    class="rounded-circle me-3 mt-1"
+    width="40"
+    height="40"
+  />
+
+  <div class="flex-grow-1">
+    <div class="d-flex align-items-start">
+      <div class="me-auto">
+        <span class="fw-semibold d-block">{{
+          $comment().author.name
+        }}</span>
+        <p class="mb-1 text-break">{{ $comment().content }}</p>
+      </div>
+
+      <div class="ms-2">
+        @if ($isAdmin()) {
+        <app-dropdown
+          [$type]="commentDropdown.AdminComment"
+          ($delete)="onDelete()"
+        />
+        } @else if (isCommentAuthor()) {
+        <app-dropdown
+          [$type]="commentDropdown.UserOwn"
+          ($edit)="onEdit()"
+          ($delete)="onDelete()"
+        />
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+}

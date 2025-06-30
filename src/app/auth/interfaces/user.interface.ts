@@ -9,6 +9,6 @@ export interface User {
   birthday?: Date;
   phone?: string;
   nickname?: string;
-  favoriteEpisodes?: string[],
-  profilePictureUrl?: string
+  favoriteEpisodes?: number[],
+  avatarUrl?: string
 }

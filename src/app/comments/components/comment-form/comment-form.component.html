@@ -1,0 +1,49 @@
+@if (createCommentResource.isLoading() || updateCommentResource.isLoading()) {
+<app-loader />
+}
+<!--  -->
+@if(createCommentResource.error()){
+<snackbar-error
+  snackbarMessage="We couldn't post your comment. Please try again"
+/>
+}
+
+<!--  -->
+@if(updateCommentResource.error()){
+<snackbar-error
+  snackbarMessage="We couldn't update your comment. Please try again"
+/>
+}
+<form (ngSubmit)="onSubmit()" [formGroup]="commentForm" class="comment-form">
+  <img
+    [src]="$user().avatarUrl | avatarFallback"
+    alt="User avatar"
+    class="avatar rounded-circle me-2"
+    width="40"
+    height="40"
+  />
+
+  <div class="w-100">
+    <input
+      formControlName="content"
+      placeholder="Add a comment..."
+      #contentInput
+      (focus)="this.$focused.set(true)"
+    />
+
+    @if (this.$focused() ) {
+    <div class="action-buttons mt-3">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="commentForm.invalid"
+      >
+        @if ($isEditMode()) { Save } @else {Comment}
+      </button>
+    </div>
+    }
+  </div>
+</form>

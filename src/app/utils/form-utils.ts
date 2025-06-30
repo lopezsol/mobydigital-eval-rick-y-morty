@@ -22,6 +22,11 @@ export class FormUtils {
           return `This email is already in use`;
         case 'futureDate':
           return 'Date cannot be in the future';
+        case 'minTrimmedLength':
+          return `Minimum of ${errors['minTrimmedLength'].requiredLength} characters`;
+        case 'whitespace':
+          return 'The title is empty';
+
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
             return 'The value does not look like a valid email address';
@@ -79,5 +84,26 @@ export class FormUtils {
     const todayStr = today.toISOString().split('T')[0];
 
     return inputDateStr > todayStr ? { futureDate: true } : null;
+  }
+
+  static noWhitespaceValidator(
+    control: AbstractControl
+  ): ValidationErrors | null {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    return isWhitespace ? { whitespace: true } : null;
+  }
+
+  static minTrimmedLength(min: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const trimmed = control.value?.trim();
+      if (trimmed?.length < min) {
+        return {
+          minTrimmedLength: {
+            requiredLength: min,
+          },
+        };
+      }
+      return null;
+    };
   }
 }

@@ -22,12 +22,12 @@ export default class UserProfilePageComponent {
   $isEditMode = signal(false);
 
   $favoriteEpisodesResource = rxResource({
-    request: () => ({ urls: this.$favoriteEpisodes() }),
+    request: () => ({ ids: this.$favoriteEpisodes() }),
     loader: ({ request }) => {
-      if (!request.urls) return of([]);
+      if (!request.ids) return of([]);
 
       return forkJoin(
-        request.urls.map((url) => this.episodeService.getEpisodeByUrl(url))
+        request.ids.map((id) => this.episodeService.getEpisodeById(id))
       );
     },
   });
