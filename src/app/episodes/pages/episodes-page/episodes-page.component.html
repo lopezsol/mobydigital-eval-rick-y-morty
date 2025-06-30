@@ -13,8 +13,8 @@
   @if( $episodeResource.hasValue()) {
   <episodes-list
     [$episodes]="$episodeResource.value().episodes"
-    ($favoriteToggled)="$favoriteEpisode.set($event)"
-    [$favoriteEpisodes]="authService.user()?.favoriteEpisodes || []"
+    [$user]="authService.user()!"
+    ($userToUpdate)="$userUpdated.set($event)"
   />
   <app-pagination
     [$infoPagination]="$episodeResource.value()!.info"

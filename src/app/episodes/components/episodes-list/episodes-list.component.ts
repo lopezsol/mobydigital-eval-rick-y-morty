@@ -1,6 +1,8 @@
 import { Component, input, output } from '@angular/core';
 import { EpisodeCardComponent } from '../episode-card/episode-card.component';
 import type { Episode } from '@episodes/interfaces/episode.interface';
+import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
+import type { User } from '@auth/interfaces/user.interface';
 
 @Component({
   selector: 'episodes-list',
@@ -10,6 +12,6 @@ import type { Episode } from '@episodes/interfaces/episode.interface';
 })
 export class EpisodesListComponent {
   $episodes = input.required<Episode[]>();
-  $favoriteToggled = output<number>();
-  $favoriteEpisodes = input.required<number[]>()
+  $user = input.required<User>()
+  $userToUpdate = output<UpdateUserDto>();
 }

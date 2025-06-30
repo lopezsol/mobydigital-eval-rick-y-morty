@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { of, tap } from 'rxjs';
 import { AuthService } from '@auth/services/auth.service';
 import { EpisodesListComponent } from '@episodes/components/episodes-list/episodes-list.component';
 import { EpisodeService } from '@episodes/services/episode.service';
@@ -8,7 +9,7 @@ import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { PaginationComponent } from '@shared/components/pagination/pagination.component';
 import { SearchComponent } from '@shared/components/search/search.component';
 import { UserService } from '@user/services/user.service';
-import { of, tap } from 'rxjs';
+import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
 
 @Component({
   selector: 'episodes-page',
@@ -30,6 +31,7 @@ export class EpisodesPageComponent {
   $page = signal<number>(1);
   $query = signal<string>('');
   $favoriteEpisode = signal<number | null>(null);
+  $userUpdated = signal<UpdateUserDto | null>(null);
 
   $episodeResource = rxResource({
     request: () => ({ page: this.$page(), query: this.$query() }),
@@ -54,20 +56,13 @@ export class EpisodesPageComponent {
   }
 
   favoriteEpisodeResource = rxResource({
-    request: () => ({ favoriteEpisode: this.$favoriteEpisode() }),
+    request: () => ({ user: this.$userUpdated() }),
     loader: ({ request }) => {
       console.log('entre en reouserce');
-      if (!request.favoriteEpisode) return of(null);
-      console.log('pase');
-      console.log(this.authService.user());
+      if (!request.user) return of(null);
+
       return this.userService
-        .updateFavoriteEpisodes({
-          id: this.authService.user()?.id!,
-          favoriteEpisodes: [
-            ...(this.authService.user()?.favoriteEpisodes ?? []),
-            request.favoriteEpisode,
-          ],
-        })
+        .updateFavoriteEpisodes(request.user)
         .pipe(tap((resp) => this.authService.updateUser(resp.data.user)));
     },
   });
