@@ -134,7 +134,7 @@ export class UserFormComponent {
       case 'country':
       case 'city':
       case 'location':
-      case 'state':
+      case 'street':
         return [Validators.maxLength(50)];
       case 'zip':
         return [Validators.minLength(4), Validators.maxLength(4)];
