@@ -1,5 +1,6 @@
 img.rounded-circle {
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .dropdown-menu {

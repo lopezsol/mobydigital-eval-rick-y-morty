@@ -6,11 +6,11 @@
   <!--  -->
   @else {
   <div class="card gap-4 border border-0">
-    <img
-      [src]="$user().avatarUrl | avatarFallback"
-      class="card-img-top"
-      [alt]="'Profile picture ' + $user().name"
-    />
+      <img
+        [src]="$user().avatarUrl | avatarFallback"
+        [alt]="'Profile picture ' + $user().name"
+        class="avatar-img"
+      />
     <div class="card-body text-white">
       <div class="row">
         <h5 class="card-title">User Info</h5>
