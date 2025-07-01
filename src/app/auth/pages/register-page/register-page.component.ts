@@ -4,9 +4,9 @@ import { Router, RouterLink } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FormUtils } from 'src/app/utils/form-utils';
 import { catchError, of, tap } from 'rxjs';
-import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
 import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { ErrorMessageFormComponent } from '@shared/components/error-message-form/error-message-form.component';
 import { AuthService } from '@auth/services/auth.service';
 import type { Address } from '@auth/interfaces/adress.interface';
 import type { RegisterUserDto } from '@auth/interfaces/register-user-dto.interface';
@@ -16,9 +16,9 @@ import type { RegisterUserDto } from '@auth/interfaces/register-user-dto.interfa
   imports: [
     ReactiveFormsModule,
     RouterLink,
-    ErrorMessageComponent,
     ErrorAlertComponent,
     LoaderComponent,
+    ErrorMessageFormComponent,
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css',

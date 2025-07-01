@@ -5,9 +5,9 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { map, of, tap } from 'rxjs';
 import { UserService } from '@user/services/user.service';
 import { AuthService } from '@auth/services/auth.service';
-import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackbar-error.component';
+import { ErrorMessageFormComponent } from '@shared/components/error-message-form/error-message-form.component';
 import type { UpdateUserResponse } from '@user/interfaces/update-user-response.interface';
 import type { User } from '@auth/interfaces/user.interface';
 import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
@@ -17,9 +17,9 @@ import type { Address } from '@auth/interfaces/adress.interface';
   selector: 'user-form',
   imports: [
     ReactiveFormsModule,
-    ErrorMessageComponent,
     LoaderComponent,
     SnackbarErrorComponent,
+    ErrorMessageFormComponent,
   ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
