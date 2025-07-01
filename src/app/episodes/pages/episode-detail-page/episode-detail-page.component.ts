@@ -5,6 +5,7 @@ import { map, of, tap } from 'rxjs';
 import { EpisodeService } from '@episodes/services/episode.service';
 import { ErrorComponent } from '@shared/components/error/error.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { EpisodeInfoComponent } from '@episodes/components/episode-info/episode-info.component';
 import { EpisodeCharactersListComponent } from '@episodes/components/episode-characters-list/episode-characters-list.component';
 import { CommentListComponent } from '@comments/components/comment-list/comment-list.component';
@@ -21,7 +22,8 @@ import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
     EpisodeInfoComponent,
     EpisodeCharactersListComponent,
     CommentListComponent,
-  ],
+    BreadcrumbComponent
+],
   templateUrl: './episode-detail-page.component.html',
   styleUrl: './episode-detail-page.component.css',
 })
