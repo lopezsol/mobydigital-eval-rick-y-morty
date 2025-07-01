@@ -3,8 +3,8 @@ import { AvatarFallbackPipe } from '@shared/pipes/avatar-fallback.pipe';
 import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
 import { DropdownComponent } from '@shared/components/dropdown/dropdown.component';
 import type { User } from '@auth/interfaces/user.interface';
-import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
-import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
+import type { EpisodeComment } from '@comments/interfaces/comment/comment.interface';
+import type { UpdateCommentDto } from '@comments/interfaces/comment/update-comment-dto.interface';
 import { CommentFormComponent } from '../comment-form/comment-form.component';
 
 @Component({
@@ -32,15 +32,12 @@ export class CommentCardComponent {
   }
 
   onDelete() {
-    console.log('me borro');
     this.$commentToDelete.emit(this.$comment().id);
   }
   onEdit() {
-    console.log('me edito');
     this.$isEditMode.set(true);
   }
   onCommentUpdated() {
-    console.log('ya me edite');
     this.$commentUpdated.emit();
     this.$isEditMode.set(false);
   }

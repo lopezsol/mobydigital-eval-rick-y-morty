@@ -23,7 +23,6 @@ export class UserService {
       'auth-token': token ?? '',
     });
 
-    console.log(user);
     return this.http
       .put<UpdateUserResponse>(
         `${apiUrl}/user/update`,
@@ -48,7 +47,6 @@ export class UserService {
       'auth-token': token ?? '',
     });
 
-    console.log(user);
     return this.http
       .put<UpdateUserResponse>(
         `${apiUrl}/user/update`,

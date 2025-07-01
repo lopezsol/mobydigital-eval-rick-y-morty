@@ -1,4 +1,4 @@
-import type { EpisodeComment } from './episode-comment.interface';
+import type { EpisodeComment } from './comment/comment.interface';
 
 export interface Post {
   id: string;

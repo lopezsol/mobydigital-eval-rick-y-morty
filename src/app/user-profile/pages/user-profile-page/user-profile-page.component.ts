@@ -49,7 +49,6 @@ export default class UserProfilePageComponent {
   deletefavoriteEpisodeResource = rxResource({
     request: () => ({ episodeId: this.$favoriteEpisodeDeleted() }),
     loader: ({ request }) => {
-      console.log('entre en reouserce');
       if (!request.episodeId) return of(null);
 
       const favoriteEpisodes = this.authService
