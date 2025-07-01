@@ -28,3 +28,9 @@ select.form-select {
 ::placeholder {
   color: var(--color-placeholder);
 }
+
+.close {
+  border: none;
+  color: white;
+  width: fit-content;
+}
