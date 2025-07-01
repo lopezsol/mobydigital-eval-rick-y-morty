@@ -11,6 +11,11 @@
 
   <!--  -->
   @if( $characterResource.hasValue()) {
+  <app-breadcrumb
+    [$extraLabel]="$characterResource.value().name"
+    class="mt-4 container"
+  />
+
   <div class="container py-3">
     <character-info [$character]="$characterResource.value()" />
     <character-episodes [$episodes]="$characterResource.value().episode" />

@@ -29,17 +29,27 @@ export class BreadcrumbComponent {
   }
 
   private buildBreadcrumbs(): void {
-    const pathSegments = this.router.url
+    const url = this.router.url;
+    const pathSegments = url
       .split('/')
       .filter((segment) => segment.length > 0)
       .filter((segment) => !this.isId(segment));
 
     const items: BreadcrumbItem[] = [];
 
+    // Siempre empezamos con Home
     items.push({ label: 'Home', path: '/characters' });
 
-    let accumulatedPath = '';
+    // Caso especial: si está en /profile, solo mostrar Home + extraLabel
+    if (pathSegments.length === 1 && pathSegments[0] === 'profile') {
+      if (this.$extraLabel()) {
+        items.push({ label: this.$extraLabel()! });
+      }
+      this.breadcrumbItems = items;
+      return;
+    }
 
+    let accumulatedPath = '';
     pathSegments.forEach((segment, index) => {
       accumulatedPath += `/${segment}`;
       const isLast = index === pathSegments.length - 1 && !this.$extraLabel();
