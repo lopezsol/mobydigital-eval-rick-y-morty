@@ -13,10 +13,13 @@
   <!--  -->
   @if( $characterResource.hasValue()) {
   <characters-list [$characters]="$characterResource.value().characters" />
-  <character-pagination
-    [$infoPagination]="$characterResource.value().info"
-    [$currentPage]="$page()"
-    ($pageChanged)="setPage($event)"
-  />
+  <div class="pagination-container">
+    <character-pagination
+      [$infoPagination]="$characterResource.value().info"
+      [$currentPage]="$page()"
+      ($pageChanged)="setPage($event)"
+    />
+  </div>
+
   }
 </section>
