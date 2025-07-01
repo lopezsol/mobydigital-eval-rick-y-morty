@@ -12,7 +12,7 @@ export interface CommentResponse {
       commentsPerPage: number;
       totalPages: number;
       page: number;
-      nextPage: number; //TODO: revisar si es number
+      nextPage: number; 
     };
     comments: EpisodeComment[];
   };

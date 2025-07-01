@@ -57,7 +57,7 @@ export class UserFormComponent {
     location: ['', [Validators.maxLength(50)]],
     country: ['', [Validators.maxLength(50)]],
     zip: ['', [Validators.minLength(4), Validators.maxLength(4)]],
-    avatarUrl: ['', [Validators.maxLength(2048)]],
+    avatarUrl: ['', [Validators.pattern(FormUtils.imageUrlPattern)]],
   });
 
   countries: string[] = [

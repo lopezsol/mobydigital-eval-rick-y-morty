@@ -6,6 +6,8 @@ export class FormUtils {
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
   static birthdayPattern = '^\\d{4}-\\d{2}-\\d{2}$';
+  static imageUrlPattern =
+    '^https?:\\/\\/.*\\.(jpg|jpeg|png|gif|webp)(\\?.*)?$';
 
   static getTextError(errors: ValidationErrors) {
     for (const key of Object.keys(errors)) {
@@ -39,6 +41,9 @@ export class FormUtils {
           }
           if (errors['pattern'].requiredPattern === FormUtils.nicknamePattern) {
             return 'Nickname must not contain spaces or symbols';
+          }
+          if (errors['pattern'].requiredPattern === FormUtils.imageUrlPattern) {
+            return 'The URL must start with http/https and end in .jpg, .png, etc.';
           }
           return 'Pattern does not match the expected format';
         default:

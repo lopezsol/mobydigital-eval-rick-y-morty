@@ -20,7 +20,6 @@ export class CommentService {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
 
-  //TODO: implementar cuando este la BE hecha
   getPostByEpisodeId(episodeId: number) {
     const token = this.authService.token();
 
@@ -99,7 +98,6 @@ export class CommentService {
     );
   }
 
-  //TODO: implementar cuando este la BE hecha
   deleteComment(idComment: string) {
     const token = this.authService.token();
 
@@ -122,7 +120,6 @@ export class CommentService {
     );
   }
 
-  //TODO: implementar cuando este la BE hecha
   updatePostEnabledStatus(postId: string, enabled: boolean) {
     const token = this.authService.token();
 
