@@ -6,7 +6,7 @@ import { AuthService } from '@auth/services/auth.service';
 import { FormUtils } from 'src/app/utils/form-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
-import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.component';
+import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackbar-error.component';
 import { ErrorService } from '@shared/services/error.service';
 import type { LoginUserDto } from '@auth/interfaces/login-user-dto.interface';
 
@@ -15,9 +15,9 @@ import type { LoginUserDto } from '@auth/interfaces/login-user-dto.interface';
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    ErrorAlertComponent,
     LoaderComponent,
-  ],
+    SnackbarErrorComponent
+],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })

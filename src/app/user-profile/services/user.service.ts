@@ -34,7 +34,7 @@ export class UserService {
         catchError((error: any) => {
           const message =
             error?.error?.header?.error ??
-            'Error desconocido al actualizar los datos del usuario';
+            'Something went wrong while updating your profile. Please try again.';
           console.error(error);
           return throwError(() => new Error(message));
         })
@@ -59,7 +59,7 @@ export class UserService {
         catchError((error: any) => {
           const message =
             error?.error?.header?.error ??
-            'Error desconocido al actualizar los datos del usuario';
+            'Something went wrong while updating your profile. Please try again.';
           console.error(error);
           return throwError(() => new Error(message));
         })

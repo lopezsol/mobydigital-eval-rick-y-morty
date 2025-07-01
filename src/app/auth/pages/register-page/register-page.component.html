@@ -54,7 +54,9 @@
           }
           <!--  -->
           @else if( registerForm.errors && registerForm.touched ) {
-          <app-error-message-form [$message]="'Las contraseñas no son iguales'" />
+          <app-error-message-form
+            [$message]="'Las contraseñas no son iguales'"
+          />
           }
         </div>
         <div class="col-md-6 mb-3">
@@ -146,9 +148,6 @@
 
   <!--  -->
   @if($hasError() || $authResource.error()) {
-  <error-alert
-    [$errorMessage]="$errorMessage()"
-    ($hideAlert)="$hasError.set(false)"
-  />
+  <app-snackbar-error [$snackbarMessage]="$errorMessage()" />
   }
 </div>
