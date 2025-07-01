@@ -1,4 +1,5 @@
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 
 export class FormUtils {
   static namePattern = '^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+)(\\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)+$';
@@ -6,6 +7,8 @@ export class FormUtils {
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
   static birthdayPattern = '^\\d{4}-\\d{2}-\\d{2}$';
+  static imageUrlPattern =
+    '^https?:\\/\\/.*\\.(jpg|jpeg|png|gif|webp)(\\?.*)?$';
 
   static getTextError(errors: ValidationErrors) {
     for (const key of Object.keys(errors)) {
@@ -26,7 +29,8 @@ export class FormUtils {
           return `Minimum of ${errors['minTrimmedLength'].requiredLength} characters`;
         case 'whitespace':
           return 'The title is empty';
-
+        case 'imageNotFound':
+          return 'The image could not be loaded. Please check the URL.';
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
             return 'The value does not look like a valid email address';
@@ -39,6 +43,9 @@ export class FormUtils {
           }
           if (errors['pattern'].requiredPattern === FormUtils.nicknamePattern) {
             return 'Nickname must not contain spaces or symbols';
+          }
+          if (errors['pattern'].requiredPattern === FormUtils.imageUrlPattern) {
+            return 'The URL must start with http/https and end in .jpg, .png, etc.';
           }
           return 'Pattern does not match the expected format';
         default:
@@ -104,6 +111,28 @@ export class FormUtils {
         };
       }
       return null;
+    };
+  }
+
+  static imageExistsValidator(): (
+    control: AbstractControl
+  ) => Observable<ValidationErrors | null> {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const url = control.value;
+      if (!url) return of(null);
+
+      return new Observable<ValidationErrors | null>((observer) => {
+        const img = new Image();
+        img.onload = () => {
+          observer.next(null); // Imagen válida
+          observer.complete();
+        };
+        img.onerror = () => {
+          observer.next({ imageNotFound: true }); // Imagen rota
+          observer.complete();
+        };
+        img.src = url;
+      });
     };
   }
 }

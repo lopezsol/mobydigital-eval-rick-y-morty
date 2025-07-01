@@ -57,7 +57,11 @@ export class UserFormComponent {
     location: ['', [Validators.maxLength(50)]],
     country: ['', [Validators.maxLength(50)]],
     zip: ['', [Validators.minLength(4), Validators.maxLength(4)]],
-    avatarUrl: ['', [Validators.maxLength(2048)]],
+    avatarUrl: [
+      '',
+      [Validators.pattern(FormUtils.imageUrlPattern)],
+      [FormUtils.imageExistsValidator()],
+    ],
   });
 
   countries: string[] = [
@@ -130,7 +134,7 @@ export class UserFormComponent {
       case 'country':
       case 'city':
       case 'location':
-      case 'state':
+      case 'street':
         return [Validators.maxLength(50)];
       case 'zip':
         return [Validators.minLength(4), Validators.maxLength(4)];
@@ -147,44 +151,38 @@ export class UserFormComponent {
   }
 
   getUpdatedUser(): UpdateUserDto {
-    const {
-      birthday,
-      city = this.$user().address?.city,
-      location = this.$user().address?.location,
-      nickname = this.$user().nickname,
-      avatarUrl = this.$user().avatarUrl,
-      country = this.$user().address?.country,
-      street = this.$user().address?.street,
-      zip = this.$user().address?.cp,
-    } = this.profileForm.value;
+    const formValue = this.profileForm.getRawValue();
 
-    const parsedBirthday = birthday ? new Date(birthday) : undefined;
-    const parsedNickname = nickname || undefined;
-    const address = street
+    const birthday = formValue.birthday?.trim()
+      ? new Date(formValue.birthday)
+      : undefined;
+
+    const nickname = formValue.nickname?.trim() || undefined;
+
+    const avatarUrl = formValue.avatarUrl?.trim() || undefined;
+
+    const address: Address = formValue.street?.trim()
       ? {
-          street: street!,
-          location: location!,
-          city: city!,
-          country: country!,
-          cp: zip?.toString()!,
+          street: formValue.street.trim(),
+          location: formValue.location?.trim() || '',
+          city: formValue.city?.trim() || '',
+          country: formValue.country?.trim() || '',
+          cp: formValue.zip?.toString() || '',
         }
       : ({} as Address);
 
-    const updatedUser: UpdateUserDto = {
+    return {
       id: this.$user().id,
-      birthday: parsedBirthday,
-      nickname: parsedNickname!,
-      avatarUrl: avatarUrl!,
-      address: address,
+      birthday,
+      nickname,
+      avatarUrl,
+      address,
     };
-    return updatedUser;
   }
-
   $updateUserResource = rxResource({
     request: () => ({ user: this.$updatedUser() }),
     loader: ({ request }) => {
       if (!request.user) return of({} as UpdateUserResponse);
-
       return this.userService.update(request.user).pipe(
         tap((res) => this.authService.updateUser(res.data.user)),
         tap(() => this.$isEditMode.emit(false))

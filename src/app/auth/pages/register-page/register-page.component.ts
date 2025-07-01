@@ -85,9 +85,9 @@ export class RegisterPageComponent {
       ],
       password2: ['', Validators.required],
 
-      address: ['', [Validators.maxLength(50)]],
+      street: ['', [Validators.maxLength(50)]],
       city: ['', [Validators.maxLength(50)]],
-      state: ['', [Validators.maxLength(50)]],
+      country: ['', [Validators.maxLength(50)]],
       zip: ['', [Validators.minLength(4), Validators.maxLength(4)]],
     },
     {
@@ -100,40 +100,44 @@ export class RegisterPageComponent {
   }
 
   private setupAddressValidation(): void {
-    const addressFields = ['address', 'city', 'state', 'zip'];
+    const addressFields = ['street', 'city', 'location', 'country', 'zip'];
 
     addressFields.forEach((field) => {
-      this.registerForm.get(field)?.valueChanges.subscribe(() => {
+      const control = this.registerForm.get(field);
+      if (!control) return;
+
+      control.valueChanges.subscribe(() => {
         const hasAnyValue = addressFields.some(
           (key) => !!this.registerForm.get(key)?.value
         );
 
         addressFields.forEach((key) => {
-          const control = this.registerForm.get(key);
-          if (!control) return;
+          const ctrl = this.registerForm.get(key);
+          if (!ctrl) return;
 
-          const currentValidators = control.validator
-            ? [control.validator]
-            : [];
-
-          const requiredValidator = Validators.required;
-
-          if (hasAnyValue) {
-            // Añade el required solo si no está
-            const newValidators = [...currentValidators, requiredValidator];
-            control.setValidators(newValidators);
-          } else {
-            // Quita sólo el required pero deja los demás
-            const newValidators = currentValidators.filter(
-              (v) => v !== requiredValidator
-            );
-            control.setValidators(newValidators);
-          }
-
-          control.updateValueAndValidity({ emitEvent: false });
+          ctrl.setValidators(
+            hasAnyValue
+              ? [...this.getBaseValidators(key), Validators.required]
+              : this.getBaseValidators(key)
+          );
+          ctrl.updateValueAndValidity({ emitEvent: false });
         });
       });
     });
+  }
+
+  private getBaseValidators(field: string) {
+    switch (field) {
+      case 'country':
+      case 'city':
+      case 'location':
+      case 'street':
+        return [Validators.maxLength(50)];
+      case 'zip':
+        return [Validators.minLength(4), Validators.maxLength(4)];
+      default:
+        return [];
+    }
   }
 
   $authResource = rxResource({
@@ -167,6 +171,8 @@ export class RegisterPageComponent {
   }
 
   createUser(): RegisterUserDto {
+    const formValue = this.registerForm.getRawValue();
+
     const { name = '', email = '', password = '' } = this.registerForm.value;
 
     const user: RegisterUserDto = {
@@ -175,51 +181,21 @@ export class RegisterPageComponent {
       password: password!,
     };
 
-    const address = this.buildAddress();
+    const address: Address = this.registerForm.value.street?.trim()
+      ? {
+          street: formValue.street?.trim()!,
+          location: '',
+          city: formValue.city?.trim()!,
+          country: formValue.country?.trim()!,
+          cp: formValue.zip?.toString()!,
+        }
+      : ({} as Address);
+
     if (address) {
       user.address = address;
     }
 
     return user;
-  }
-
-  private isFilled(value: string): boolean {
-    return value?.trim() !== '';
-  }
-
-  private hasFullAddress(): boolean {
-    const {
-      address = '',
-      city = '',
-      state = '',
-      zip = '',
-    } = this.registerForm.value;
-
-    return (
-      this.isFilled(address!) &&
-      this.isFilled(city!) &&
-      this.isFilled(state!) &&
-      this.isFilled(zip!)
-    );
-  }
-  //TODO:verificar sin esto funciona
-  private buildAddress(): Address | null {
-    if (!this.hasFullAddress()) return null;
-
-    const {
-      address = '',
-      city = '',
-      state = '',
-      zip = '',
-    } = this.registerForm.value;
-
-    return {
-      street: address!,
-      city: city!,
-      country: state!,
-      cp: zip!,
-      location: '-',
-    };
   }
 
   navigateToLogin() {

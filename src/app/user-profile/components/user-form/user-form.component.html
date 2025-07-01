@@ -7,6 +7,16 @@
   [$snackbarMessage]="'We couldn’t update your profile. Please try again.'"
 />
 }
+<div class="d-flex justify-content-end">
+  <button
+    type="button"
+    class="btn btn-outline-primary close"
+    aria-label="Close"
+    (click)="$isEditMode.emit(false)"
+  >
+    X
+  </button>
+</div>
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <div class="row">
     <div class="col-12 col-lg-6 mb-3">

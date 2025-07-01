@@ -77,16 +77,16 @@
       </div>
 
       <div class="mb-3">
-        <label for="address" class="form-label text-primary">Address</label>
+        <label for="street" class="form-label text-primary">Street</label>
         <input
           type="text"
           class="form-control text-white"
-          formControlName="address"
+          formControlName="street"
           placeholder="Apartment, studio or floor"
         />
-        @if ( formUtils.isInvalidField(registerForm, 'address')) {
+        @if ( formUtils.isInvalidField(registerForm, 'street')) {
         <app-error-message-form
-          [$message]="formUtils.getFieldError(registerForm, 'address')!"
+          [$message]="formUtils.getFieldError(registerForm, 'street')!"
         />
         }
       </div>
@@ -106,16 +106,16 @@
           }
         </div>
         <div class="col-md-4 mb-3">
-          <label for="state" class="form-label text-primary">State</label>
-          <select class="form-select text-white" formControlName="state">
+          <label for="country" class="form-label text-primary">Country</label>
+          <select class="form-select text-white" formControlName="country">
             <option value="">--Choose an option--</option>
             @for (country of countries; track country; let index = $index) {
             <option>{{ country }}</option>
             }
           </select>
-          @if ( formUtils.isInvalidField(registerForm, 'state')) {
+          @if ( formUtils.isInvalidField(registerForm, 'country')) {
           <app-error-message-form
-            [$message]="formUtils.getFieldError(registerForm, 'state')!"
+            [$message]="formUtils.getFieldError(registerForm, 'country')!"
           />
           }
         </div>
