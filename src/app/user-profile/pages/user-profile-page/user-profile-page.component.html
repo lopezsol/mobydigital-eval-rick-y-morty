@@ -1,3 +1,27 @@
+@if( favoriteEpisodesResource.error() ) {
+<!-- <app-error [$message]="$characterResource.error()" /> -->
+<app-snackbar-error
+  [$snackbarMessage]="
+    'We couldn’t load your favorite episodes. Please try again later.'
+  "
+/>
+}
+<!--  -->
+@if( deletefavoriteEpisodeResource.error() ) {
+<app-snackbar-error
+  [$snackbarMessage]="
+    'We couldn’t delete your favorite episode. Please try again later.'
+  "
+/>
+}
+
+<!--  -->
+
+@if (favoriteEpisodesResource.isLoading() ||
+deletefavoriteEpisodeResource.isLoading()) {
+<app-loader class="absolute-loader" />
+}
+
 <section class="d-flex justify-content-center">
   <app-breadcrumb
     class="mt-4 container"
@@ -5,8 +29,9 @@
   />
   <div class="container py-4">
     <user-info [$user]="authService.user()!" />
+
     <user-favorite-episodes
-      [$favoriteEpisodes]="$favoriteEpisodesResource.value() || []"
+      [$favoriteEpisodes]="favoriteEpisodesResource.value() || []"
       ($favoriteEpisodeToDelete)="$favoriteEpisodeDeleted.set($event)"
     />
   </div>

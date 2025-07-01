@@ -7,6 +7,8 @@ import { UserFavoriteEpisodesComponent } from '@user/components/user-favorite-ep
 import { UserInfoComponent } from '@user/components/user-info/user-info.component';
 import { UserService } from '@user/services/user.service';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackbar-error.component';
 
 @Component({
   selector: 'user-profile-page',
@@ -14,7 +16,9 @@ import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.co
     UserInfoComponent,
     UserFavoriteEpisodesComponent,
     BreadcrumbComponent,
-  ],
+    LoaderComponent,
+    SnackbarErrorComponent
+],
   templateUrl: './user-profile-page.component.html',
   styleUrl: './user-profile-page.component.css',
 })
@@ -27,7 +31,7 @@ export default class UserProfilePageComponent {
   $favoriteEpisodes = signal(this.authService.user()!.favoriteEpisodes);
   $isEditMode = signal(false);
 
-  $favoriteEpisodesResource = rxResource({
+  favoriteEpisodesResource = rxResource({
     request: () => ({ ids: this.$favoriteEpisodes() }),
     loader: ({ request }) => {
       if (!request.ids || request.ids.length === 0) return of([]);
@@ -42,7 +46,7 @@ export default class UserProfilePageComponent {
     },
   });
 
-  favoriteEpisodeResource = rxResource({
+  deletefavoriteEpisodeResource = rxResource({
     request: () => ({ episodeId: this.$favoriteEpisodeDeleted() }),
     loader: ({ request }) => {
       console.log('entre en reouserce');

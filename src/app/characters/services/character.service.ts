@@ -31,7 +31,7 @@ export class CharacterService {
       })),
       catchError((error) => {
         console.error('Error fetching characters:', error);
-        return throwError(() => new Error('No se pudo obtener los personajes'));
+        return throwError(() => new Error("We couldn't load the characters."));
       })
     );
   }
@@ -43,7 +43,7 @@ export class CharacterService {
       catchError((error) => {
         console.error('Error fetching characters:', error);
         return throwError(
-          () => new Error(`No se pudo obtener el personaje con id: ${id}`)
+          () => new Error(`We couldn't load the character details.`)
         );
       })
     );
@@ -55,7 +55,7 @@ export class CharacterService {
       catchError((error) => {
         console.error('Error fetching characters:', error);
         return throwError(
-          () => new Error(`No se pudo obtener el personaje con url: ${url}`)
+          () => new Error(`We couldn't load the character details.`)
         );
       })
     );
@@ -75,9 +75,7 @@ export class CharacterService {
       })),
       catchError((error) => {
         console.error('Error fetching characters:', error);
-        return throwError(
-          () => new Error(`No se pudo obtener personajes con nombre ${name}`)
-        );
+        return throwError(() => new Error(`We couldn't load the characters.`));
       })
     );
   }

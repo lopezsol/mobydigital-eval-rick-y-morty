@@ -58,20 +58,14 @@
     </div>
   </div>
 
-  <!--  -->
-  <!-- @if($hasError() || $authResource.error()) { -->
   @if($hasError()) {
 
-  <error-alert
-    [$errorMessage]="'Please check your credentials and try again.'"
-    ($hideAlert)="$hasError.set(false)"
+  <app-snackbar-error
+    [$snackbarMessage]="'Please check your credentials and try again.'"
   />
-  } 
+  }
   <!--  -->
   @if(errorService.$errorMessage()) {
-  <error-alert
-    [$errorMessage]="errorService.$errorMessage()!"
-    ($hideAlert)="errorService.clearError()"
-  />
+  <app-snackbar-error [$snackbarMessage]="errorService.$errorMessage()!" />
   }
 </section>

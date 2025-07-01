@@ -3,8 +3,8 @@
 }
 <!--  -->
 @if($updateUserResource.error()) {
-<snackbar-error
-  snackbarMessage="We couldn't update your profile. Please try again."
+<app-snackbar-error
+  [$snackbarMessage]="'We couldn’t update your profile. Please try again.'"
 />
 }
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
@@ -18,7 +18,7 @@
         formControlName="nickname"
       />
       @if (formUtils.isInvalidField(profileForm, 'nickname')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'nickname')!"
       />
       }
@@ -32,7 +32,7 @@
         formControlName="birthday"
       />
       @if (formUtils.isInvalidField(profileForm, 'birthday')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'birthday')!"
       />
       }
@@ -47,7 +47,7 @@
         formControlName="street"
       />
       @if (formUtils.isInvalidField(profileForm, 'street')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'street')!"
       />
       }
@@ -62,7 +62,7 @@
         formControlName="city"
       />
       @if (formUtils.isInvalidField(profileForm, 'city')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'city')!"
       />
       }
@@ -77,7 +77,7 @@
         formControlName="location"
       />
       @if (formUtils.isInvalidField(profileForm, 'location')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'location')!"
       />
       }
@@ -92,7 +92,7 @@
         }
       </select>
       @if (formUtils.isInvalidField(profileForm, 'country')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'country')!"
       />
       }
@@ -107,7 +107,7 @@
         formControlName="zip"
       />
       @if (formUtils.isInvalidField(profileForm, 'zip')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'zip')!"
       />
       }
@@ -122,7 +122,7 @@
         formControlName="avatarUrl"
       />
       @if (formUtils.isInvalidField(profileForm, 'avatarUrl')) {
-      <error-message
+      <app-error-message-form
         [$message]="formUtils.getFieldError(profileForm, 'avatarUrl')!"
       />
       }

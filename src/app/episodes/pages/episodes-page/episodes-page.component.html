@@ -18,10 +18,13 @@
     [$user]="authService.user()!"
     ($userToUpdate)="$userUpdated.set($event)"
   />
-  <app-pagination
-    [$infoPagination]="$episodeResource.value()!.info"
-    [$currentPage]="$page()"
-    ($pageChanged)="setPage($event)"
-  />
+
+  <div class="pagination-container">
+    <app-pagination
+      [$infoPagination]="$episodeResource.value()!.info"
+      [$currentPage]="$page()"
+      ($pageChanged)="setPage($event)"
+    />
+  </div>
   }
 </section>

@@ -19,7 +19,7 @@
             formControlName="name"
           />
           @if ( formUtils.isInvalidField(registerForm, 'name')) {
-          <error-message
+          <app-error-message-form
             [$message]="formUtils.getFieldError(registerForm, 'name')!"
           />
           }
@@ -33,7 +33,7 @@
             formControlName="email"
           />
           @if ( formUtils.isInvalidField(registerForm, 'email')) {
-          <error-message
+          <app-error-message-form
             [$message]="formUtils.getFieldError(registerForm, 'email')!"
           />
           }
@@ -48,13 +48,15 @@
             formControlName="password"
           />
           @if ( formUtils.isInvalidField(registerForm, 'password')) {
-          <error-message
+          <app-error-message-form
             [$message]="formUtils.getFieldError(registerForm, 'password')!"
           />
           }
           <!--  -->
           @else if( registerForm.errors && registerForm.touched ) {
-          <error-message [$message]="'Las contraseñas no son iguales'" />
+          <app-error-message-form
+            [$message]="'Passwords do not match.'"
+          />
           }
         </div>
         <div class="col-md-6 mb-3">
@@ -67,7 +69,7 @@
             formControlName="password2"
           />
           @if ( formUtils.isInvalidField(registerForm, 'password2')) {
-          <error-message
+          <app-error-message-form
             [$message]="formUtils.getFieldError(registerForm, 'password2')!"
           />
           }
@@ -83,7 +85,7 @@
           placeholder="Apartment, studio or floor"
         />
         @if ( formUtils.isInvalidField(registerForm, 'address')) {
-        <error-message
+        <app-error-message-form
           [$message]="formUtils.getFieldError(registerForm, 'address')!"
         />
         }
@@ -98,7 +100,7 @@
             placeholder="Córdoba"
           />
           @if ( formUtils.isInvalidField(registerForm, 'city')) {
-          <error-message
+          <app-error-message-form
             [$message]="formUtils.getFieldError(registerForm, 'city')!"
           />
           }
@@ -112,7 +114,7 @@
             }
           </select>
           @if ( formUtils.isInvalidField(registerForm, 'state')) {
-          <error-message
+          <app-error-message-form
             [$message]="formUtils.getFieldError(registerForm, 'state')!"
           />
           }
@@ -126,7 +128,7 @@
             placeholder="5000"
           />
           @if ( formUtils.isInvalidField(registerForm, 'zip')) {
-          <error-message
+          <app-error-message-form
             [$message]="formUtils.getFieldError(registerForm, 'zip')!"
           />
           }
@@ -146,9 +148,6 @@
 
   <!--  -->
   @if($hasError() || $authResource.error()) {
-  <error-alert
-    [$errorMessage]="$errorMessage()"
-    ($hideAlert)="$hasError.set(false)"
-  />
+  <app-snackbar-error [$snackbarMessage]="$errorMessage()" />
   }
 </div>

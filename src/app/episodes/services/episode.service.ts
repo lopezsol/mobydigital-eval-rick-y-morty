@@ -23,7 +23,7 @@ export class EpisodeService {
       catchError((error) => {
         console.error('Error fetching episodes:', error);
         return throwError(
-          () => new Error(`No se pudo obtener el episodio con id: ${id}`)
+          () => new Error(`We couldn't load the episode details.`)
         );
       })
     );
@@ -35,7 +35,7 @@ export class EpisodeService {
       catchError((error) => {
         console.error('Error fetching episodes:', error);
         return throwError(
-          () => new Error(`No se pudo obtener el episodio con url: ${url}`)
+          () => new Error(`We couldn't load the episode details.`)
         );
       })
     );
@@ -57,7 +57,7 @@ export class EpisodeService {
       })),
       catchError((error) => {
         console.error('Error fetching episodes:', error);
-        return throwError(() => new Error('No se pudieron obtener los episodios'));
+        return throwError(() => new Error("We couldn't load the episodes."));
       })
     );
   }
@@ -79,7 +79,7 @@ export class EpisodeService {
       })),
       catchError((error) => {
         console.error('Error fetching episodes:', error);
-        return throwError(() => new Error('No se pudieron obtener los episodios'));
+        return throwError(() => new Error("We couldn't load the episodes."));
       })
     );
   }

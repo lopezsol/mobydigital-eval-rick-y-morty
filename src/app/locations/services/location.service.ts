@@ -19,7 +19,7 @@ export class LocationService {
       catchError((error) => {
         console.error('Error fetching locations:', error);
         return throwError(
-          () => new Error(`No se pudo obtener la ubicación con id: ${id}`)
+          () => new Error(`We couldn't load the location details.`)
         );
       })
     );
@@ -31,7 +31,7 @@ export class LocationService {
       catchError((error) => {
         console.error('Error fetching locations:', error);
         return throwError(
-          () => new Error(`No se pudo obtener la ubicación con url: ${url}`)
+          () => new Error(`We couldn't load the location details.`)
         );
       })
     );

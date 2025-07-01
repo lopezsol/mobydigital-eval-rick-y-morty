@@ -4,3 +4,6 @@ section {
   flex-direction: column;
   gap: 8px;
 }
+.pagination-container {
+  margin-top: auto;
+}

@@ -60,7 +60,8 @@ export class AuthService {
       .pipe(
         catchError((error: any) => {
           const message =
-            error?.error?.header?.error ?? 'Error desconocido al registrarse';
+            error?.error?.header?.error ??
+            'Something went wrong while signing up. Please try again.';
           return throwError(() => new Error(message));
         })
       );

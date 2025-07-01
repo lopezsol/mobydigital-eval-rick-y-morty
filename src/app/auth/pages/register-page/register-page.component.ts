@@ -4,21 +4,21 @@ import { Router, RouterLink } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FormUtils } from 'src/app/utils/form-utils';
 import { catchError, of, tap } from 'rxjs';
-import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
-import { ErrorAlertComponent } from '@shared/components/error-alert/error-alert.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { ErrorMessageFormComponent } from '@shared/components/error-message-form/error-message-form.component';
 import { AuthService } from '@auth/services/auth.service';
 import type { Address } from '@auth/interfaces/adress.interface';
 import type { RegisterUserDto } from '@auth/interfaces/register-user-dto.interface';
+import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackbar-error.component';
 
 @Component({
   selector: 'app-register-page',
   imports: [
     ReactiveFormsModule,
     RouterLink,
-    ErrorMessageComponent,
-    ErrorAlertComponent,
     LoaderComponent,
+    ErrorMessageFormComponent,
+    SnackbarErrorComponent,
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css',
@@ -151,7 +151,7 @@ export class RegisterPageComponent {
         }),
         catchError((err: Error) => {
           this.$hasError.set(true);
-          this.$errorMessage.set(err.message || 'Error inesperado');
+          this.$errorMessage.set(err.message);
           return of(false);
         })
       );
