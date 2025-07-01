@@ -7,11 +7,18 @@ import { CharacterEpisodesComponent } from '@characters/components/character-epi
 import { CharacterInfoComponent } from '@characters/components/character-info/character-info.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { ErrorComponent } from '@shared/components/error/error.component';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import type { Character } from '@characters/interfaces/character.interface';
 
 @Component({
   selector: 'app-character-detail-page',
-  imports: [CharacterInfoComponent, CharacterEpisodesComponent, LoaderComponent, ErrorComponent],
+  imports: [
+    CharacterInfoComponent,
+    CharacterEpisodesComponent,
+    LoaderComponent,
+    ErrorComponent,
+    BreadcrumbComponent,
+  ],
   templateUrl: './character-detail-page.component.html',
   styleUrl: './character-detail-page.component.css',
 })

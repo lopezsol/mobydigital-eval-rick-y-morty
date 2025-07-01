@@ -10,6 +10,7 @@ import { PaginationComponent } from '@shared/components/pagination/pagination.co
 import { SearchComponent } from '@shared/components/search/search.component';
 import { UserService } from '@user/services/user.service';
 import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'episodes-page',
@@ -19,7 +20,8 @@ import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
     PaginationComponent,
     SearchComponent,
     EpisodesListComponent,
-  ],
+    BreadcrumbComponent
+],
   templateUrl: './episodes-page.component.html',
   styleUrl: './episodes-page.component.css',
 })

@@ -6,10 +6,15 @@ import { EpisodeService } from '@episodes/services/episode.service';
 import { UserFavoriteEpisodesComponent } from '@user/components/user-favorite-episodes/user-favorite-episodes.component';
 import { UserInfoComponent } from '@user/components/user-info/user-info.component';
 import { UserService } from '@user/services/user.service';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'user-profile-page',
-  imports: [UserInfoComponent, UserFavoriteEpisodesComponent],
+  imports: [
+    UserInfoComponent,
+    UserFavoriteEpisodesComponent,
+    BreadcrumbComponent,
+  ],
   templateUrl: './user-profile-page.component.html',
   styleUrl: './user-profile-page.component.css',
 })

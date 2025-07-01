@@ -3,9 +3,10 @@ import { CharactersListComponent } from '../../components/characters-list/charac
 import { CharacterService } from '../../services/character.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CharacterPaginationComponent } from '../../components/character-pagination/character-pagination.component';
-import { LoaderComponent } from '../../../shared/components/loader/loader.component';
-import { ErrorComponent } from '../../../shared/components/error/error.component';
 import { CharacterSearchComponent } from '../../components/character-search/character-search.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { ErrorComponent } from '@shared/components/error/error.component';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'characters-page',
@@ -15,6 +16,7 @@ import { CharacterSearchComponent } from '../../components/character-search/char
     LoaderComponent,
     ErrorComponent,
     CharacterSearchComponent,
+    BreadcrumbComponent,
   ],
   templateUrl: './characters-page.component.html',
   styleUrl: './characters-page.component.css',

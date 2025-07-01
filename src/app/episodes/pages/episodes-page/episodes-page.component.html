@@ -1,4 +1,6 @@
-<section class="py-5 container">
+<section class="py-4 container">
+  <app-breadcrumb />
+
   <app-search ($queryChanged)="setQuery($event)" [$query]="$query()" />
   @if( $episodeResource.error() ) {
   <app-error [$message]="$episodeResource.error()" />

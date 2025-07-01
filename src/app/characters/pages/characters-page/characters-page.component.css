@@ -1,7 +1,6 @@
-:host {
-  display: block;
-}
-
 section {
   min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
