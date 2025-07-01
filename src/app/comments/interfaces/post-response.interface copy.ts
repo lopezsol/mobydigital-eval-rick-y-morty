@@ -1,4 +1,4 @@
-import { EpisodeComment } from './episode-comment.interface';
+import { EpisodeComment } from './comment/comment.interface';
 import { Post } from './post.interface';
 
 export interface PostResponse {

@@ -9,7 +9,7 @@ import { AuthService } from '@auth/services/auth.service';
 import { Role } from '@auth/enums/role.enum';
 import { DropdownComponent } from '@shared/components/dropdown/dropdown.component';
 import { CommentDropdown } from '@shared/enums/comment-dropdown.enum';
-import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
+import type { EpisodeComment } from '@comments/interfaces/comment/comment.interface';
 import type { Post } from '@comments/interfaces/post.interface';
 
 @Component({

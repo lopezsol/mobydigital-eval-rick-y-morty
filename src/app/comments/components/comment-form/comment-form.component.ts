@@ -16,8 +16,8 @@ import { CommentService } from '@comments/services/comment.service';
 import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackbar-error.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { AvatarFallbackPipe } from '@shared/pipes/avatar-fallback.pipe';
-import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
-import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
+import type { CreateCommentDto } from '@comments/interfaces/comment/create-comment-dto.interface';
+import type { UpdateCommentDto } from '@comments/interfaces/comment/update-comment-dto.interface';
 import type { User } from '@auth/interfaces/user.interface';
 
 @Component({

@@ -1,4 +1,4 @@
-import { EpisodeComment } from "../episode-comment.interface";
+import { EpisodeComment } from "./comment.interface";
 
 export interface CreateCommentResponse {
   header: {

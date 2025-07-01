@@ -1,11 +1,11 @@
 import { map, of } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import type { Post } from '../interfaces/post.interface';
-import type { CreateCommentDto } from '@comments/interfaces/create-episode-comment-dto.interface';
-import type { EpisodeComment } from '@comments/interfaces/episode-comment.interface';
-import type { UpdateCommentDto } from '@comments/interfaces/update-episode-comment-dto.interface';
+import type { CreateCommentDto } from '@comments/interfaces/comment/create-comment-dto.interface';
+import type { EpisodeComment } from '@comments/interfaces/comment/comment.interface';
+import type { UpdateCommentDto } from '@comments/interfaces/comment/update-comment-dto.interface';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { CommentResponse } from '@comments/interfaces/comment-response.interface';
+import { CommentResponse } from '@comments/interfaces/comment/comment-response.interface';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '@auth/services/auth.service';
 import { PostResponse } from '@comments/interfaces/post-response.interface copy';
