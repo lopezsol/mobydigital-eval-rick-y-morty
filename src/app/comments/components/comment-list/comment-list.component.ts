@@ -82,11 +82,8 @@ export class CommentListComponent {
       };
     },
     loader: ({ request }) => {
-      console.log('entre?');
-
       if (request.enabled === null) return of(null);
 
-      console.log(request.enabled);
       return this.commentService
         .updatePostEnabledStatus(this.$post()?.id!, request.enabled)
         .pipe(

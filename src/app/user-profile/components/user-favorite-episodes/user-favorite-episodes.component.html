@@ -17,7 +17,7 @@
         </a>
 
         <button
-          class="btn btn-outline-danger btn-sm "
+          class="btn btn-outline-danger btn-sm"
           (click)="$favoriteEpisodeToDelete.emit(episode.id)"
         >
           <i class="bi bi-trash delete-icon" title="Remove from favorites"></i>
@@ -35,15 +35,6 @@
         (more)
       </button>
       } }
-      <!--  -->
-
-      <!-- @if ($episodeResource.isLoading()) {
-      <app-loader />
-      }
-
-      @if ($episodeResource.error()) {
-      <app-error [$message]="$episodeResource.error()" />
-      } -->
     </div>
   </div>
 </div>

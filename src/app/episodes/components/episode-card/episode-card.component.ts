@@ -22,7 +22,6 @@ export class EpisodeCardComponent {
   toggleFavorite(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
-    console.log('toggle', this.$episode().id);
     const episodeId = this.$episode().id;
     const favoriteEpisodes = this.$user()?.favoriteEpisodes?.includes(episodeId)
       ? this.$user()?.favoriteEpisodes?.filter((id) => id !== episodeId)

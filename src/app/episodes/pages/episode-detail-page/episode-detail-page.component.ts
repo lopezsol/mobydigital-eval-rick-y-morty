@@ -48,7 +48,6 @@ export class EpisodeDetailPageComponent {
   favoriteEpisodeResource = rxResource({
     request: () => ({ user: this.$userUpdated() }),
     loader: ({ request }) => {
-      console.log('entre en reouserce');
       if (!request.user) return of(null);
 
       return this.userService

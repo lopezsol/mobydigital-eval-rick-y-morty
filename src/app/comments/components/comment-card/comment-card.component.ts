@@ -32,15 +32,12 @@ export class CommentCardComponent {
   }
 
   onDelete() {
-    console.log('me borro');
     this.$commentToDelete.emit(this.$comment().id);
   }
   onEdit() {
-    console.log('me edito');
     this.$isEditMode.set(true);
   }
   onCommentUpdated() {
-    console.log('ya me edite');
     this.$commentUpdated.emit();
     this.$isEditMode.set(false);
   }
