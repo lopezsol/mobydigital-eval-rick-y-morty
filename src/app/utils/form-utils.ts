@@ -1,4 +1,5 @@
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 
 export class FormUtils {
   static namePattern = '^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+)(\\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)+$';
@@ -28,7 +29,8 @@ export class FormUtils {
           return `Minimum of ${errors['minTrimmedLength'].requiredLength} characters`;
         case 'whitespace':
           return 'The title is empty';
-
+        case 'imageNotFound':
+          return 'The image could not be loaded. Please check the URL.';
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
             return 'The value does not look like a valid email address';
@@ -109,6 +111,28 @@ export class FormUtils {
         };
       }
       return null;
+    };
+  }
+
+  static imageExistsValidator(): (
+    control: AbstractControl
+  ) => Observable<ValidationErrors | null> {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const url = control.value;
+      if (!url) return of(null);
+
+      return new Observable<ValidationErrors | null>((observer) => {
+        const img = new Image();
+        img.onload = () => {
+          observer.next(null); // Imagen válida
+          observer.complete();
+        };
+        img.onerror = () => {
+          observer.next({ imageNotFound: true }); // Imagen rota
+          observer.complete();
+        };
+        img.src = url;
+      });
     };
   }
 }

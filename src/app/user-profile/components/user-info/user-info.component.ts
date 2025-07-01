@@ -22,4 +22,9 @@ export class UserInfoComponent {
     const { street, city, location, country, cp } = address;
     return `${street}, ${city}, ${location}, ${country}, ${cp}`;
   }
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/images/profile-picture-default.webp';
+  }
 }
