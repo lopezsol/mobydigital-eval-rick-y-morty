@@ -14,8 +14,11 @@ p {
 
 .card img {
   border-radius: 8px;
-  align-self: center;
+  width: 100%;
   max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+  align-self: center;
 }
 
 .card-body {
@@ -34,11 +37,13 @@ h5 {
   width: fit-content;
 }
 
-button{
+button {
   border: none;
   color: white;
   width: fit-content;
 }
+
+
 
 @media (width > 768px) {
   .container {
