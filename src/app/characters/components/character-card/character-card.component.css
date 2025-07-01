@@ -3,7 +3,7 @@
 }
 
 .card {
-  background-color: var(--color-card); 
+  background-color: var(--color-card);
 }
 
 .card:hover {
@@ -12,10 +12,13 @@
 
 h6 {
   font-weight: 700;
-
 }
 
 .card img {
-  max-height: 225px;
   border-radius: 8px;
+  width: 100%;
+  max-width: 225px;
+  max-height: 225px;
+  object-fit: cover;
+  align-self: center;
 }

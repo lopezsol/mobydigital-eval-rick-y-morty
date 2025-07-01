@@ -8,10 +8,14 @@ div {
 
 .container {
   padding: 24px;
+  border-radius: 8px;
+  height: 100%;
 }
 
 .card {
   color: var(--color-text-gray);
+  height: 100%;
+
 }
 
 .card-body {
