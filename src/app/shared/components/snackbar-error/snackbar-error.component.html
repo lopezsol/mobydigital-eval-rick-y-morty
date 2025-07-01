@@ -1,3 +1,4 @@
-<div class="snackbar" [class.show]="showSnackbar()">
-  {{ snackbarMessage() }}
+<div class="snackbar error" [class.show]="$showSnackbar()">
+  <span class="icon">⚠️</span>
+  {{ $snackbarMessage() }}
 </div>

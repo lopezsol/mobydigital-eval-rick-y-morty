@@ -3,15 +3,15 @@
 }
 <!--  -->
 @if(createCommentResource.error()){
-<snackbar-error
-  snackbarMessage="We couldn't post your comment. Please try again"
+<app-snackbar-error
+  [$snackbarMessage]="'We couldn’t post your comment. Please try again'"
 />
 }
 
 <!--  -->
 @if(updateCommentResource.error()){
-<snackbar-error
-  snackbarMessage="We couldn't update your comment. Please try again"
+<app-snackbar-error
+  [$snackbarMessage]="'We couldn’t edit your comment. Please try again'"
 />
 }
 <form (ngSubmit)="onSubmit()" [formGroup]="commentForm" class="comment-form">

@@ -3,8 +3,8 @@
 }
 <!--  -->
 @if($updateUserResource.error()) {
-<snackbar-error
-  snackbarMessage="We couldn't update your profile. Please try again."
+<app-snackbar-error
+  [$snackbarMessage]="'We couldn’t update your profile. Please try again.'"
 />
 }
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">

@@ -1,24 +1,36 @@
 .snackbar {
   visibility: hidden;
-  min-width: 250px;
+  min-width: 280px;
   background-color: #323232;
   color: #fff;
   border-radius: 8px;
   padding: 14px 24px;
   position: fixed;
   left: 50%;
-  bottom: 30px;
+  bottom: 24px;
   transform: translateX(-50%);
-  font-size: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: visibility 0s linear 0.3s, opacity 0.3s ease-in-out;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: visibility 0s linear 0.3s, opacity 0.3s ease-in-out, transform 0.3s ease;
   opacity: 0;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   user-select: none;
 }
 
 .snackbar.show {
   visibility: visible;
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
   transition-delay: 0s;
+}
+
+.snackbar.error {
+  background-color: #dc3545; /* Bootstrap danger color */
+}
+
+.snackbar .icon {
+  font-size: 18px;
 }
