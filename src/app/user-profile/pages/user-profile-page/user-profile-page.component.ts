@@ -17,8 +17,8 @@ import { SnackbarErrorComponent } from '@shared/components/snackbar-error/snackb
     UserFavoriteEpisodesComponent,
     BreadcrumbComponent,
     LoaderComponent,
-    SnackbarErrorComponent
-],
+    SnackbarErrorComponent,
+  ],
   templateUrl: './user-profile-page.component.html',
   styleUrl: './user-profile-page.component.css',
 })
@@ -57,7 +57,7 @@ export default class UserProfilePageComponent {
       return this.userService
         .updateFavoriteEpisodes({
           id: this.authService.user()?.id!,
-          favoriteEpisodes,
+          favoriteEpisodes: favoriteEpisodes || [],
         })
         .pipe(
           tap((resp) => this.authService.updateUser(resp.data.user)),

@@ -37,6 +37,7 @@ export class UserFormComponent {
   ngOnInit(): void {
     this.setupAddressValidation();
     this.setFormValue(this.$user());
+    // this.setFormValue(this.authService.user()!);
   }
 
   profileForm = this.fb.group({
@@ -152,37 +153,34 @@ export class UserFormComponent {
 
   getUpdatedUser(): UpdateUserDto {
     const formValue = this.profileForm.getRawValue();
-
-    const birthday = formValue.birthday?.trim()
-      ? new Date(formValue.birthday)
-      : undefined;
-
-    const nickname = formValue.nickname?.trim() || undefined;
-
-    const avatarUrl = formValue.avatarUrl?.trim() || undefined;
-
-    const address: Address = formValue.street?.trim()
-      ? {
-          street: formValue.street.trim(),
-          location: formValue.location?.trim() || '',
-          city: formValue.city?.trim() || '',
-          country: formValue.country?.trim() || '',
-          cp: formValue.zip?.toString() || '',
-        }
-      : ({} as Address);
+    const nickname = formValue.nickname?.trim();
+    const birthday = formValue.birthday?.trim();
+    const avatarUrl = formValue.avatarUrl?.trim();
+    const address =
+      formValue.street?.trim() !== ''
+        ? {
+            street: formValue.street?.trim() || '',
+            location: formValue.location?.trim() || '',
+            city: formValue.city?.trim() || '',
+            country: formValue.country?.trim() || '',
+            cp: formValue.zip?.toString() || '',
+          }
+        : undefined;
 
     return {
       id: this.$user().id,
-      birthday,
-      nickname,
-      avatarUrl,
+      birthday: birthday != '' ? new Date(birthday!) : undefined,
+      nickname: nickname || undefined,
+      avatarUrl: avatarUrl || undefined,
       address,
     };
   }
+
   $updateUserResource = rxResource({
     request: () => ({ user: this.$updatedUser() }),
     loader: ({ request }) => {
       if (!request.user) return of({} as UpdateUserResponse);
+      console.log('updateUser: user-form');
       return this.userService.update(request.user).pipe(
         tap((res) => this.authService.updateUser(res.data.user)),
         tap(() => this.$isEditMode.emit(false))

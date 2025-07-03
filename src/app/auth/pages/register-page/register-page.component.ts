@@ -201,4 +201,6 @@ export class RegisterPageComponent {
   navigateToLogin() {
     this.router.navigateByUrl('/auth/login');
   }
+
+  //TODO: espacio fijo en los mensajes de error del form
 }

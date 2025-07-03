@@ -20,8 +20,8 @@ import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.co
     PaginationComponent,
     SearchComponent,
     EpisodesListComponent,
-    BreadcrumbComponent
-],
+    BreadcrumbComponent,
+  ],
   templateUrl: './episodes-page.component.html',
   styleUrl: './episodes-page.component.css',
 })
@@ -63,7 +63,10 @@ export class EpisodesPageComponent {
       if (!request.user) return of(null);
 
       return this.userService
-        .updateFavoriteEpisodes(request.user)
+        .updateFavoriteEpisodes({
+          id: this.authService.user()?.id!,
+          favoriteEpisodes: request.user.favoriteEpisodes || [],
+        })
         .pipe(tap((resp) => this.authService.updateUser(resp.data.user)));
     },
   });

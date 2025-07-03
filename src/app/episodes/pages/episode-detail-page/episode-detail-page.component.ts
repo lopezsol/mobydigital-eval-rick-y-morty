@@ -22,8 +22,8 @@ import type { UpdateUserDto } from '@user/interfaces/update-user-dto.interface';
     EpisodeInfoComponent,
     EpisodeCharactersListComponent,
     CommentListComponent,
-    BreadcrumbComponent
-],
+    BreadcrumbComponent,
+  ],
   templateUrl: './episode-detail-page.component.html',
   styleUrl: './episode-detail-page.component.css',
 })
@@ -51,7 +51,10 @@ export class EpisodeDetailPageComponent {
       if (!request.user) return of(null);
 
       return this.userService
-        .updateFavoriteEpisodes(request.user)
+        .updateFavoriteEpisodes({
+          id: this.authService.user()?.id!,
+          favoriteEpisodes: request.user.favoriteEpisodes || [],
+        })
         .pipe(tap((resp) => this.authService.updateUser(resp.data.user)));
     },
   });

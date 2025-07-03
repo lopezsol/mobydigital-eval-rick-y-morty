@@ -47,7 +47,6 @@ export class CommentService {
       .get<CommentResponse>(`${apiUrl}/comment/${postId}`, { params, headers })
       .pipe(
         map((response) => {
-          console.log(response.data?.comments);
           return {
             comments: response.data?.comments ?? [],
             totalComments: response.data?.info?.totalComments ?? 0,
