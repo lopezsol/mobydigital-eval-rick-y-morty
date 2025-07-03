@@ -180,7 +180,7 @@ export class UserFormComponent {
     request: () => ({ user: this.$updatedUser() }),
     loader: ({ request }) => {
       if (!request.user) return of({} as UpdateUserResponse);
-      console.log('updateUser: user-form');
+      
       return this.userService.update(request.user).pipe(
         tap((res) => this.authService.updateUser(res.data.user)),
         tap(() => this.$isEditMode.emit(false))
