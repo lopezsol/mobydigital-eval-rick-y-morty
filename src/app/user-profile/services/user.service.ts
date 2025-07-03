@@ -40,7 +40,13 @@ export class UserService {
       );
   }
 
-  updateFavoriteEpisodes(user: UpdateUserDto) {
+  updateFavoriteEpisodes({
+    id,
+    favoriteEpisodes,
+  }: {
+    id: string;
+    favoriteEpisodes: number[];
+  }) {
     const token = this.authService.token();
 
     const headers = new HttpHeaders({
@@ -48,19 +54,20 @@ export class UserService {
     });
 
     return this.http
-      .put<UpdateUserResponse>(
-        `${apiUrl}/user/update`,
-        { ...user },
+      .patch<UpdateUserResponse>(
+        `${apiUrl}/user/update/favorite-episodes`,
+        { id, favoriteEpisodes },
         { headers }
       )
       .pipe(
         catchError((error: any) => {
           const message =
             error?.error?.header?.error ??
-            'Something went wrong while updating your profile. Please try again.';
+            'Something went wrong while updating your favorite episode. Please try again.';
           console.error(error);
           return throwError(() => new Error(message));
         })
       );
   }
+  //TODO: merge con authService
 }
