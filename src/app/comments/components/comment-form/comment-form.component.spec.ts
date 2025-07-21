@@ -228,7 +228,6 @@ describe('CommentFormComponent', () => {
 
     fixture.detectChanges();
     const lastArgs = mockCommentService.editComment.calls.mostRecent().args;
-    console.log('Última llamada a editComment:', lastArgs);
 
     expect(mockCommentService.editComment).toHaveBeenCalledWith(
       'c1',
