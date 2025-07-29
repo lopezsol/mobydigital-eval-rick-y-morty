@@ -20,6 +20,7 @@ describe('PaginationComponent', () => {
 
     fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;
+    //TODO: mover  fixture.componentRef.setInput('$infoPagination', mockPaginationInfo)
   });
 
   it('should create', () => {

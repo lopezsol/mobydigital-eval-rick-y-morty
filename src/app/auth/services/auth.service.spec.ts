@@ -128,7 +128,7 @@ describe('AuthService', () => {
     });
 
     it('should handle login error and return false', () => {
-      // Arrange
+      // Arrange -when
       const email = 'test@example.com';
       const password = 'wrongpassword';
       const errorResponse = { error: { message: 'Invalid credentials' } };
@@ -141,7 +141,7 @@ describe('AuthService', () => {
         expect(service.$authStatus()).toBe(AuthStatus.NotAuthenticated);
       });
 
-      // Assert
+      // Assert - then
       const req = httpMock.expectOne(`${baseUrl}/user/login`);
       req.flush(errorResponse, { status: 401, statusText: 'Unauthorized' });
     });
