@@ -1,6 +1,8 @@
+import { navigateTo } from "../../support/helpers/navigateTo";
+
 describe("Navbar", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:4200"); // Ajustá la ruta si es necesario
+    navigateTo.home();
   });
 
   it("should display the navbar", () => {

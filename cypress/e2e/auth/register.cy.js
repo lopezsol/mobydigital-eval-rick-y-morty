@@ -1,6 +1,8 @@
+import { navigateTo } from "../../support/helpers/navigateTo";
+
 describe("Register Page", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:4200/auth/register");
+    navigateTo.register();
   });
 
   it("should display all input fields", () => {
@@ -20,36 +22,76 @@ describe("Register Page", () => {
   });
 
   it("should register when form is valid", () => {
-    cy.intercept("POST", "http://localhost:3000/api/user/register").as(
-      "registerRequest"
-    );
+    cy.intercept("POST", "/api/user/register").as("registerRequest");
 
     cy.get('input[formcontrolname="name"]').type("Cosme Fulanito");
+    cy.get('input[formcontrolname="email"]').type("cosme@fulanito.com");
+    cy.get('input[formcontrolname="password"]').type("123456ABC");
+    cy.get('input[formcontrolname="password2"]').type("123456ABC");
+    cy.get('input[formcontrolname="street"]').type("123 Fake St");
+    cy.get('input[formcontrolname="city"]').type("Springfield");
+    cy.get(".form-select").select("Argentina");
+    cy.get('input[formcontrolname="zip"]').type("5000");
+
+    cy.contains("Sign Up").click();
+    cy.wait("@registerRequest").its("response.statusCode").should("eq", 201);
+  });
+
+  it("should show loader if loading", () => {
+    cy.intercept("POST", "/api/user/register", {
+      delay: 3000,
+      statusCode: 201,
+      body: {
+        header: {
+          resultCode: 0,
+          message: "Usuario creado exitosamente",
+        },
+        data: {
+          id: "fake-id",
+          name: "Cosme Fulano",
+          mail: "cosme@fulano.com",
+        },
+      },
+    }).as("slowRegister");
+
+    cy.get('input[formcontrolname="name"]').type("Cosme Fulano");
     cy.get('input[formcontrolname="email"]').type("cosme@fulano.com");
     cy.get('input[formcontrolname="password"]').type("123456ABC");
     cy.get('input[formcontrolname="password2"]').type("123456ABC");
     cy.get('input[formcontrolname="street"]').type("123 Fake St");
     cy.get('input[formcontrolname="city"]').type("Springfield");
     cy.get(".form-select").select("Argentina");
-    // cy.get('select[formcontrolname="country"]').select("Argentina");
     cy.get('input[formcontrolname="zip"]').type("5000");
-
-    cy.intercept("POST", "/api/auth/register").as("registerRequest");
     cy.contains("Sign Up").click();
-    cy.wait("@registerRequest").its("response.statusCode").should("eq", 201);
+
+    cy.get("app-loader").should("be.visible");
+
+    cy.wait("@slowRegister");
+
+    cy.get("app-loader").should("not.exist");
   });
 
-  it("should show loader if loading", () => {
-    // Esto depende de si podés controlar el $authResource en pruebas
-    // Alternativamente, podés interceptar un delay artificial para forzarlo:
-    cy.intercept("POST", "/api/auth/register", (req) => {
-      req.reply((res) => {
-        res.delay(3000); // fuerza que el loader se vea
-        res.send({ statusCode: 201 });
-      });
-    }).as("slowRegister");
+  it("should display error message when email is already registered", () => {
+    cy.intercept("POST", "/api/user/register").as("registerConflict");
 
-    // completar y enviar el formulario como en el test anterior
-    // y verificar que se muestre <app-loader>
+    // Visitá el formulario y llenalo como siempre
+    cy.get('input[formControlName="name"]').type("Cosme Fulanito");
+    cy.get('input[formControlName="email"]').type("cosme@fulanito.com");
+    cy.get('input[formControlName="password"]').type("123456ABC");
+    cy.get('input[formControlName="password2"]').type("123456ABC");
+    cy.get('input[formControlName="street"]').type("123 Fake St");
+    cy.get('input[formControlName="city"]').type("Springfield");
+    cy.get("select.form-select").select("Argentina");
+    cy.get('input[formControlName="zip"]').type("5000");
+
+    cy.contains("Sign Up").click();
+
+    cy.wait("@registerConflict");
+
+    cy.get('.snackbar').should("be.visible");
+    cy.get('.snackbar').should(
+      "contain.text",
+      "Mail already registered"
+    );
   });
 });

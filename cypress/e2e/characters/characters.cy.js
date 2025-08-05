@@ -1,22 +1,9 @@
+import { navigateTo } from "../../support/helpers/navigateTo";
+
 describe("Characters Page", () => {
   beforeEach(() => {
-    // Simula login escribiendo en sessionStorage
-    const user = {
-      id: "1",
-      name: "Test User",
-      mail: "test@example.com",
-    };
-
-    const token = "fake-jwt-token";
-
-    cy.visit("http://localhost:4200", {
-      onBeforeLoad(win) {
-        win.sessionStorage.setItem("user", JSON.stringify(user));
-        win.sessionStorage.setItem("token", token);
-      },
-    });
-
-    cy.visit("http://localhost:4200/characters");
+    cy.login("user");
+    navigateTo.characters();
   });
 
   it("should display the breadcrumb component", () => {

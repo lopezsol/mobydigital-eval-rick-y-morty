@@ -1,18 +1,9 @@
-describe("Character Detail Page", () => {
-  const user = {
-    id: "1",
-    name: "Test User",
-    mail: "test@example.com",
-  };
-  const token = "fake-jwt-token";
+import { navigateTo } from "../../support/helpers/navigateTo";
 
+describe("Character Detail Page", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:4200/characters/1", {
-      onBeforeLoad(win) {
-        win.sessionStorage.setItem("user", JSON.stringify(user));
-        win.sessionStorage.setItem("token", token);
-      },
-    });
+    cy.login("user");
+    navigateTo.characterById(1);
   });
 
   it("should show loader while character is loading", () => {
@@ -37,15 +28,15 @@ describe("Character Detail Page", () => {
     // Ahora esperamos a que se renderice el contenido dentro
     cy.get("character-episodes .card-body", { timeout: 10000 }).should("exist");
 
-    // cy.get("character-episodes .card-body").within(() => {
-    //   cy.contains("List of Episodes appearances").should("exist");
-    //   cy.get("a").should("have.length.greaterThan", 0);
-    // });
+    cy.get('character-episodes > .container').within(() => {
+      cy.contains("List of Episodes appearances").should("exist");
+      cy.get("a").should("have.length.greaterThan", 0);
+    });
   });
 
   it("should show breadcrumb with character name", () => {
     cy.get("app-breadcrumb").should("exist");
-    cy.get("app-breadcrumb").should("contain.text", "Rick"); // ajustá según personaje
+    cy.get("app-breadcrumb").should("contain.text", "Rick Sanchez");
   });
 
   it("should show 'more' button if there are many episodes", () => {
@@ -58,13 +49,7 @@ describe("Character Detail Page", () => {
   });
 
   it("should show error component if character not found", () => {
-    cy.visit("http://localhost:4200/characters/9999", {
-      onBeforeLoad(win) {
-        win.sessionStorage.setItem("user", JSON.stringify(user));
-        win.sessionStorage.setItem("token", token);
-      },
-    });
-
+    cy.visit("/characters/9999");
     cy.get("app-error").should("exist");
   });
 });
