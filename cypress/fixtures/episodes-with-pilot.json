@@ -1,0 +1,22 @@
+{
+  "info": {
+    "count": 2,
+    "pages": 1,
+    "next": null,
+    "prev": null
+  },
+  "results": [
+    {
+      "id": 1,
+      "name": "Pilot",
+      "air_date": "December 2, 2013",
+      "episode": "S01E01"
+    },
+    {
+      "id": 2,
+      "name": "Pilot Redux",
+      "air_date": "December 9, 2013",
+      "episode": "S01E02"
+    }
+  ]
+}

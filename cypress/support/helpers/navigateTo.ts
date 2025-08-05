@@ -4,4 +4,6 @@ export const navigateTo = {
   login: () => cy.visit('/auth/login'),
   characters: () => cy.visit('/characters'),
   characterById: (id: string) => cy.visit(`/characters/${id}`),
+  episodes: () => cy.visit('/episodes'),
+  episodeById: (id: string) => cy.visit(`/episodes/${id}`),
 };

@@ -5,12 +5,14 @@ Cypress.Commands.add("login", (role = "user") => {
       name: "Admin User",
       mail: "admin@example.com",
       role: "admin",
+      favoriteEpisodes: []
     },
     user: {
       id: 2,
       name: "Regular User",
       mail: "user@example.com",
       role: "user",
+      favoriteEpisodes: []
     },
   };
 
