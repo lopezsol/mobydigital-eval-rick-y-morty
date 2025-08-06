@@ -24,18 +24,44 @@ describe("Login Page", () => {
     });
   });
 
+  describe("Form Validation", () => {
+    it("should show general error message for invalid email format", () => {
+      cy.get('input[formControlName="email"]').type("not-an-email");
+      cy.get('input[formControlName="password"]').type("12345678");
+      cy.get(".login-form > .btn").click();
+
+      cy.contains("Please check your credentials and try again").should(
+        "be.visible"
+      );
+    });
+
+    it("should show general error message for password shorter than 8 chars", () => {
+      cy.get('input[formControlName="email"]').type("test@example.com");
+      cy.get('input[formControlName="password"]').type("123");
+      cy.get(".login-form > .btn").click();
+
+      cy.contains("Please check your credentials and try again").should(
+        "be.visible"
+      );
+    });
+  });
+
   describe("Failure Scenarios", () => {
     it("should show error message when submitting empty form", () => {
       cy.get(".login-form > .btn").click();
-      cy.contains("Please check your credentials and try again").should("be.visible");
+      cy.contains("Please check your credentials and try again").should(
+        "be.visible"
+      );
     });
 
     it("should show error snackbar on failed login attempt", () => {
       cy.intercept("POST", "/api/user/login", {
         statusCode: 401,
         body: {
-          header: { resultCode: 1002 },
-          error: "Invalid credentials",
+          header: {
+            resultCode: 3,
+            error: "User not found",
+          },
         },
       }).as("loginFail");
 

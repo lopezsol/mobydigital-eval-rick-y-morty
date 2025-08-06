@@ -31,3 +31,15 @@ export const loginResponseUser = {
   header: { message: 'authenticated user', resultCode: 0 },
   data: { user: users['user'], token: fakeToken },
 };
+
+export const registerResponseUser = {
+  header: {
+    message: 'User created successfully',
+    resultCode: 0,
+  },
+  data: {
+    id: users.user.id,
+    name: users.user.name,
+    mail: users.user.mail,
+  },
+};
