@@ -1,0 +1,12 @@
+{
+  "header": {
+    "message": "authenticated user",
+    "resultCode": 0
+  },
+  "data": {
+    "user": {
+      "$import": "./user.json"
+    },
+    "token": "fake-jwt-token-for-testing"
+  }
+}
