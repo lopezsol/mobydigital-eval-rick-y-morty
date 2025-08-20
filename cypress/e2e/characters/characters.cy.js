@@ -1,7 +1,16 @@
 import { navigateTo } from "../../support/helpers/navigateTo";
+import {
+  charactersResponse,
+  charactersPage2Response,
+} from "../../fixtures/characters";
 
 describe("Characters Page", () => {
   beforeEach(() => {
+    cy.intercept("GET", "https://rickandmortyapi.com/api/character?page=1", {
+      statusCode: 200,
+      body: charactersResponse,
+    }).as("getCharacters");
+
     cy.login("user");
     navigateTo.characters();
   });
@@ -36,15 +45,20 @@ describe("Characters Page", () => {
   });
 
   it("should update displayed characters on pagination click", () => {
-    // Capturamos el nombre del primer personaje en la página actual
+    cy.intercept("GET", "https://rickandmortyapi.com/api/character?page=2", {
+      statusCode: 200,
+      body: charactersPage2Response,
+    }).as("getCharactersPage2");
+
     cy.get("characters-list character-card")
       .first()
       .invoke("text")
       .then((firstCharacterBefore) => {
-        // Click en el segundo botón de paginación (suele ser la página 2)
         cy.get("character-pagination button").eq(2).click();
 
-        // Verificamos que el primer personaje haya cambiado (esperamos a que se actualice el DOM)
+        // Esperamos que la API de page=2 sea llamada
+        cy.wait("@getCharactersPage2");
+
         cy.get("characters-list character-card")
           .first()
           .invoke("text")
@@ -67,6 +81,6 @@ describe("Characters Page", () => {
     cy.url().should("match", /\/characters\/\d+$/);
 
     // Verifica que hay contenido en el detalle (nombre o imagen)
-    cy.get("h1, h2, .character-name, .card-title").should("exist");
+    cy.contains("Character Info").should("be.visible");
   });
 });
