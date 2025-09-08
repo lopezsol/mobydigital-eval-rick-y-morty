@@ -23,6 +23,37 @@ export const users = {
       cp: 5000,
     },
   },
+  emptyUser: {
+    id: '3',
+    role: 'user',
+    name: 'User Test',
+    mail: 'user@mail.com',
+  },
+  userWithFavoriteEpisodes: {
+    id: '4',
+    role: 'user',
+    name: 'User Test',
+    mail: 'user@mail.com',
+    nickname: 'user',
+    phone: '12345678',
+    birthday: '1998-10-10',
+    favoriteEpisodes: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    avatarUrl: 'https://example.com/avatar.png',
+    address: {
+      street: 'Fake St 123',
+      city: 'Córdoba',
+      country: 'Argentina',
+      location: 'Córdoba',
+      cp: 5000,
+    },
+  },
+};
+
+export const emptyUser = {
+  id: '3',
+  role: 'user',
+  name: 'User Test',
+  mail: 'user@mail.com',
 };
 
 export const fakeToken = 'fake-jwt-token-for-testing';
