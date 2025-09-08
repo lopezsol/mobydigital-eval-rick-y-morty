@@ -10,6 +10,7 @@ describe("Characters Page", () => {
       statusCode: 200,
       body: charactersResponse,
     }).as("getCharacters");
+  
 
     cy.login("user");
     navigateTo.characters();
@@ -90,3 +91,7 @@ describe("Characters Page", () => {
     });
   });
 });
+
+
+//TODO: agregar test search cuando cambie a app-search
+//TODO: cambiar el componente navegacion cuando se cambie a app-navigation
