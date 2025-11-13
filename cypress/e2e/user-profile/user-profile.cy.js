@@ -109,6 +109,7 @@ describe("User Profile Page", () => {
       cy.get(".bi-pencil").click();
       cy.get("user-form").should("exist");
     });
+    //TODO: completar con el form de editar perfil
   });
 
   it("should navigate to episode detail when clicking an episode", () => {
@@ -116,3 +117,5 @@ describe("User Profile Page", () => {
     cy.url().should("include", "/episodes/");
   });
 });
+
+
